@@ -59,9 +59,7 @@ const StarParticles = () => {
             mode: 'push',
           },
           onDiv: {
-            selectors: {},
             enable: false,
-            mode: {},
             type: 'circle',
           },
           onHover: {
@@ -245,9 +243,8 @@ const StarParticles = () => {
           close: true,
           fill: true,
           options: {},
-          type: {},
         },
-        groups: [],
+        groups: {},
         move: {
           angle: {
             offset: 0,
