@@ -23,7 +23,10 @@ function Process() {
       <section className="py-24  px-6 md:px-20 relative z-10 bg-[#050505]/50 backdrop-blur-sm border-y border-white/10">
         <div className="max-w-5xl mx-auto space-y-24">
           {/* Step 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center group">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center group animate-fade-in-up opacity-0"
+            style={{ animationDelay: '300ms' }}
+          >
             <div className="order-2 md:order-1 space-y-4">
               <span className="text-[#E1BE4C] text-xs font-bold tracking-[0.3em] uppercase">
                 Phase 01
@@ -44,7 +47,10 @@ function Process() {
           </div>
 
           {/* Step 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center group">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center group animate-fade-in-up opacity-0"
+            style={{ animationDelay: '500ms' }}
+          >
             <div className="order-1 md:order-2 space-y-4 md:text-right">
               <span className="text-[#E1BE4C] text-xs font-bold tracking-[0.3em] uppercase">
                 Phase 02
@@ -64,7 +70,10 @@ function Process() {
           </div>
 
           {/* Step 3 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center group">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center group animate-fade-in-up opacity-0"
+            style={{ animationDelay: '700ms' }}
+          >
             <div className="order-2 md:order-1 space-y-4">
               <span className="text-[#E1BE4C] text-xs font-bold tracking-[0.3em] uppercase">
                 Phase 03
@@ -84,7 +93,10 @@ function Process() {
           </div>
 
           {/* Step 4 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center group">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center group animate-fade-in-up opacity-0"
+            style={{ animationDelay: '900ms' }}
+          >
             <div className="order-1 md:order-2 space-y-4 md:text-right">
               <span className="text-[#E1BE4C] text-xs font-bold tracking-[0.3em] uppercase">
                 Phase 04
@@ -106,7 +118,10 @@ function Process() {
       </section>
 
       {/* CTA */}
-      <section className="py-32 flex flex-col justify-center items-center text-center px-4 relative z-10 ">
+      <section
+        className="py-32 flex flex-col justify-center items-center text-center px-4 relative z-10 animate-fade-in-up opacity-0"
+        style={{ animationDelay: '1100ms' }}
+      >
         <p className="text-xs font-bold tracking-[0.3em] text-neutral-500 uppercase mb-8">
           The Next Step
         </p>

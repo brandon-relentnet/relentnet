@@ -22,12 +22,6 @@ export function Header() {
         >
           The Work
         </Link>
-        <Link
-          to="/client-portal"
-          className="hover:text-[#E1BE4C] transition-colors duration-300 [&.active]:text-[#E1BE4C]"
-        >
-          Client Login
-        </Link>
       </div>
       <Link
         to="/inquire"

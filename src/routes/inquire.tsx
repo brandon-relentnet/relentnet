@@ -71,7 +71,7 @@ function Contact() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* LEFT COLUMN: Context & Info */}
           <div className="lg:col-span-5 space-y-12">
-            <div>
+            <div className="animate-fade-in-up opacity-0">
               <h1 className="font-serif text-5xl md:text-6xl leading-[1.1] mb-6">
                 Start the <br />
                 <span className="italic text-[#E1BE4C]">Conversation.</span>
@@ -83,7 +83,10 @@ function Contact() {
               </p>
             </div>
 
-            <div className="space-y-8 border-t border-white/10 pt-8">
+            <div
+              className="space-y-8 border-t border-white/10 pt-8 animate-fade-in-up opacity-0"
+              style={{ animationDelay: '200ms' }}
+            >
               <div>
                 <h4 className="text-xs font-bold tracking-[0.3em] text-[#E1BE4C] uppercase mb-4">
                   Office Locations
@@ -127,7 +130,10 @@ function Contact() {
           </div>
 
           {/* RIGHT COLUMN: Form */}
-          <div className="lg:col-span-7 bg-neutral-900/30 border border-white/5 p-8 md:p-12 backdrop-blur-sm">
+          <div
+            className="lg:col-span-7 bg-neutral-900/30 border border-white/5 p-8 md:p-12 backdrop-blur-sm animate-fade-in-up opacity-0"
+            style={{ animationDelay: '400ms' }}
+          >
             {isSuccess ? (
               <div className="h-full flex flex-col justify-center items-center text-center space-y-6 animate-fade-in-up">
                 <div className="w-16 h-16 rounded-full border border-[#E1BE4C] flex items-center justify-center text-[#E1BE4C]">

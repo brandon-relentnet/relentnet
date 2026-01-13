@@ -24,7 +24,10 @@ function Portfolio() {
       <section className="py-32 px-6 md:px-20 relative z-10 bg-[#050505]/50 backdrop-blur-sm border-y border-white/10">
         <div className="max-w-6xl mx-auto space-y-32">
           {/* Project 1 */}
-          <div className="group relative">
+          <div
+            className="group relative animate-fade-in-up opacity-0"
+            style={{ animationDelay: '200ms' }}
+          >
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
               <div className="md:col-span-8 relative overflow-hidden aspect-video bg-neutral-900 border border-white/5 group-hover:border-[#E1BE4C]/30 transition-colors duration-500">
                 {/* Placeholder for Project Image */}
@@ -49,8 +52,8 @@ function Portfolio() {
                   VM Homes
                 </h3>
                 <p className="text-neutral-500 leading-relaxed text-sm">
-                  A comprehensive and robust real estate platform serving the
-                  St. Pete area. Engineered with complex MLS integration and
+                  A comprehensive and robust real estate platform serving the St.
+                  Pete area. Engineered with complex MLS integration and
                   high-performance search functionality, this site prioritizes
                   utility and speed without sacrificing aesthetic.
                 </p>
@@ -64,7 +67,10 @@ function Portfolio() {
           </div>
 
           {/* Project 2 */}
-          <div className="group relative">
+          <div
+            className="group relative animate-fade-in-up opacity-0"
+            style={{ animationDelay: '400ms' }}
+          >
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
               <div className="md:col-span-4 order-2 md:order-1 space-y-6 md:text-right">
                 <span className="text-[#E1BE4C] text-[10px] tracking-[0.3em] uppercase mb-2 block">
@@ -104,7 +110,10 @@ function Portfolio() {
           </div>
 
           {/* Project 3 */}
-          <div className="group relative">
+          <div
+            className="group relative animate-fade-in-up opacity-0"
+            style={{ animationDelay: '600ms' }}
+          >
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
               <div className="md:col-span-8 relative overflow-hidden aspect-video bg-neutral-900 border border-white/5 group-hover:border-[#E1BE4C]/30 transition-colors duration-500">
                 {/* Placeholder for Project Image */}
@@ -146,7 +155,10 @@ function Portfolio() {
       </section>
 
       {/* CTA */}
-      <section className="py-32 flex flex-col justify-center items-center text-center px-4 relative z-10 border-t border-white/5">
+      <section
+        className="py-32 flex flex-col justify-center items-center text-center px-4 relative z-10 border-t border-white/5 mt-20 animate-fade-in-up opacity-0"
+        style={{ animationDelay: '800ms' }}
+      >
         <p className="text-xs font-bold tracking-[0.3em] text-neutral-500 uppercase mb-8">
           Your Turn
         </p>
