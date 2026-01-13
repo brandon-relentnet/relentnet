@@ -3,11 +3,11 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'RelentNet | Empower Your Digital Presence' },
+      { title: 'RelentNet | Bespoke Digital Stewardship & Legacy' },
       {
         name: 'description',
         content:
-          'Bespoke digital creation and white-glove website management. We build digital legacies with radical human attention.',
+          'The sovereign antidote to the template factory. White-glove web architecture and digital legacy management for discerning founders. Secure your domain.',
       },
     ],
   }),

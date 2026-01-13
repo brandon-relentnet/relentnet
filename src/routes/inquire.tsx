@@ -5,11 +5,11 @@ import { useState } from 'react'
 export const Route = createFileRoute('/inquire')({
   head: () => ({
     meta: [
-      { title: 'Inquire | Start the Conversation with RelentNet' },
+      { title: 'Initiate Stewardship | RelentNet Executive Inquire' },
       {
         name: 'description',
         content:
-          'Tell us about your vision. We provide the architecture to build your digital legacy. Bespoke creation and white-glove management.',
+          'Transition your digital vision from abstract to absolute. Request a private consultation for bespoke development and concierge infrastructure management.',
       },
     ],
   }),

@@ -4,11 +4,11 @@ import { ExternalLink } from 'lucide-react'
 export const Route = createFileRoute('/portfolio')({
   head: () => ({
     meta: [
-      { title: 'The Work | RelentNet Portfolio' },
+      { title: 'The Provenance | RelentNet Case Studies' },
       {
         name: 'description',
         content:
-          'A curated selection of digital experiences crafted with precision. Featuring VM Homes, Cambridge Building Group, and Scrollr.',
+          'A collection of digital experiences crafted with precision. Explore our bespoke engineering for real estate, construction, and innovative technology.',
       },
     ],
   }),
@@ -44,6 +44,7 @@ function Portfolio() {
                 <div className="absolute inset-0 z-10">
                   <img
                     src="/vmh_portfolio.png"
+                    alt="VM Homes - Custom Real Estate Platform with MLS Integration"
                     className="object-cover h-full"
                   />
                   <a
@@ -106,6 +107,7 @@ function Portfolio() {
                 <div className="absolute inset-0 z-10">
                   <img
                     src="/cbg_portfolio.png"
+                    alt="Cambridge Building Group - Professional Construction Firm Website"
                     className="object-cover h-full"
                   />
                   <a
@@ -130,6 +132,7 @@ function Portfolio() {
                 <div className="absolute inset-0 z-10">
                   <img
                     src="/scrollr_portfolio.png"
+                    alt="Scrollr - Productivity Tool Landing Page and App Redesign"
                     className="object-cover h-full"
                   />
                   <a
