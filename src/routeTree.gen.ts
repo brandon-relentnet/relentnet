@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as InquireRouteImport } from './routes/inquire'
-import { Route as ClientPortalRouteImport } from './routes/client-portal'
 import { Route as IndexRouteImport } from './routes/index'
 
 const ProcessRoute = ProcessRouteImport.update({
@@ -30,11 +29,6 @@ const InquireRoute = InquireRouteImport.update({
   path: '/inquire',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ClientPortalRoute = ClientPortalRouteImport.update({
-  id: '/client-portal',
-  path: '/client-portal',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,14 +37,12 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/client-portal': typeof ClientPortalRoute
   '/inquire': typeof InquireRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/client-portal': typeof ClientPortalRoute
   '/inquire': typeof InquireRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
@@ -58,28 +50,20 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/client-portal': typeof ClientPortalRoute
   '/inquire': typeof InquireRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/client-portal' | '/inquire' | '/portfolio' | '/process'
+  fullPaths: '/' | '/inquire' | '/portfolio' | '/process'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/client-portal' | '/inquire' | '/portfolio' | '/process'
-  id:
-    | '__root__'
-    | '/'
-    | '/client-portal'
-    | '/inquire'
-    | '/portfolio'
-    | '/process'
+  to: '/' | '/inquire' | '/portfolio' | '/process'
+  id: '__root__' | '/' | '/inquire' | '/portfolio' | '/process'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ClientPortalRoute: typeof ClientPortalRoute
   InquireRoute: typeof InquireRoute
   PortfolioRoute: typeof PortfolioRoute
   ProcessRoute: typeof ProcessRoute
@@ -108,13 +92,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InquireRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/client-portal': {
-      id: '/client-portal'
-      path: '/client-portal'
-      fullPath: '/client-portal'
-      preLoaderRoute: typeof ClientPortalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -127,7 +104,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ClientPortalRoute: ClientPortalRoute,
   InquireRoute: InquireRoute,
   PortfolioRoute: PortfolioRoute,
   ProcessRoute: ProcessRoute,

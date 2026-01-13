@@ -47,7 +47,7 @@ export function Header() {
 
       {/* Mobile Menu Toggle */}
       <button
-        className="md:hidden z-[70] text-[#e5e5e5] hover:text-[#E1BE4C] transition-colors"
+        className="md:hidden z-70 text-[#e5e5e5] hover:text-[#E1BE4C] transition-colors"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >
@@ -56,7 +56,7 @@ export function Header() {
 
       {/* Mobile Navigation Overlay */}
       <div
-        className={`fixed inset-0 w-screen h-screen bg-[#050505]/95 backdrop-blur-xl z-[60] flex flex-col justify-start pt-32 items-center gap-12 transition-all duration-500 ease-in-out ${
+        className={`fixed inset-0 w-screen h-screen bg-[#050505]/95 backdrop-blur-xl z-60 flex flex-col justify-start pt-32 items-center gap-12 transition-all duration-500 ease-in-out ${
           isOpen
             ? 'opacity-100 visible'
             : 'opacity-0 invisible pointer-events-none'
