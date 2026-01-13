@@ -30,13 +30,10 @@ function Contact() {
       hasDeadline: false,
       deadlineDate: '',
       vision: '',
-      communicationMethod: 'email' as
-        | 'sms'
-        | 'phone'
-        | 'email'
-        | 'person_nsh'
-        | 'person_la',
+      communicationMethods: [] as string[],
       phoneNumber: '',
+      inPersonState: '',
+      cityState: '',
     },
     onSubmit: async ({ value }) => {
       setError(null)
@@ -101,13 +98,10 @@ function Contact() {
                 <h4 className="text-xs font-bold tracking-[0.3em] text-[#E1BE4C] uppercase mb-4">
                   Office Locations
                 </h4>
-                <p className="text-sm text-neutral-400 mb-2">
-                  <strong className="text-white">Nashville, TN</strong> •
-                  available for in-person consultation
-                </p>
-                <p className="text-sm text-neutral-400">
-                  <strong className="text-white">Baton Rouge, LA</strong> •
-                  available for in-person consultation
+                <p className="text-sm text-neutral-400 leading-relaxed">
+                  <strong className="text-white">Tennessee, Louisiana, Georgia, Florida</strong>
+                  <br />
+                  <span className="text-xs text-neutral-500">Available for in-person consultation</span>
                 </p>
               </div>
 
@@ -478,93 +472,202 @@ function Contact() {
                   </h3>
 
                   <form.Field
-                    name="communicationMethod"
+                    name="communicationMethods"
+                    validators={{
+                      onChange: ({ value }) =>
+                        value.length === 0
+                          ? 'Select at least one method'
+                          : undefined,
+                    }}
                     children={(field) => (
                       <div className="space-y-2">
-                        <label
-                          htmlFor={field.name}
-                          className="text-xs uppercase tracking-widest text-neutral-500"
-                        >
-                          Preferred Contact Method *
+                        <label className="text-xs uppercase tracking-widest text-neutral-500">
+                          Communication Methods (Select all that apply) *
                         </label>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                           {[
-                            { label: 'Executive Text / SMS', value: 'sms' },
-                            { label: 'Phone Call', value: 'phone' },
-                            { label: 'Email Only', value: 'email' },
-                            {
-                              label: 'In-Person (Nashville)',
-                              value: 'person_nsh',
-                            },
-                            {
-                              label: 'In-Person (Baton Rouge)',
-                              value: 'person_la',
-                            },
+                            { label: 'Phone Calls', value: 'phone' },
+                            { label: 'Texts', value: 'sms' },
+                            { label: 'Emails', value: 'email' },
+                            { label: 'Video Calls', value: 'video' },
+                            { label: 'In-Person', value: 'person' },
                           ].map((option) => (
                             <label
                               key={option.value}
-                              className={`flex items-center gap-3 p-3 border ${field.state.value === option.value ? 'border-[#E1BE4C] bg-[#E1BE4C]/5' : 'border-white/10 bg-black/20'} cursor-pointer transition-all`}
+                              className={`flex items-center gap-3 p-3 border ${
+                                field.state.value.includes(option.value)
+                                  ? 'border-[#E1BE4C] bg-[#E1BE4C]/5'
+                                  : 'border-white/10 bg-black/20'
+                              } cursor-pointer transition-all`}
                             >
                               <input
-                                type="radio"
-                                name={field.name}
+                                type="checkbox"
                                 value={option.value}
-                                checked={field.state.value === option.value}
-                                onChange={() =>
-                                  field.handleChange(option.value as any)
-                                }
+                                checked={field.state.value.includes(
+                                  option.value,
+                                )}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    field.handleChange([
+                                      ...field.state.value,
+                                      option.value,
+                                    ])
+                                  } else {
+                                    field.handleChange(
+                                      field.state.value.filter(
+                                        (v) => v !== option.value,
+                                      ),
+                                    )
+                                  }
+                                }}
                                 className="accent-[#E1BE4C]"
                               />
                               <span className="text-sm">{option.label}</span>
                             </label>
                           ))}
                         </div>
+                        {field.state.meta.errors ? (
+                          <em className="text-xs text-red-500">
+                            {field.state.meta.errors.join(', ')}
+                          </em>
+                        ) : null}
                       </div>
                     )}
                   />
 
                   <form.Subscribe
-                    selector={(state) => [state.values.communicationMethod]}
-                    children={([method]) =>
-                      ['sms', 'phone', 'person_nsh', 'person_la'].includes(
-                        method,
-                      ) ? (
-                        <form.Field
-                          name="phoneNumber"
-                          validators={{
-                            onChange: ({ value }) =>
-                              !value ? 'Phone number is required' : undefined,
-                          }}
-                          children={(field) => (
-                            <div className="space-y-2 animate-fade-in-up">
-                              <label
-                                htmlFor={field.name}
-                                className="text-xs uppercase tracking-widest text-neutral-500"
-                              >
-                                Mobile Number *
-                              </label>
-                              <input
-                                id={field.name}
-                                name={field.name}
-                                type="tel"
-                                value={field.state.value}
-                                onBlur={field.handleBlur}
-                                onChange={(e) =>
-                                  field.handleChange(e.target.value)
-                                }
-                                placeholder="+1 (555) 000-0000"
-                                className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors"
-                              />
-                              {field.state.meta.errors ? (
-                                <em className="text-xs text-red-500">
-                                  {field.state.meta.errors.join(', ')}
-                                </em>
-                              ) : null}
-                            </div>
-                          )}
-                        />
-                      ) : null
-                    }
+                    selector={(state) => [state.values.communicationMethods]}
+                    children={([methods]) => (
+                      <>
+                        {(methods.includes('phone') ||
+                          methods.includes('sms')) && (
+                          <form.Field
+                            name="phoneNumber"
+                            validators={{
+                              onChange: ({ value }) =>
+                                !value ? 'Phone number is required' : undefined,
+                            }}
+                            children={(field) => (
+                              <div className="space-y-2 animate-fade-in-up">
+                                <label
+                                  htmlFor={field.name}
+                                  className="text-xs uppercase tracking-widest text-neutral-500"
+                                >
+                                  Mobile Number *
+                                </label>
+                                <input
+                                  id={field.name}
+                                  name={field.name}
+                                  type="tel"
+                                  value={field.state.value}
+                                  onBlur={field.handleBlur}
+                                  onChange={(e) =>
+                                    field.handleChange(e.target.value)
+                                  }
+                                  placeholder="+1 (555) 000-0000"
+                                  className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors"
+                                />
+                                {field.state.meta.errors ? (
+                                  <em className="text-xs text-red-500">
+                                    {field.state.meta.errors.join(', ')}
+                                  </em>
+                                ) : null}
+                              </div>
+                            )}
+                          />
+                        )}
+
+                        {methods.includes('person') && (
+                          <div className="space-y-4 animate-fade-in-up">
+                            <form.Field
+                              name="inPersonState"
+                              validators={{
+                                onChange: ({ value }) =>
+                                  !value ? 'Please select a state' : undefined,
+                              }}
+                              children={(field) => (
+                                <div className="space-y-2">
+                                  <label className="text-xs uppercase tracking-widest text-neutral-500">
+                                    Preferred State *
+                                  </label>
+                                  <div className="grid grid-cols-2 gap-2">
+                                    {[
+                                      'Tennessee',
+                                      'Louisiana',
+                                      'Georgia',
+                                      'Florida',
+                                      'Other',
+                                    ].map((option) => (
+                                      <label
+                                        key={option}
+                                        className={`flex items-center gap-2 p-3 border ${
+                                          field.state.value === option
+                                            ? 'border-[#E1BE4C] bg-[#E1BE4C]/5'
+                                            : 'border-white/10 bg-black/20'
+                                        } cursor-pointer transition-all`}
+                                      >
+                                        <input
+                                          type="radio"
+                                          name={field.name}
+                                          value={option}
+                                          checked={field.state.value === option}
+                                          onChange={() =>
+                                            field.handleChange(option)
+                                          }
+                                          className="accent-[#E1BE4C]"
+                                        />
+                                        <span className="text-sm">{option}</span>
+                                      </label>
+                                    ))}
+                                  </div>
+                                  {field.state.meta.errors ? (
+                                    <em className="text-xs text-red-500">
+                                      {field.state.meta.errors.join(', ')}
+                                    </em>
+                                  ) : null}
+                                </div>
+                              )}
+                            />
+
+                            <form.Field
+                              name="cityState"
+                              validators={{
+                                onChange: ({ value }) =>
+                                  !value
+                                    ? 'City & State is required'
+                                    : undefined,
+                              }}
+                              children={(field) => (
+                                <div className="space-y-2">
+                                  <label
+                                    htmlFor={field.name}
+                                    className="text-xs uppercase tracking-widest text-neutral-500"
+                                  >
+                                    City & State *
+                                  </label>
+                                  <input
+                                    id={field.name}
+                                    name={field.name}
+                                    value={field.state.value}
+                                    onBlur={field.handleBlur}
+                                    onChange={(e) =>
+                                      field.handleChange(e.target.value)
+                                    }
+                                    placeholder="e.g. Nashville, TN"
+                                    className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors"
+                                  />
+                                  {field.state.meta.errors ? (
+                                    <em className="text-xs text-red-500">
+                                      {field.state.meta.errors.join(', ')}
+                                    </em>
+                                  ) : null}
+                                </div>
+                              )}
+                            />
+                          </div>
+                        )}
+                      </>
+                    )}
                   />
                 </div>
 
