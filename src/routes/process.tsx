@@ -1,6 +1,16 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/process')({
+  head: () => ({
+    meta: [
+      { title: 'Our Process | RelentNet' },
+      {
+        name: 'description',
+        content:
+          'Our rigorous digital discipline for translating vision into concrete digital legacy. Discovery, Design, Development, and Stewardship.',
+      },
+    ],
+  }),
   component: Process,
 })
 

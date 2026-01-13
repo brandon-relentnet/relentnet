@@ -2,6 +2,16 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { ExternalLink } from 'lucide-react'
 
 export const Route = createFileRoute('/portfolio')({
+  head: () => ({
+    meta: [
+      { title: 'The Work | RelentNet Portfolio' },
+      {
+        name: 'description',
+        content:
+          'A curated selection of digital experiences crafted with precision. Featuring VM Homes, Cambridge Building Group, and Scrollr.',
+      },
+    ],
+  }),
   component: Portfolio,
 })
 

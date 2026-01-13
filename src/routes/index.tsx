@@ -1,6 +1,16 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
+  head: () => ({
+    meta: [
+      { title: 'RelentNet | Empower Your Digital Presence' },
+      {
+        name: 'description',
+        content:
+          'Bespoke digital creation and white-glove website management. We build digital legacies with radical human attention.',
+      },
+    ],
+  }),
   component: HomeComponent,
 })
 

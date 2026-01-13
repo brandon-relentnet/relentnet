@@ -3,6 +3,16 @@ import { useForm } from '@tanstack/react-form'
 import { useState } from 'react'
 
 export const Route = createFileRoute('/inquire')({
+  head: () => ({
+    meta: [
+      { title: 'Inquire | Start the Conversation with RelentNet' },
+      {
+        name: 'description',
+        content:
+          'Tell us about your vision. We provide the architecture to build your digital legacy. Bespoke creation and white-glove management.',
+      },
+    ],
+  }),
   component: Contact,
 })
 
