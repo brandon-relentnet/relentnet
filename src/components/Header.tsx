@@ -36,7 +36,13 @@ export function Header() {
         </Link>
       </div>
 
-      <div className="hidden md:block">
+      <div className="hidden md:flex items-center gap-10">
+        <Link
+          to="/portal"
+          className="text-xs tracking-widest uppercase opacity-60 hover:opacity-100 hover:text-[#E1BE4C] transition-all duration-300 [&.active]:text-[#E1BE4C] [&.active]:opacity-100"
+        >
+          Portal
+        </Link>
         <Link
           to="/inquire"
           className="border border-white/20 px-6 py-3 text-xs tracking-widest uppercase hover:bg-[#E1BE4C] hover:border-[#E1BE4C] hover:text-black transition-all duration-500 [&.active]:bg-[#E1BE4C] [&.active]:text-black [&.active]:border-[#E1BE4C]"
@@ -83,6 +89,13 @@ export function Header() {
             className="hover:text-[#E1BE4C] transition-colors duration-300 [&.active]:text-[#E1BE4C]"
           >
             The Work
+          </Link>
+          <Link
+            to="/portal"
+            onClick={closeMenu}
+            className="hover:text-[#E1BE4C] transition-colors duration-300 [&.active]:text-[#E1BE4C]"
+          >
+            Client Portal
           </Link>
           <Link
             to="/inquire"

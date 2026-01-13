@@ -8,6 +8,9 @@ export function Footer() {
         <p>TN • LA • GA • FL</p>
       </div>
       <div className="flex gap-6 mt-6 md:mt-0">
+        <Link to="/portal" className="hover:text-[#E1BE4C] transition-colors">
+          Client Portal
+        </Link>
         <Link to="/sow" className="hover:text-[#E1BE4C] transition-colors">
           Statement of Work
         </Link>
