@@ -14,8 +14,6 @@ import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as ClientPortalRouteImport } from './routes/client-portal'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
-import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
 
 const ProcessRoute = ProcessRouteImport.update({
   id: '/process',
@@ -42,16 +40,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoFormSimpleRoute = DemoFormSimpleRouteImport.update({
-  id: '/demo/form/simple',
-  path: '/demo/form/simple',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
-  id: '/demo/form/address',
-  path: '/demo/form/address',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -59,8 +47,6 @@ export interface FileRoutesByFullPath {
   '/inquire': typeof InquireRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -68,8 +54,6 @@ export interface FileRoutesByTo {
   '/inquire': typeof InquireRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -78,28 +62,12 @@ export interface FileRoutesById {
   '/inquire': typeof InquireRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/client-portal'
-    | '/inquire'
-    | '/portfolio'
-    | '/process'
-    | '/demo/form/address'
-    | '/demo/form/simple'
+  fullPaths: '/' | '/client-portal' | '/inquire' | '/portfolio' | '/process'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/client-portal'
-    | '/inquire'
-    | '/portfolio'
-    | '/process'
-    | '/demo/form/address'
-    | '/demo/form/simple'
+  to: '/' | '/client-portal' | '/inquire' | '/portfolio' | '/process'
   id:
     | '__root__'
     | '/'
@@ -107,8 +75,6 @@ export interface FileRouteTypes {
     | '/inquire'
     | '/portfolio'
     | '/process'
-    | '/demo/form/address'
-    | '/demo/form/simple'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -117,8 +83,6 @@ export interface RootRouteChildren {
   InquireRoute: typeof InquireRoute
   PortfolioRoute: typeof PortfolioRoute
   ProcessRoute: typeof ProcessRoute
-  DemoFormAddressRoute: typeof DemoFormAddressRoute
-  DemoFormSimpleRoute: typeof DemoFormSimpleRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -158,20 +122,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/form/simple': {
-      id: '/demo/form/simple'
-      path: '/demo/form/simple'
-      fullPath: '/demo/form/simple'
-      preLoaderRoute: typeof DemoFormSimpleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/form/address': {
-      id: '/demo/form/address'
-      path: '/demo/form/address'
-      fullPath: '/demo/form/address'
-      preLoaderRoute: typeof DemoFormAddressRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -181,8 +131,6 @@ const rootRouteChildren: RootRouteChildren = {
   InquireRoute: InquireRoute,
   PortfolioRoute: PortfolioRoute,
   ProcessRoute: ProcessRoute,
-  DemoFormAddressRoute: DemoFormAddressRoute,
-  DemoFormSimpleRoute: DemoFormSimpleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

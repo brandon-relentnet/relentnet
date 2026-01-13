@@ -18,15 +18,13 @@
     "@tanstack/react-router": "^1.132.0",
     "@tanstack/react-router-devtools": "^1.132.0",
     "@tanstack/router-plugin": "^1.132.0",
-    "@tanstack/zod-form-adapter": "^0.42.1",
     "@tsparticles/engine": "^3.9.1",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
     "lucide-react": "^0.545.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "tailwindcss": "^4.0.6",
-    "zod": "^4.3.5"
+    "tailwindcss": "^4.0.6"
   },
   "devDependencies": {
     "@tanstack/devtools-vite": "^0.3.11",
