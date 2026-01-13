@@ -6,7 +6,7 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
   const containerClasses =
-    'fixed top-0 w-full flex justify-between items-center p-8 z-50 bg-[#050505]/50 backdrop-blur-sm text-[#e5e5e5]'
+    'fixed top-0 w-full flex justify-between items-center p-8 z-50 bg-[#050505]/20 backdrop-blur-xs text-[#e5e5e5]'
 
   const closeMenu = () => setIsOpen(false)
 

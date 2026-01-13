@@ -16,7 +16,7 @@ export const Route = createFileRoute('/')({
 
 function HomeComponent() {
   return (
-    <div className="min-h-screen  text-[#e5e5e5] font-sans selection:bg-[#E1BE4C] selection:text-black overflow-hidden">
+    <div className="min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-[#E1BE4C] selection:text-black overflow-hidden">
       {/* 2. HERO SECTION */}
       <section className="h-screen flex flex-col justify-center items-center px-4 relative">
         {/* --- HERO CONTENT --- */}
@@ -36,11 +36,11 @@ function HomeComponent() {
 
           <div className="flex justify-center gap-8 items-center pt-4">
             <span className="text-[10px] tracking-[0.3em] uppercase text-neutral-500">
-              Tennessee • Louisiana
+              Tennessee • Georgia
             </span>
             <div className="w-1 h-1 bg-[#E1BE4C] rounded-full shadow-[0_0_10px_#E1BE4C]"></div>
             <span className="text-[10px] tracking-[0.3em] uppercase text-neutral-500">
-              Georgia • Florida
+              Florida • Louisiana
             </span>
           </div>
         </div>
@@ -55,7 +55,7 @@ function HomeComponent() {
       </section>
 
       {/* 3. THE MANIFESTO */}
-      <section className="py-32 px-6 md:px-20 relative z-10 bg-[#050505]/50 backdrop-blur-sm border-y border-white/10">
+      <section className="py-32 px-6 md:px-20 relative z-10 bg-[#050505]/20 backdrop-blur-xs border-y border-white/10">
         <div className="max-w-7xl pb-24 mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div>
             <h2 className="text-xs font-bold tracking-[0.3em] text-[#E1BE4C] uppercase mb-6">
@@ -140,25 +140,6 @@ function HomeComponent() {
           Accepting new clients for Q1 2026.
         </p>
       </section>
-
-      {/* FOOTER */}
-      <footer className="py-12 px-8 bg-[#050505]/50 backdrop-blur-sm border-y border-white/10 flex flex-col md:flex-row justify-between items-end text-[10px] uppercase tracking-widest text-neutral-600 relative z-10">
-        <div className="space-y-2">
-          <p>© RelentNet 2026</p>
-          <p>TN • LA • GA • FL</p>
-        </div>
-        <div className="flex gap-6 mt-6 md:mt-0">
-          <a href="#" className="hover:text-[#E1BE4C] transition-colors">
-            Instagram
-          </a>
-          <a href="#" className="hover:text-[#E1BE4C] transition-colors">
-            LinkedIn
-          </a>
-          <a href="#" className="hover:text-[#E1BE4C] transition-colors">
-            Email
-          </a>
-        </div>
-      </footer>
     </div>
   )
 }

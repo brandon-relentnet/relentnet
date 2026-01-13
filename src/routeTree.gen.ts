@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SowRouteImport } from './routes/sow'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SowRoute = SowRouteImport.update({
+  id: '/sow',
+  path: '/sow',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProcessRoute = ProcessRouteImport.update({
   id: '/process',
   path: '/process',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/inquire': typeof InquireRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
+  '/sow': typeof SowRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/inquire': typeof InquireRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
+  '/sow': typeof SowRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/inquire': typeof InquireRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
+  '/sow': typeof SowRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/inquire' | '/portfolio' | '/process'
+  fullPaths: '/' | '/inquire' | '/portfolio' | '/process' | '/sow'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/inquire' | '/portfolio' | '/process'
-  id: '__root__' | '/' | '/inquire' | '/portfolio' | '/process'
+  to: '/' | '/inquire' | '/portfolio' | '/process' | '/sow'
+  id: '__root__' | '/' | '/inquire' | '/portfolio' | '/process' | '/sow'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +76,18 @@ export interface RootRouteChildren {
   InquireRoute: typeof InquireRoute
   PortfolioRoute: typeof PortfolioRoute
   ProcessRoute: typeof ProcessRoute
+  SowRoute: typeof SowRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sow': {
+      id: '/sow'
+      path: '/sow'
+      fullPath: '/sow'
+      preLoaderRoute: typeof SowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/process': {
       id: '/process'
       path: '/process'
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   InquireRoute: InquireRoute,
   PortfolioRoute: PortfolioRoute,
   ProcessRoute: ProcessRoute,
+  SowRoute: SowRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

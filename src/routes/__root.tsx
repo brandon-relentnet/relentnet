@@ -3,6 +3,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import StarParticles from '@/components/StarParticles'
 import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
 
 export const Route = createRootRoute({
   component: () => (
@@ -10,6 +11,7 @@ export const Route = createRootRoute({
       <StarParticles />
       <Header />
       <Outlet />
+      <Footer />
       <TanStackDevtools
         config={{
           position: 'bottom-right',
