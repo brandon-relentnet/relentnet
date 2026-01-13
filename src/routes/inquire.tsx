@@ -41,13 +41,26 @@ function Contact() {
         )
 
         if (!response.ok) {
-          throw new Error('Failed to submit form')
+          const responseBody = await response.text()
+
+          // N8N Workaround: If the workflow runs but lacks a response node, it returns 500 with this message.
+          // We treat this as a success since the data successfully reached the webhook.
+          if (
+            response.status === 500 &&
+            responseBody.includes('No Respond to Webhook node found')
+          ) {
+            setIsSuccess(true)
+            return
+          }
+
+          throw new Error(
+            `Failed to submit form: ${response.status} ${response.statusText}`,
+          )
         }
 
         setIsSuccess(true)
       } catch (err) {
         setError('Something went wrong. Please try again later.')
-        console.error(err)
       }
     },
   })

@@ -15,7 +15,7 @@ const StarParticles = () => {
   }, [])
 
   const particlesLoaded = async (container?: Container): Promise<void> => {
-    console.log(container)
+    // container loaded
   }
 
   const options: ISourceOptions = useMemo(
