@@ -1,4 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { Button } from '@/components/ui/Button'
+import { Input } from '@/components/ui/Input'
 
 export const Route = createFileRoute('/portal')({
   head: () => ({
@@ -38,13 +40,7 @@ function Portal() {
             >
               Email Address
             </label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              size={50}
-              className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors text-white autofill:bg-neutral-900"
-            />
+            <Input type="text" name="username" id="username" size={50} />
           </div>
 
           <div className="space-y-2">
@@ -54,22 +50,19 @@ function Portal() {
             >
               Password
             </label>
-            <input
+            <Input
               type="password"
               name="password"
               id="password"
               size={20}
               autoComplete="off"
-              className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors text-white"
             />
           </div>
 
           <div className="pt-4">
-            <input
-              type="submit"
-              value="Login"
-              className="w-full bg-[#E1BE4C] text-black font-bold uppercase tracking-widest py-4 px-8 hover:bg-white transition-colors duration-300 cursor-pointer"
-            />
+            <Button type="submit" fullWidth>
+              Login
+            </Button>
           </div>
         </form>
 

@@ -1,6 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useForm } from '@tanstack/react-form'
 import { useState } from 'react'
+import { Input } from '@/components/ui/Input'
+import { Button } from '@/components/ui/Button'
+import { Textarea } from '@/components/ui/Textarea'
 
 export const Route = createFileRoute('/inquire')({
   head: () => ({
@@ -201,16 +204,15 @@ function Contact() {
                           >
                             Full Name *
                           </label>
-                          <input
+                          <Input
                             id={field.name}
                             name={field.name}
                             value={field.state.value}
                             onBlur={field.handleBlur}
                             onChange={(e) => field.handleChange(e.target.value)}
                             placeholder="John Doe"
-                            className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors"
                           />
-                          {field.state.meta.errors ? (
+                          {field.state.meta.errors.length ? (
                             <em className="text-xs text-red-500">
                               {field.state.meta.errors.join(', ')}
                             </em>
@@ -232,16 +234,15 @@ function Contact() {
                           >
                             Company *
                           </label>
-                          <input
+                          <Input
                             id={field.name}
                             name={field.name}
                             value={field.state.value}
                             onBlur={field.handleBlur}
                             onChange={(e) => field.handleChange(e.target.value)}
                             placeholder="Relentless Industries"
-                            className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors"
                           />
-                          {field.state.meta.errors ? (
+                          {field.state.meta.errors.length ? (
                             <em className="text-xs text-red-500">
                               {field.state.meta.errors.join(', ')}
                             </em>
@@ -268,7 +269,7 @@ function Contact() {
                         >
                           Business Email *
                         </label>
-                        <input
+                        <Input
                           id={field.name}
                           name={field.name}
                           type="email"
@@ -276,9 +277,8 @@ function Contact() {
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
                           placeholder="john@company.com"
-                          className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors"
                         />
-                        {field.state.meta.errors ? (
+                        {field.state.meta.errors.length ? (
                           <em className="text-xs text-red-500">
                             {field.state.meta.errors.join(', ')}
                           </em>
@@ -296,16 +296,15 @@ function Contact() {
                         >
                           Current Website
                         </label>
-                        <input
+                        <Input
                           id={field.name}
                           name={field.name}
                           value={field.state.value}
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
                           placeholder="https://..."
-                          className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors"
                         />
-                        {field.state.meta.errors ? (
+                        {field.state.meta.errors.length ? (
                           <em className="text-xs text-red-500">
                             {field.state.meta.errors.join(', ')}
                           </em>
@@ -410,7 +409,7 @@ function Contact() {
                               >
                                 Target Launch Date *
                               </label>
-                              <input
+                              <Input
                                 id={field.name}
                                 name={field.name}
                                 type="date"
@@ -419,9 +418,9 @@ function Contact() {
                                 onChange={(e) =>
                                   field.handleChange(e.target.value)
                                 }
-                                className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors color-scheme-dark"
+                                className="color-scheme-dark"
                               />
-                              {field.state.meta.errors ? (
+                              {field.state.meta.errors.length ? (
                                 <em className="text-xs text-red-500">
                                   {field.state.meta.errors.join(', ')}
                                 </em>
@@ -449,7 +448,7 @@ function Contact() {
                         >
                           The Vision *
                         </label>
-                        <textarea
+                        <Textarea
                           id={field.name}
                           name={field.name}
                           value={field.state.value}
@@ -457,9 +456,8 @@ function Contact() {
                           onChange={(e) => field.handleChange(e.target.value)}
                           placeholder="Tell us about your goals, design preferences, or the specific problems you are trying to solve..."
                           rows={4}
-                          className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors resize-none"
                         />
-                        {field.state.meta.errors ? (
+                        {field.state.meta.errors.length ? (
                           <em className="text-xs text-red-500">
                             {field.state.meta.errors.join(', ')}
                           </em>
@@ -530,7 +528,7 @@ function Contact() {
                             </label>
                           ))}
                         </div>
-                        {field.state.meta.errors ? (
+                        {field.state.meta.errors.length ? (
                           <em className="text-xs text-red-500">
                             {field.state.meta.errors.join(', ')}
                           </em>
@@ -559,7 +557,7 @@ function Contact() {
                                 >
                                   Mobile Number *
                                 </label>
-                                <input
+                                <Input
                                   id={field.name}
                                   name={field.name}
                                   type="tel"
@@ -569,9 +567,8 @@ function Contact() {
                                     field.handleChange(e.target.value)
                                   }
                                   placeholder="+1 (555) 000-0000"
-                                  className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors"
                                 />
-                                {field.state.meta.errors ? (
+                                {field.state.meta.errors.length ? (
                                   <em className="text-xs text-red-500">
                                     {field.state.meta.errors.join(', ')}
                                   </em>
@@ -626,7 +623,7 @@ function Contact() {
                                       </label>
                                     ))}
                                   </div>
-                                  {field.state.meta.errors ? (
+                                  {field.state.meta.errors.length ? (
                                     <em className="text-xs text-red-500">
                                       {field.state.meta.errors.join(', ')}
                                     </em>
@@ -651,7 +648,7 @@ function Contact() {
                                   >
                                     City & State *
                                   </label>
-                                  <input
+                                  <Input
                                     id={field.name}
                                     name={field.name}
                                     value={field.state.value}
@@ -660,9 +657,8 @@ function Contact() {
                                       field.handleChange(e.target.value)
                                     }
                                     placeholder="e.g. Nashville, TN"
-                                    className="w-full bg-black/20 border border-white/10 p-3 text-sm focus:border-[#E1BE4C] focus:outline-hidden transition-colors"
                                   />
-                                  {field.state.meta.errors ? (
+                                  {field.state.meta.errors.length ? (
                                     <em className="text-xs text-red-500">
                                       {field.state.meta.errors.join(', ')}
                                     </em>
@@ -682,13 +678,13 @@ function Contact() {
                   <form.Subscribe
                     selector={(state) => [state.canSubmit, state.isSubmitting]}
                     children={([canSubmit, isSubmitting]) => (
-                      <button
+                      <Button
                         type="submit"
+                        fullWidth
                         disabled={!canSubmit || isSubmitting}
-                        className="w-full bg-[#E1BE4C] text-black font-bold uppercase tracking-widest py-4 px-8 hover:bg-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? 'Sending...' : 'Request Consultation'}
-                      </button>
+                      </Button>
                     )}
                   />
                   {error && (

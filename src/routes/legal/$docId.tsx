@@ -9,6 +9,7 @@ import {
 export const Route = createFileRoute('/legal/$docId')({
   loader: ({ params }) => {
     const doc = legalDocs[params.docId]
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!doc) {
       throw notFound()
     }
