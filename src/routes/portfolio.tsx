@@ -181,10 +181,10 @@ function Portfolio() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-12 px-8 bg-[#050505]/50 backdrop-blur-sm border-y border-white/10 flex flex-col md:flex-row justify-between items-end text-[10px] uppercase tracking-widest text-neutral-600 relative z-10">
+      <footer className="py-12 px-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-end text-[10px] uppercase tracking-widest text-neutral-600 relative z-10">
         <div className="space-y-2">
           <p>© RelentNet 2026</p>
-          <p>Nashville • Baton Rouge</p>
+          <p>TN • LA • GA • FL</p>
         </div>
         <div className="flex gap-6 mt-6 md:mt-0">
           <a href="#" className="hover:text-[#E1BE4C] transition-colors">

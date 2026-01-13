@@ -36,11 +36,11 @@ function HomeComponent() {
 
           <div className="flex justify-center gap-8 items-center pt-4">
             <span className="text-[10px] tracking-[0.3em] uppercase text-neutral-500">
-              Nashville
+              Tennessee • Louisiana
             </span>
             <div className="w-1 h-1 bg-[#E1BE4C] rounded-full shadow-[0_0_10px_#E1BE4C]"></div>
             <span className="text-[10px] tracking-[0.3em] uppercase text-neutral-500">
-              Baton Rouge
+              Georgia • Florida
             </span>
           </div>
         </div>
@@ -80,7 +80,7 @@ function HomeComponent() {
               We are a high-end creation company where you provide the vision,
               and we manage the execution, the infrastructure, and the growth.
               Whether you prefer a phone call, an email, or a handshake in
-              Nashville, we adapt our methods to your preferences.
+              the Southeast, we adapt our methods to your preferences.
             </p>
           </div>
         </div>
@@ -145,7 +145,7 @@ function HomeComponent() {
       <footer className="py-12 px-8 bg-[#050505]/50 backdrop-blur-sm border-y border-white/10 flex flex-col md:flex-row justify-between items-end text-[10px] uppercase tracking-widest text-neutral-600 relative z-10">
         <div className="space-y-2">
           <p>© RelentNet 2026</p>
-          <p>Nashville • Baton Rouge</p>
+          <p>TN • LA • GA • FL</p>
         </div>
         <div className="flex gap-6 mt-6 md:mt-0">
           <a href="#" className="hover:text-[#E1BE4C] transition-colors">
