@@ -64,6 +64,13 @@ export function Header() {
       >
         <div className="flex flex-col gap-12 text-center text-xl tracking-[0.2em] uppercase font-light items-center">
           <Link
+            to="/"
+            onClick={closeMenu}
+            className="hover:text-[#E1BE4C] transition-colors duration-300 [&.active]:text-[#E1BE4C]"
+          >
+            Home
+          </Link>
+          <Link
             to="/process"
             onClick={closeMenu}
             className="hover:text-[#E1BE4C] transition-colors duration-300 [&.active]:text-[#E1BE4C]"

@@ -61,7 +61,7 @@ function Process() {
             className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center group animate-fade-in-up opacity-0"
             style={{ animationDelay: '500ms' }}
           >
-            <div className="order-1 md:order-2 space-y-4 md:text-right">
+            <div className="order-2 md:order-2 space-y-4 md:text-right">
               <span className="text-[#E1BE4C] text-xs font-bold tracking-[0.3em] uppercase">
                 Phase 02
               </span>
@@ -72,7 +72,7 @@ function Process() {
                 while engineering a scalable backend infrastructure.
               </p>
             </div>
-            <div className="order-2 md:order-1 flex justify-center md:justify-start">
+            <div className="order-1 md:order-1 flex justify-center md:justify-start">
               <div className="text-9xl font-serif text-white/30 group-hover:text-[#E1BE4C]/70 transition-colors duration-500">
                 02
               </div>
@@ -107,7 +107,7 @@ function Process() {
             className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center group animate-fade-in-up opacity-0"
             style={{ animationDelay: '900ms' }}
           >
-            <div className="order-1 md:order-2 space-y-4 md:text-right">
+            <div className="order-2 md:order-2 space-y-4 md:text-right">
               <span className="text-[#E1BE4C] text-xs font-bold tracking-[0.3em] uppercase">
                 Phase 04
               </span>
@@ -118,7 +118,7 @@ function Process() {
                 you can focus on leading your business.
               </p>
             </div>
-            <div className="order-2 md:order-1 flex justify-center md:justify-start">
+            <div className="order-1 md:order-1 flex justify-center md:justify-start">
               <div className="text-9xl font-serif text-white/30 group-hover:text-[#E1BE4C]/70 transition-colors duration-500">
                 04
               </div>
