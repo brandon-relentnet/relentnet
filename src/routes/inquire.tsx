@@ -30,7 +30,7 @@ function Contact() {
       hasDeadline: false,
       deadlineDate: '',
       vision: '',
-      communicationMethods: [] as string[],
+      communicationMethods: [] as Array<string>,
       phoneNumber: '',
       inPersonState: '',
       cityState: '',

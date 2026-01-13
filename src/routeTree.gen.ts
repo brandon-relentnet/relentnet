@@ -12,8 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SowRouteImport } from './routes/sow'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as PortalRouteImport } from './routes/portal'
 import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LegalIndexRouteImport } from './routes/legal/index'
+import { Route as LegalDocIdRouteImport } from './routes/legal/$docId'
 
 const SowRoute = SowRouteImport.update({
   id: '/sow',
@@ -30,6 +33,11 @@ const PortfolioRoute = PortfolioRouteImport.update({
   path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalRoute = PortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InquireRoute = InquireRouteImport.update({
   id: '/inquire',
   path: '/inquire',
@@ -40,43 +48,90 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegalIndexRoute = LegalIndexRouteImport.update({
+  id: '/legal/',
+  path: '/legal/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalDocIdRoute = LegalDocIdRouteImport.update({
+  id: '/legal/$docId',
+  path: '/legal/$docId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/inquire': typeof InquireRoute
+  '/portal': typeof PortalRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/sow': typeof SowRoute
+  '/legal/$docId': typeof LegalDocIdRoute
+  '/legal': typeof LegalIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/inquire': typeof InquireRoute
+  '/portal': typeof PortalRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/sow': typeof SowRoute
+  '/legal/$docId': typeof LegalDocIdRoute
+  '/legal': typeof LegalIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/inquire': typeof InquireRoute
+  '/portal': typeof PortalRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/sow': typeof SowRoute
+  '/legal/$docId': typeof LegalDocIdRoute
+  '/legal/': typeof LegalIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/inquire' | '/portfolio' | '/process' | '/sow'
+  fullPaths:
+    | '/'
+    | '/inquire'
+    | '/portal'
+    | '/portfolio'
+    | '/process'
+    | '/sow'
+    | '/legal/$docId'
+    | '/legal'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/inquire' | '/portfolio' | '/process' | '/sow'
-  id: '__root__' | '/' | '/inquire' | '/portfolio' | '/process' | '/sow'
+  to:
+    | '/'
+    | '/inquire'
+    | '/portal'
+    | '/portfolio'
+    | '/process'
+    | '/sow'
+    | '/legal/$docId'
+    | '/legal'
+  id:
+    | '__root__'
+    | '/'
+    | '/inquire'
+    | '/portal'
+    | '/portfolio'
+    | '/process'
+    | '/sow'
+    | '/legal/$docId'
+    | '/legal/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   InquireRoute: typeof InquireRoute
+  PortalRoute: typeof PortalRoute
   PortfolioRoute: typeof PortfolioRoute
   ProcessRoute: typeof ProcessRoute
   SowRoute: typeof SowRoute
+  LegalDocIdRoute: typeof LegalDocIdRoute
+  LegalIndexRoute: typeof LegalIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -102,6 +157,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal': {
+      id: '/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof PortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/inquire': {
       id: '/inquire'
       path: '/inquire'
@@ -116,15 +178,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/legal/': {
+      id: '/legal/'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal/$docId': {
+      id: '/legal/$docId'
+      path: '/legal/$docId'
+      fullPath: '/legal/$docId'
+      preLoaderRoute: typeof LegalDocIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   InquireRoute: InquireRoute,
+  PortalRoute: PortalRoute,
   PortfolioRoute: PortfolioRoute,
   ProcessRoute: ProcessRoute,
   SowRoute: SowRoute,
+  LegalDocIdRoute: LegalDocIdRoute,
+  LegalIndexRoute: LegalIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

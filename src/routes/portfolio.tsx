@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 import { ExternalLink } from 'lucide-react'
 
 export const Route = createFileRoute('/portfolio')({

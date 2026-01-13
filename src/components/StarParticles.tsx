@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Particles, { initParticlesEngine } from '@tsparticles/react'
-import { type ISourceOptions } from '@tsparticles/engine'
 import { loadSlim } from '@tsparticles/slim'
+import type { ISourceOptions } from '@tsparticles/engine'
 
 const StarParticles = () => {
   const [init, setInit] = useState(false)
