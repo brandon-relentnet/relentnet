@@ -16,7 +16,7 @@ export const Route = createFileRoute('/')({
 
 function HomeComponent() {
   return (
-    <div className="min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-[#E1BE4C] selection:text-black overflow-hidden">
+    <div className="min-h-screen  text-[#e5e5e5] font-sans selection:bg-[#E1BE4C] selection:text-black overflow-hidden">
       {/* 2. HERO SECTION */}
       <section className="h-screen flex flex-col justify-center items-center px-4 relative">
         {/* --- HERO CONTENT --- */}
@@ -79,8 +79,8 @@ function HomeComponent() {
             <p>
               We are a high-end creation company where you provide the vision,
               and we manage the execution, the infrastructure, and the growth.
-              Whether you prefer a phone call, an email, or a handshake in
-              the Southeast, we adapt our methods to your preferences.
+              Whether you prefer a phone call, an email, or a handshake in the
+              Southeast, we adapt our methods to your preferences.
             </p>
           </div>
         </div>

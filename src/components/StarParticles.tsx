@@ -21,54 +21,81 @@ const StarParticles = () => {
   const options: ISourceOptions = useMemo(
     () => ({
       autoPlay: true,
-      background: { color: { value: '#050505' } },
-      fullScreen: { enable: true, zIndex: 0 },
+      background: {
+        color: { value: '#050505' },
+      },
+      fullScreen: {
+        enable: true,
+        zIndex: 0,
+      },
       fpsLimit: 120,
       particles: {
-        // 1. DENSITY: Increase count for a "Milky Way" feel since we removed lines
+        // 1. DENSITY: Good amount of particles for a "field"
         number: {
-          value: 160,
-          density: { enable: true, width: 1920, height: 1080 },
+          value: 120,
+          density: {
+            enable: true,
+            width: 1920,
+            height: 1080,
+          },
         },
-        // 2. COLOR: Keep it subtle white/gold mix if you want, or just white
-        color: { value: '#ffffff' },
-
-        // 3. SHAPE: Pure circles
-        shape: { type: 'circle' },
-
-        // 4. OPACITY: Random opacity creates depth (some stars look further away)
+        // 2. COLOR: Mix of White and your Brand Gold for richness
+        color: {
+          value: ['#ffffff', '#E1BE4C'],
+        },
+        shape: {
+          type: 'circle',
+        },
         opacity: {
+          // DEPTH: Varied opacity
           value: { min: 0.1, max: 0.8 },
           animation: {
             enable: true,
-            speed: 0.5, // Very slow twinkle
+            speed: 1, // Subtle shimmer
             mode: 'auto',
             sync: false,
           },
         },
-
-        // 5. SIZE: Mostly small, occasional larger stars
         size: {
-          value: { min: 0.5, max: 2.5 }, // 8px was too big (looked like bubbles)
+          // VARIETY: mostly small dust, some larger embers
+          value: { min: 1, max: 3 },
+          animation: {
+            enable: true,
+            speed: 2,
+            mode: 'auto',
+            sync: false,
+          },
         },
-
-        // 6. MOVEMENT: extremely slow drift, no connecting lines
+        // 3. MOVEMENT: Rising "Champagne" Effect
         move: {
           enable: true,
-          speed: 0.2, // Drastically slowed down from 2
-          direction: 'none',
-          random: true,
-          straight: false,
-          outModes: { default: 'out' },
+          speed: { min: 0.5, max: 1.5 }, // Variable speed adds life
+          direction: 'top', // Rising upwards
+          random: false,
+          straight: false, // "Wiggle" slightly, don't move in straight lines
+          outModes: {
+            default: 'out', // Reappear at bottom when they leave top
+          },
         },
-
-        // 7. DISABLE LINES (Crucial for Luxury feel)
-        links: { enable: false },
+        links: {
+          enable: false, // Keep lines off for clean luxury look
+        },
       },
-      // Optional: Keep hover effect but make it subtle (push stars away gently)
+      // 4. INTERACTIVITY: Parallax (3D Depth) on Mouse Move
       interactivity: {
-        events: { onHover: { enable: true, mode: 'repulse' } },
-        modes: { repulse: { distance: 100, duration: 0.4 } },
+        events: {
+          onHover: {
+            enable: true,
+            mode: 'parallax', // 3D Effect
+          },
+        },
+        modes: {
+          parallax: {
+            enable: true,
+            force: 60, // How much they shift
+            smooth: 10,
+          },
+        },
       },
       detectRetina: true,
     }),
