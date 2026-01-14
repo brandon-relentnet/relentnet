@@ -5,17 +5,74 @@ import StarParticles from '@/components/StarParticles'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { NotFound } from '@/components/NotFound'
+import { siteConfig } from '@/site.config'
 
 export const Route = createRootRoute({
+  head: () => ({
+    meta: [
+      {
+        charSet: 'utf-8',
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
+      },
+      {
+        title: siteConfig.meta.title,
+      },
+      {
+        name: 'description',
+        content: siteConfig.meta.description,
+      },
+      // Open Graph
+      {
+        property: 'og:title',
+        content: siteConfig.meta.title,
+      },
+      {
+        property: 'og:description',
+        content: siteConfig.meta.description,
+      },
+      {
+        property: 'og:image',
+        content: `${siteConfig.domain}${siteConfig.meta.ogImage}`,
+      },
+      {
+        property: 'og:url',
+        content: siteConfig.domain,
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      // Twitter
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      {
+        name: 'twitter:title',
+        content: siteConfig.meta.title,
+      },
+      {
+        name: 'twitter:description',
+        content: siteConfig.meta.description,
+      },
+      {
+        name: 'twitter:image',
+        content: `${siteConfig.domain}${siteConfig.meta.ogImage}`,
+      },
+    ],
+  }),
   notFoundComponent: NotFound,
   component: () => {
     const jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'ProfessionalService',
-      name: 'RelentNet',
-      image: 'https://relentnet.com/logo512.png',
-      url: 'https://relentnet.com',
-      telephone: '+1-727-616-1060',
+      name: siteConfig.name,
+      image: `${siteConfig.domain}/logo512.png`,
+      url: siteConfig.domain,
+      telephone: siteConfig.contact.phoneFormatted,
       priceRange: '$$$$',
       address: {
         '@type': 'PostalAddress',
@@ -28,20 +85,17 @@ export const Route = createRootRoute({
         latitude: 36.1627,
         longitude: -86.7816,
       },
-      areaServed: [
-        { '@type': 'State', name: 'Tennessee' },
-        { '@type': 'State', name: 'Louisiana' },
-        { '@type': 'State', name: 'Georgia' },
-        { '@type': 'State', name: 'Florida' },
-      ],
+      areaServed: siteConfig.regions.map((region) => ({
+        '@type': 'State',
+        name: region,
+      })),
       openingHoursSpecification: {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
         opens: '09:00',
         closes: '18:00',
       },
-      description:
-        'Bespoke digital creation and white-glove website management. We build digital legacies with radical human attention.',
+      description: siteConfig.meta.description,
     }
 
     return (

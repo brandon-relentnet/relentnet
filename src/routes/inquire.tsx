@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { Textarea } from '@/components/ui/Textarea'
+import { siteConfig } from '@/site.config'
 
 export const Route = createFileRoute('/inquire')({
   head: () => ({
@@ -33,7 +34,7 @@ function Contact() {
       hasDeadline: false,
       deadlineDate: '',
       vision: '',
-      communicationMethods: [] as Array<string>,
+      communicationMethods: [] as string[],
       phoneNumber: '',
       inPersonState: '',
       cityState: '',
@@ -84,7 +85,7 @@ function Contact() {
             <div className="animate-fade-in-up opacity-0">
               <h1 className="font-serif text-5xl md:text-6xl leading-[1.1] mb-6">
                 Start the <br />
-                <span className="italic text-[#E1BE4C]">Conversation.</span>
+                <span className="italic text-gold">Conversation.</span>
               </h1>
               <p className="text-neutral-400 font-light text-lg leading-relaxed">
                 You have a vision. We have the architecture to build it. Tell us
@@ -98,12 +99,12 @@ function Contact() {
               style={{ animationDelay: '200ms' }}
             >
               <div>
-                <h4 className="text-xs font-bold tracking-[0.3em] text-[#E1BE4C] uppercase mb-4">
+                <h4 className="text-xs font-bold tracking-[0.3em] text-gold uppercase mb-4">
                   Office Locations
                 </h4>
                 <p className="text-sm text-neutral-400 leading-relaxed">
                   <strong className="text-white">
-                    Tennessee, Louisiana, Georgia, Florida
+                    {siteConfig.regions.join(', ')}
                   </strong>
                   <br />
                   <span className="text-xs text-neutral-500">
@@ -113,7 +114,7 @@ function Contact() {
               </div>
 
               <div>
-                <h4 className="text-xs font-bold tracking-[0.3em] text-[#E1BE4C] uppercase mb-4">
+                <h4 className="text-xs font-bold tracking-[0.3em] text-gold uppercase mb-4">
                   Direct Contact
                 </h4>
                 <div className="space-y-2 text-sm text-neutral-400">
@@ -121,19 +122,19 @@ function Contact() {
                     <span className="block text-[10px] uppercase tracking-widest text-neutral-600">
                       Email
                     </span>
-                    inquires@relentnet.com
+                    {siteConfig.contact.email}
                   </p>
                   <p>
                     <span className="block text-[10px] uppercase tracking-widest text-neutral-600">
                       Phone
                     </span>
-                    727-616-1060
+                    {siteConfig.contact.phone}
                   </p>
                   <p>
                     <span className="block text-[10px] uppercase tracking-widest text-neutral-600">
                       Hours
                     </span>
-                    9am - 5pm CST (Mon-Fri)
+                    {siteConfig.contact.hours}
                   </p>
                 </div>
               </div>
@@ -147,7 +148,7 @@ function Contact() {
           >
             {isSuccess ? (
               <div className="h-full flex flex-col justify-center items-center text-center space-y-6 animate-fade-in-up">
-                <div className="w-16 h-16 rounded-full border border-[#E1BE4C] flex items-center justify-center text-[#E1BE4C]">
+                <div className="w-16 h-16 rounded-full border border-gold flex items-center justify-center text-gold">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -170,7 +171,7 @@ function Contact() {
                 </p>
                 <button
                   onClick={() => setIsSuccess(false)}
-                  className="text-xs tracking-widest uppercase text-[#E1BE4C] hover:underline mt-8"
+                  className="text-xs tracking-widest uppercase text-gold hover:underline mt-8"
                 >
                   Send another message
                 </button>
@@ -349,7 +350,7 @@ function Contact() {
                           ].map((option) => (
                             <label
                               key={option.value}
-                              className={`flex items-center gap-3 p-3 border ${field.state.value === option.value ? 'border-[#E1BE4C] bg-[#E1BE4C]/5' : 'border-white/10 bg-black/20'} cursor-pointer transition-all`}
+                              className={`flex items-center gap-3 p-3 border ${field.state.value === option.value ? 'border-gold bg-gold/5' : 'border-white/10 bg-black/20'} cursor-pointer transition-all`}
                             >
                               <input
                                 type="radio"
@@ -359,7 +360,7 @@ function Contact() {
                                 onChange={() =>
                                   field.handleChange(option.value as any)
                                 }
-                                className="accent-[#E1BE4C]"
+                                className="accent-gold"
                               />
                               <span className="text-sm">{option.label}</span>
                             </label>
@@ -381,7 +382,7 @@ function Contact() {
                             onChange={(e) =>
                               field.handleChange(e.target.checked)
                             }
-                            className="w-4 h-4 accent-[#E1BE4C] bg-black/20 border-white/10"
+                            className="w-4 h-4 accent-gold bg-black/20 border-white/10"
                           />
                           <span className="text-sm text-neutral-300">
                             Is there a firm deadline for this project?
@@ -498,7 +499,7 @@ function Contact() {
                               key={option.value}
                               className={`flex items-center gap-3 p-3 border ${
                                 field.state.value.includes(option.value)
-                                  ? 'border-[#E1BE4C] bg-[#E1BE4C]/5'
+                                  ? 'border-gold bg-gold/5'
                                   : 'border-white/10 bg-black/20'
                               } cursor-pointer transition-all`}
                             >
@@ -522,7 +523,7 @@ function Contact() {
                                     )
                                   }
                                 }}
-                                className="accent-[#E1BE4C]"
+                                className="accent-gold"
                               />
                               <span className="text-sm">{option.label}</span>
                             </label>
@@ -593,17 +594,14 @@ function Contact() {
                                   </label>
                                   <div className="grid grid-cols-2 gap-2">
                                     {[
-                                      'Tennessee',
-                                      'Louisiana',
-                                      'Georgia',
-                                      'Florida',
+                                      ...siteConfig.regions,
                                       'Other',
                                     ].map((option) => (
                                       <label
                                         key={option}
                                         className={`flex items-center gap-2 p-3 border ${
                                           field.state.value === option
-                                            ? 'border-[#E1BE4C] bg-[#E1BE4C]/5'
+                                            ? 'border-gold bg-gold/5'
                                             : 'border-white/10 bg-black/20'
                                         } cursor-pointer transition-all`}
                                       >
@@ -615,7 +613,7 @@ function Contact() {
                                           onChange={() =>
                                             field.handleChange(option)
                                           }
-                                          className="accent-[#E1BE4C]"
+                                          className="accent-gold"
                                         />
                                         <span className="text-sm">
                                           {option}
