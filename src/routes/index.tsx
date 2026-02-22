@@ -16,7 +16,7 @@ export const Route = createFileRoute('/')({
 
 function HomeComponent() {
   return (
-    <div className="min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-gold selection:text-black overflow-hidden">
+    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black overflow-hidden">
       {/* 2. HERO SECTION */}
       <section className="h-screen flex flex-col justify-center items-center px-4 relative">
         {/* --- HERO CONTENT --- */}
@@ -29,17 +29,17 @@ function HomeComponent() {
           className="relative z-10 mt-12 max-w-md text-center space-y-8 opacity-0 animate-fade-in-up"
           style={{ animationDelay: '200ms' }}
         >
-          <p className="text-sm md:text-base text-neutral-400 font-light leading-relaxed">
+          <p className="text-sm md:text-base text-ink-sub font-light leading-relaxed">
             Relentless dedication to the white-glove website experience. We do
             not just build; we steward your digital legacy.
           </p>
 
           <div className="flex justify-center gap-8 items-center pt-4">
-            <span className="text-[10px] tracking-[0.3em] uppercase text-neutral-500">
+            <span className="text-[10px] tracking-[0.3em] uppercase text-ink-muted">
               Tennessee • Georgia
             </span>
             <div className="w-1 h-1 bg-gold rounded-full shadow-[0_0_10px_var(--color-gold)]"></div>
-            <span className="text-[10px] tracking-[0.3em] uppercase text-neutral-500">
+            <span className="text-[10px] tracking-[0.3em] uppercase text-ink-muted">
               Florida • Louisiana
             </span>
           </div>
@@ -55,7 +55,7 @@ function HomeComponent() {
       </section>
 
       {/* 3. THE MANIFESTO */}
-      <section className="py-32 px-6 md:px-20 relative z-10 bg-[#050505]/20 backdrop-blur-xs border-y border-white/10">
+      <section className="py-32 px-6 md:px-20 relative z-10 bg-surface backdrop-blur-xs border-y border-line">
         <div className="max-w-7xl pb-24 mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div>
             <h2 className="text-xs font-bold tracking-[0.3em] text-gold uppercase mb-6">
@@ -64,10 +64,12 @@ function HomeComponent() {
             <h3 className="font-serif text-4xl md:text-5xl leading-tight mb-8">
               We sell one thing:
               <br />
-              <span className="text-white/30">Peace of mind.</span>
+              <span className="text-black/15 dark:text-white/30">
+                Peace of mind.
+              </span>
             </h3>
           </div>
-          <div className="space-y-6 text-neutral-400 font-light text-lg leading-relaxed">
+          <div className="space-y-6 text-ink-sub font-light text-lg leading-relaxed">
             <p>
               In a world of templates and automated responses, RelentNet offers
               the antidote:
@@ -86,34 +88,34 @@ function HomeComponent() {
         </div>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="group border-l border-white/10 pl-8 hover:border-gold transition-colors duration-500">
-              <span className="block text-4xl font-serif text-white/20 mb-4 group-hover:text-gold transition-colors">
+            <div className="group border-l border-line pl-8 hover:border-gold transition-colors duration-500">
+              <span className="block text-4xl font-serif text-black/[0.08] dark:text-white/20 mb-4 group-hover:text-gold transition-colors">
                 01
               </span>
               <h4 className="text-xl mb-3 tracking-wide">Bespoke Creation</h4>
-              <p className="text-neutral-500 text-sm leading-6 group-hover:text-neutral-300 transition-colors">
+              <p className="text-ink-muted text-sm leading-6 group-hover:text-ink-sub transition-colors">
                 No templates. We architect solutions tailored specifically to
                 your business goals.
               </p>
             </div>
-            <div className="group border-l border-white/10 pl-8 hover:border-gold transition-colors duration-500">
-              <span className="block text-4xl font-serif text-white/20 mb-4 group-hover:text-gold transition-colors">
+            <div className="group border-l border-line pl-8 hover:border-gold transition-colors duration-500">
+              <span className="block text-4xl font-serif text-black/[0.08] dark:text-white/20 mb-4 group-hover:text-gold transition-colors">
                 02
               </span>
               <h4 className="text-xl mb-3 tracking-wide">
                 White Glove Management
               </h4>
-              <p className="text-neutral-500 text-sm leading-6 group-hover:text-neutral-300 transition-colors">
+              <p className="text-ink-muted text-sm leading-6 group-hover:text-ink-sub transition-colors">
                 Updates, security, and changes are handled instantly. You own
                 the business; we own the tech.
               </p>
             </div>
-            <div className="group border-l border-white/10 pl-8 hover:border-gold transition-colors duration-500">
-              <span className="block text-4xl font-serif text-white/20 mb-4 group-hover:text-gold transition-colors">
+            <div className="group border-l border-line pl-8 hover:border-gold transition-colors duration-500">
+              <span className="block text-4xl font-serif text-black/[0.08] dark:text-white/20 mb-4 group-hover:text-gold transition-colors">
                 03
               </span>
               <h4 className="text-xl mb-3 tracking-wide">Personal Access</h4>
-              <p className="text-neutral-500 text-sm leading-6 group-hover:text-neutral-300 transition-colors">
+              <p className="text-ink-muted text-sm leading-6 group-hover:text-ink-sub transition-colors">
                 Direct lines of communication. We are there for you when needed,
                 in the format you prefer.
               </p>
@@ -124,7 +126,7 @@ function HomeComponent() {
 
       {/* 5. CTA */}
       <section className="h-[70vh] flex flex-col justify-center items-center text-center px-4 relative z-10">
-        <p className="text-xs font-bold tracking-[0.3em] text-neutral-500 uppercase mb-8">
+        <p className="text-xs font-bold tracking-[0.3em] text-ink-muted uppercase mb-8">
           Are you ready?
         </p>
         <Link
@@ -134,7 +136,7 @@ function HomeComponent() {
           Let's Talk.
         </Link>
         <p
-          className="mt-8 text-neutral-500 text-sm opacity-0 animate-fade-in-up"
+          className="mt-8 text-ink-muted text-sm opacity-0 animate-fade-in-up"
           style={{ animationDelay: '500ms' }}
         >
           Accepting new clients for Q1 2026.

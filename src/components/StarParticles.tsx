@@ -1,10 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import Particles, { initParticlesEngine } from '@tsparticles/react'
 import { loadSlim } from '@tsparticles/slim'
+
 import type { ISourceOptions } from '@tsparticles/engine'
+
+import { useTheme } from '@/hooks/useTheme'
 
 const StarParticles = () => {
   const [init, setInit] = useState(false)
+  const { effective } = useTheme()
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -18,11 +22,14 @@ const StarParticles = () => {
     // container loaded
   }
 
+  const particleColors =
+    effective === 'dark' ? ['#ffffff', '#E1BE4C'] : ['#1a1a1a', '#E1BE4C']
+
   const options: ISourceOptions = useMemo(
     () => ({
       autoPlay: true,
       background: {
-        color: { value: '#050505' },
+        color: { value: 'transparent' },
       },
       fullScreen: {
         enable: true,
@@ -30,7 +37,6 @@ const StarParticles = () => {
       },
       fpsLimit: 120,
       particles: {
-        // 1. DENSITY: Good amount of particles for a "field"
         number: {
           value: 120,
           density: {
@@ -39,72 +45,68 @@ const StarParticles = () => {
             height: 1080,
           },
         },
-        // 2. COLOR: Mix of White and your Brand Gold for richness
         color: {
-          value: ['#ffffff', '#E1BE4C'],
+          value: particleColors,
         },
         shape: {
           type: 'circle',
         },
         opacity: {
-          // DEPTH: Varied opacity
           value: { min: 0.1, max: 0.8 },
           animation: {
             enable: true,
-            speed: 1, // Subtle shimmer
-            mode: 'auto',
+            speed: 1,
+            mode: 'auto' as const,
             sync: false,
           },
         },
         size: {
-          // VARIETY: mostly small dust, some larger embers
           value: { min: 1, max: 3 },
           animation: {
             enable: true,
             speed: 2,
-            mode: 'auto',
+            mode: 'auto' as const,
             sync: false,
           },
         },
-        // 3. MOVEMENT: Rising "Champagne" Effect
         move: {
           enable: true,
-          speed: { min: 0.5, max: 1.5 }, // Variable speed adds life
-          direction: 'top', // Rising upwards
+          speed: { min: 0.5, max: 1.5 },
+          direction: 'top' as const,
           random: false,
-          straight: false, // "Wiggle" slightly, don't move in straight lines
+          straight: false,
           outModes: {
-            default: 'out', // Reappear at bottom when they leave top
+            default: 'out' as const,
           },
         },
         links: {
-          enable: false, // Keep lines off for clean luxury look
+          enable: false,
         },
       },
-      // 4. INTERACTIVITY: Parallax (3D Depth) on Mouse Move
       interactivity: {
         events: {
           onHover: {
             enable: true,
-            mode: 'parallax', // 3D Effect
+            mode: 'parallax',
           },
         },
         modes: {
           parallax: {
             enable: true,
-            force: 60, // How much they shift
+            force: 60,
             smooth: 10,
           },
         },
       },
       detectRetina: false,
     }),
-    [],
+    [particleColors],
   )
 
   if (init) {
     return (
       <Particles
+        key={effective}
         id="tsparticles"
         particlesLoaded={particlesLoaded}
         options={options}

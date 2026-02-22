@@ -48,20 +48,20 @@ export function BrowserFrame({ url, siteName }: BrowserFrameProps) {
   return (
     <div
       ref={containerRef}
-      className="group rounded-xl border border-white/10 overflow-hidden shadow-2xl shadow-black/50 transition-colors duration-500 hover:border-gold/20"
+      className="group rounded-xl border border-line overflow-hidden shadow-2xl shadow-black/10 dark:shadow-black/50 transition-colors duration-500 hover:border-gold/20"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Browser chrome */}
-      <div className="flex items-center px-5 py-3.5 bg-neutral-900/80 border-b border-white/5">
+      <div className="flex items-center px-5 py-3.5 bg-chrome border-b border-line-faint">
         <div className="flex gap-2 w-14">
-          <div className="w-3 h-3 rounded-full bg-white/10" />
-          <div className="w-3 h-3 rounded-full bg-white/10" />
-          <div className="w-3 h-3 rounded-full bg-white/10" />
+          <div className="w-3 h-3 rounded-full bg-black/[0.04] dark:bg-white/10" />
+          <div className="w-3 h-3 rounded-full bg-black/[0.04] dark:bg-white/10" />
+          <div className="w-3 h-3 rounded-full bg-black/[0.04] dark:bg-white/10" />
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="bg-black/30 rounded-md px-4 py-1.5">
-            <span className="text-[11px] text-neutral-500 font-mono tracking-wide">
+          <div className="bg-inset rounded-md px-4 py-1.5">
+            <span className="text-[11px] text-ink-muted font-mono tracking-wide">
               {displayUrl}
             </span>
           </div>

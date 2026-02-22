@@ -7,7 +7,7 @@ export const Route = createFileRoute('/legal/')({
       { title: 'Legal Documents | RelentNet' },
       {
         name: 'description',
-        content: 'Access RelentNet’s MSA, SOW, and Support Agreements.',
+        content: 'Access RelentNet\u2019s MSA, SOW, and Support Agreements.',
       },
     ],
   }),
@@ -16,14 +16,14 @@ export const Route = createFileRoute('/legal/')({
 
 function LegalIndex() {
   return (
-    <div className="min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-[#E1BE4C] selection:text-black">
+    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black">
       <div className="pt-48 pb-20 px-6 md:px-20 relative z-10">
         <div className="max-w-4xl mx-auto">
           <h1 className="font-serif text-5xl md:text-7xl leading-[1.1] animate-fade-in-up opacity-0">
-            Legal <span className="italic text-[#E1BE4C]">Documentation.</span>
+            Legal <span className="italic text-gold">Documentation.</span>
           </h1>
           <p
-            className="mt-8 text-neutral-400 font-light text-lg leading-relaxed animate-fade-in-up opacity-0"
+            className="mt-8 text-ink-sub font-light text-lg leading-relaxed animate-fade-in-up opacity-0"
             style={{ animationDelay: '200ms' }}
           >
             Review the governing terms, service descriptions, and support
@@ -39,19 +39,19 @@ function LegalIndex() {
               key={doc.id}
               to="/legal/$docId"
               params={{ docId: doc.id }}
-              className="group block border border-white/10 bg-white/5 p-8 hover:border-[#E1BE4C] transition-colors duration-300 animate-fade-in-up opacity-0"
+              className="group block border border-line bg-line-faint p-8 hover:border-gold transition-colors duration-300 animate-fade-in-up opacity-0"
               style={{ animationDelay: `${300 + index * 100}ms` }}
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                  <h2 className="font-serif text-2xl text-white group-hover:text-[#E1BE4C] transition-colors">
+                  <h2 className="font-serif text-2xl text-ink-em group-hover:text-gold transition-colors">
                     {doc.title}
                   </h2>
-                  <p className="text-sm text-neutral-500 mt-2">
+                  <p className="text-sm text-ink-muted mt-2">
                     {doc.description}
                   </p>
                 </div>
-                <div className="text-xs uppercase tracking-widest text-neutral-600 group-hover:text-[#E1BE4C] transition-colors whitespace-nowrap">
+                <div className="text-xs uppercase tracking-widest text-ink-faint group-hover:text-gold transition-colors whitespace-nowrap">
                   Updated {doc.lastUpdated} &rarr;
                 </div>
               </div>
