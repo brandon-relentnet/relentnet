@@ -17,7 +17,7 @@ export const Route = createFileRoute('/portal')({
 
 function Portal() {
   return (
-    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black overflow-hidden flex flex-col justify-center items-center px-4">
+    <div className="min-h-screen overflow-hidden flex flex-col justify-center items-center px-4">
       <div className="w-full max-w-md bg-card border border-line-faint p-8 md:p-12 backdrop-blur-sm animate-fade-in-up">
         <div className="text-center mb-8">
           <h1 className="font-serif text-3xl md:text-4xl mb-4">

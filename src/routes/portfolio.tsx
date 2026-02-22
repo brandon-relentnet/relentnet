@@ -129,7 +129,7 @@ function ProjectSection({
 
 function Portfolio() {
   return (
-    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black overflow-hidden">
+    <div className="min-h-screen overflow-hidden">
       {/* HERO */}
       <section className="min-h-screen flex flex-col justify-center items-center px-6 relative">
         <h1 className="font-serif text-5xl md:text-7xl lg:text-9xl text-center leading-[1.1] animate-fade-in-up">

@@ -4,11 +4,8 @@ import { loadSlim } from '@tsparticles/slim'
 
 import type { ISourceOptions } from '@tsparticles/engine'
 
-import { useTheme } from '@/hooks/useTheme'
-
 const StarParticles = () => {
   const [init, setInit] = useState(false)
-  const { effective } = useTheme()
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -21,9 +18,6 @@ const StarParticles = () => {
   const particlesLoaded = async (): Promise<void> => {
     // container loaded
   }
-
-  const particleColors =
-    effective === 'dark' ? ['#ffffff', '#E1BE4C'] : ['#1a1a1a', '#E1BE4C']
 
   const options: ISourceOptions = useMemo(
     () => ({
@@ -46,7 +40,7 @@ const StarParticles = () => {
           },
         },
         color: {
-          value: particleColors,
+          value: ['#ffffff', '#1a1a1a', '#E1BE4C'],
         },
         shape: {
           type: 'circle',
@@ -100,13 +94,12 @@ const StarParticles = () => {
       },
       detectRetina: false,
     }),
-    [particleColors],
+    [],
   )
 
   if (init) {
     return (
       <Particles
-        key={effective}
         id="tsparticles"
         particlesLoaded={particlesLoaded}
         options={options}

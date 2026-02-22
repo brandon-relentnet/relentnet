@@ -1,6 +1,6 @@
 import {
   useCallback,
-  useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   useSyncExternalStore,
@@ -64,8 +64,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   const effective: EffectiveTheme =
     choice === 'system' ? (systemIsDark ? 'dark' : 'light') : choice
 
-  // Apply .dark class whenever effective theme changes
-  useEffect(() => {
+  // Apply .dark class synchronously before paint to avoid intermediate states
+  useLayoutEffect(() => {
     applyTheme(effective)
   }, [effective])
 

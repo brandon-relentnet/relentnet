@@ -16,7 +16,7 @@ export const Route = createFileRoute('/')({
 
 function HomeComponent() {
   return (
-    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black overflow-hidden">
+    <div className="min-h-screen overflow-hidden">
       {/* 2. HERO SECTION */}
       <section className="h-screen flex flex-col justify-center items-center px-4 relative">
         {/* --- HERO CONTENT --- */}

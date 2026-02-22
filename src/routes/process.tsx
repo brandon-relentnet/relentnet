@@ -16,7 +16,7 @@ export const Route = createFileRoute('/process')({
 
 function Process() {
   return (
-    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black overflow-hidden">
+    <div className="min-h-screen overflow-hidden">
       {/* HERO SECTION */}
       <section className="pt-48 pb-24 px-4 flex flex-col justify-center items-center relative">
         <h1 className="relative z-10 font-serif text-5xl md:text-7xl text-center leading-[1.1] animate-fade-in-up">

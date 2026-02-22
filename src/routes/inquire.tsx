@@ -77,7 +77,7 @@ function Contact() {
   })
 
   return (
-    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black overflow-hidden flex flex-col">
+    <div className="min-h-screen overflow-hidden flex flex-col">
       <div className="grow pt-32 pb-12 px-6 md:px-20 relative z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* LEFT COLUMN: Context & Info */}

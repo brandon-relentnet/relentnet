@@ -16,7 +16,7 @@ export const Route = createFileRoute('/legal/')({
 
 function LegalIndex() {
   return (
-    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black">
+    <div className="min-h-screen">
       <div className="pt-48 pb-20 px-6 md:px-20 relative z-10">
         <div className="max-w-4xl mx-auto">
           <h1 className="font-serif text-5xl md:text-7xl leading-[1.1] animate-fade-in-up opacity-0">

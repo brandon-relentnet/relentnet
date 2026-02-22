@@ -99,7 +99,7 @@ export const Route = createRootRoute({
     }
 
     return (
-      <>
+      <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black">
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         <StarParticles />
         <Header />
@@ -116,7 +116,7 @@ export const Route = createRootRoute({
             },
           ]}
         />
-      </>
+      </div>
     )
   },
 })

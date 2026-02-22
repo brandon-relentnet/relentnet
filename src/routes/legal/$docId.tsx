@@ -44,7 +44,7 @@ function LegalDoc() {
   }
 
   return (
-    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black">
+    <div className="min-h-screen">
       {/* HEADER */}
       <section className="pt-48 pb-12 px-6 md:px-20 relative z-10">
         <div className="max-w-4xl mx-auto">
