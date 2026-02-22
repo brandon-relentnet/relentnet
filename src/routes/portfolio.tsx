@@ -23,7 +23,7 @@ interface Project {
   description: string
 }
 
-const projects: Project[] = [
+const projects: Array<Project> = [
   {
     name: 'Scrollr',
     url: 'https://myscrollr.relentnet.dev',
@@ -88,7 +88,7 @@ function ProjectSection({
       <div className="max-w-6xl mx-auto">
         {/* Number watermark */}
         <span
-          className={`block text-[7rem] md:text-[10rem] font-serif text-white/[0.03] leading-none select-none -mb-10 md:-mb-14 ${
+          className={`block text-[7rem] md:text-[10rem] font-serif text-black/[0.06] dark:text-white/[0.03] leading-none select-none -mb-10 md:-mb-14 ${
             isRevealed ? 'animate-fade-in-up' : 'opacity-0'
           }`}
         >
@@ -118,7 +118,7 @@ function ProjectSection({
               {project.name}
             </h3>
           </div>
-          <p className="text-neutral-500 text-sm leading-relaxed max-w-md font-light">
+          <p className="text-ink-muted text-sm leading-relaxed max-w-md font-light">
             {project.description}
           </p>
         </div>
@@ -129,14 +129,14 @@ function ProjectSection({
 
 function Portfolio() {
   return (
-    <div className="min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-gold selection:text-black overflow-hidden">
+    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black overflow-hidden">
       {/* HERO */}
       <section className="min-h-screen flex flex-col justify-center items-center px-6 relative">
         <h1 className="font-serif text-5xl md:text-7xl lg:text-9xl text-center leading-[1.1] animate-fade-in-up">
           The <span className="italic text-gold/90">Work.</span>
         </h1>
         <p
-          className="mt-8 text-neutral-500 text-sm md:text-base font-light tracking-wide opacity-0 animate-fade-in-up"
+          className="mt-8 text-ink-muted text-sm md:text-base font-light tracking-wide opacity-0 animate-fade-in-up"
           style={{ animationDelay: '200ms' }}
         >
           Crafted with intention. Built without compromise.
@@ -158,7 +158,7 @@ function Portfolio() {
 
       {/* CTA */}
       <section className="py-32 flex flex-col justify-center items-center text-center px-6 relative z-10">
-        <p className="text-xs font-bold tracking-[0.3em] text-neutral-500 uppercase mb-8">
+        <p className="text-xs font-bold tracking-[0.3em] text-ink-muted uppercase mb-8">
           Your vision, next
         </p>
         <Link

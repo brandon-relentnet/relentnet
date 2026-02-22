@@ -17,13 +17,13 @@ export const Route = createFileRoute('/portal')({
 
 function Portal() {
   return (
-    <div className="min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-[#E1BE4C] selection:text-black overflow-hidden flex flex-col justify-center items-center px-4">
-      <div className="w-full max-w-md bg-neutral-900/30 border border-white/5 p-8 md:p-12 backdrop-blur-sm animate-fade-in-up">
+    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black overflow-hidden flex flex-col justify-center items-center px-4">
+      <div className="w-full max-w-md bg-card border border-line-faint p-8 md:p-12 backdrop-blur-sm animate-fade-in-up">
         <div className="text-center mb-8">
           <h1 className="font-serif text-3xl md:text-4xl mb-4">
-            Client <span className="italic text-[#E1BE4C]">Access</span>
+            Client <span className="italic text-gold">Access</span>
           </h1>
-          <p className="text-neutral-400 text-sm font-light">
+          <p className="text-ink-sub text-sm font-light">
             Enter your credentials to manage your account.
           </p>
         </div>
@@ -36,7 +36,7 @@ function Portal() {
           <div className="space-y-2">
             <label
               htmlFor="username"
-              className="text-xs uppercase tracking-widest text-neutral-500"
+              className="text-xs uppercase tracking-widest text-ink-muted"
             >
               Email Address
             </label>
@@ -46,7 +46,7 @@ function Portal() {
           <div className="space-y-2">
             <label
               htmlFor="password"
-              className="text-xs uppercase tracking-widest text-neutral-500"
+              className="text-xs uppercase tracking-widest text-ink-muted"
             >
               Password
             </label>
@@ -69,7 +69,7 @@ function Portal() {
         <div className="mt-8 text-center">
           <a
             href="https://clients.relentnet.com/pwreset.php"
-            className="text-xs text-neutral-500 hover:text-[#E1BE4C] transition-colors uppercase tracking-widest"
+            className="text-xs text-ink-muted hover:text-gold transition-colors uppercase tracking-widest"
           >
             Forgot Password?
           </a>

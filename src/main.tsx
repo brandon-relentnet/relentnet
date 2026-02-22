@@ -3,9 +3,11 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
+import reportWebVitals from './reportWebVitals.ts'
+
+import { ThemeProvider } from '@/components/ThemeProvider'
 
 import './styles.css'
-import reportWebVitals from './reportWebVitals.ts'
 
 // Create a new router instance
 const router = createRouter({
@@ -28,7 +30,11 @@ declare module '@tanstack/react-router' {
 const rootElement = document.getElementById('app')
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
-  root.render(<RouterProvider router={router} />)
+  root.render(
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>,
+  )
 }
 
 // If you want to start measuring performance in your app, pass a function

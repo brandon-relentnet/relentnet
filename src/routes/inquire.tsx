@@ -34,7 +34,7 @@ function Contact() {
       hasDeadline: false,
       deadlineDate: '',
       vision: '',
-      communicationMethods: [] as string[],
+      communicationMethods: [] as Array<string>,
       phoneNumber: '',
       inPersonState: '',
       cityState: '',
@@ -77,7 +77,7 @@ function Contact() {
   })
 
   return (
-    <div className="min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-[#E1BE4C] selection:text-black overflow-hidden flex flex-col">
+    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black overflow-hidden flex flex-col">
       <div className="grow pt-32 pb-12 px-6 md:px-20 relative z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* LEFT COLUMN: Context & Info */}
@@ -87,7 +87,7 @@ function Contact() {
                 Start the <br />
                 <span className="italic text-gold">Conversation.</span>
               </h1>
-              <p className="text-neutral-400 font-light text-lg leading-relaxed">
+              <p className="text-ink-sub font-light text-lg leading-relaxed">
                 You have a vision. We have the architecture to build it. Tell us
                 about your project, and we will determine if RelentNet is the
                 right steward for your digital legacy.
@@ -95,19 +95,19 @@ function Contact() {
             </div>
 
             <div
-              className="space-y-8 border-t border-white/10 pt-8 animate-fade-in-up opacity-0"
+              className="space-y-8 border-t border-line pt-8 animate-fade-in-up opacity-0"
               style={{ animationDelay: '200ms' }}
             >
               <div>
                 <h4 className="text-xs font-bold tracking-[0.3em] text-gold uppercase mb-4">
                   Office Locations
                 </h4>
-                <p className="text-sm text-neutral-400 leading-relaxed">
-                  <strong className="text-white">
+                <p className="text-sm text-ink-sub leading-relaxed">
+                  <strong className="text-ink-em">
                     {siteConfig.regions.join(', ')}
                   </strong>
                   <br />
-                  <span className="text-xs text-neutral-500">
+                  <span className="text-xs text-ink-muted">
                     Available for in-person consultation
                   </span>
                 </p>
@@ -117,21 +117,21 @@ function Contact() {
                 <h4 className="text-xs font-bold tracking-[0.3em] text-gold uppercase mb-4">
                   Direct Contact
                 </h4>
-                <div className="space-y-2 text-sm text-neutral-400">
+                <div className="space-y-2 text-sm text-ink-sub">
                   <p>
-                    <span className="block text-[10px] uppercase tracking-widest text-neutral-600">
+                    <span className="block text-[10px] uppercase tracking-widest text-ink-faint">
                       Email
                     </span>
                     {siteConfig.contact.email}
                   </p>
                   <p>
-                    <span className="block text-[10px] uppercase tracking-widest text-neutral-600">
+                    <span className="block text-[10px] uppercase tracking-widest text-ink-faint">
                       Phone
                     </span>
                     {siteConfig.contact.phone}
                   </p>
                   <p>
-                    <span className="block text-[10px] uppercase tracking-widest text-neutral-600">
+                    <span className="block text-[10px] uppercase tracking-widest text-ink-faint">
                       Hours
                     </span>
                     {siteConfig.contact.hours}
@@ -143,7 +143,7 @@ function Contact() {
 
           {/* RIGHT COLUMN: Form */}
           <div
-            className="lg:col-span-7 bg-neutral-900/30 border border-white/5 p-8 md:p-12 backdrop-blur-sm animate-fade-in-up opacity-0"
+            className="lg:col-span-7 bg-card border border-line-faint p-8 md:p-12 backdrop-blur-sm animate-fade-in-up opacity-0"
             style={{ animationDelay: '400ms' }}
           >
             {isSuccess ? (
@@ -165,7 +165,7 @@ function Contact() {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-serif">Message Received.</h3>
-                <p className="text-neutral-400 max-w-md">
+                <p className="text-ink-sub max-w-md">
                   Your vision has been received. A senior partner will review
                   your inquiry and contact you within 24 hours.
                 </p>
@@ -187,7 +187,7 @@ function Contact() {
               >
                 {/* STEP 1: BASICS */}
                 <div className="space-y-6">
-                  <h3 className="text-lg font-serif italic text-white/50 border-b border-white/5 pb-2">
+                  <h3 className="text-lg font-serif italic text-black/25 dark:text-white/50 border-b border-line-faint pb-2">
                     01. The Basics
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -201,7 +201,7 @@ function Contact() {
                         <div className="space-y-2">
                           <label
                             htmlFor={field.name}
-                            className="text-xs uppercase tracking-widest text-neutral-500"
+                            className="text-xs uppercase tracking-widest text-ink-muted"
                           >
                             Full Name *
                           </label>
@@ -231,7 +231,7 @@ function Contact() {
                         <div className="space-y-2">
                           <label
                             htmlFor={field.name}
-                            className="text-xs uppercase tracking-widest text-neutral-500"
+                            className="text-xs uppercase tracking-widest text-ink-muted"
                           >
                             Company *
                           </label>
@@ -266,7 +266,7 @@ function Contact() {
                       <div className="space-y-2">
                         <label
                           htmlFor={field.name}
-                          className="text-xs uppercase tracking-widest text-neutral-500"
+                          className="text-xs uppercase tracking-widest text-ink-muted"
                         >
                           Business Email *
                         </label>
@@ -293,7 +293,7 @@ function Contact() {
                       <div className="space-y-2">
                         <label
                           htmlFor={field.name}
-                          className="text-xs uppercase tracking-widest text-neutral-500"
+                          className="text-xs uppercase tracking-widest text-ink-muted"
                         >
                           Current Website
                         </label>
@@ -317,7 +317,7 @@ function Contact() {
 
                 {/* STEP 2: THE PROJECT */}
                 <div className="space-y-6">
-                  <h3 className="text-lg font-serif italic text-white/50 border-b border-white/5 pb-2">
+                  <h3 className="text-lg font-serif italic text-black/25 dark:text-white/50 border-b border-line-faint pb-2">
                     02. The Project
                   </h3>
 
@@ -327,7 +327,7 @@ function Contact() {
                       <div className="space-y-2">
                         <label
                           htmlFor={field.name}
-                          className="text-xs uppercase tracking-widest text-neutral-500"
+                          className="text-xs uppercase tracking-widest text-ink-muted"
                         >
                           Current State *
                         </label>
@@ -350,7 +350,7 @@ function Contact() {
                           ].map((option) => (
                             <label
                               key={option.value}
-                              className={`flex items-center gap-3 p-3 border ${field.state.value === option.value ? 'border-gold bg-gold/5' : 'border-white/10 bg-black/20'} cursor-pointer transition-all`}
+                              className={`flex items-center gap-3 p-3 border ${field.state.value === option.value ? 'border-gold bg-gold/5' : 'border-line bg-inset'} cursor-pointer transition-all`}
                             >
                               <input
                                 type="radio"
@@ -382,9 +382,9 @@ function Contact() {
                             onChange={(e) =>
                               field.handleChange(e.target.checked)
                             }
-                            className="w-4 h-4 accent-gold bg-black/20 border-white/10"
+                            className="w-4 h-4 accent-gold bg-inset border-line"
                           />
-                          <span className="text-sm text-neutral-300">
+                          <span className="text-sm text-ink-sub">
                             Is there a firm deadline for this project?
                           </span>
                         </label>
@@ -406,7 +406,7 @@ function Contact() {
                             <div className="space-y-2 animate-fade-in-up">
                               <label
                                 htmlFor={field.name}
-                                className="text-xs uppercase tracking-widest text-neutral-500"
+                                className="text-xs uppercase tracking-widest text-ink-muted"
                               >
                                 Target Launch Date *
                               </label>
@@ -419,7 +419,6 @@ function Contact() {
                                 onChange={(e) =>
                                   field.handleChange(e.target.value)
                                 }
-                                className="color-scheme-dark"
                               />
                               {field.state.meta.errors.length ? (
                                 <em className="text-xs text-red-500">
@@ -445,7 +444,7 @@ function Contact() {
                       <div className="space-y-2">
                         <label
                           htmlFor={field.name}
-                          className="text-xs uppercase tracking-widest text-neutral-500"
+                          className="text-xs uppercase tracking-widest text-ink-muted"
                         >
                           The Vision *
                         </label>
@@ -470,7 +469,7 @@ function Contact() {
 
                 {/* STEP 3: CONCIERGE PREFERENCES */}
                 <div className="space-y-6">
-                  <h3 className="text-lg font-serif italic text-white/50 border-b border-white/5 pb-2">
+                  <h3 className="text-lg font-serif italic text-black/25 dark:text-white/50 border-b border-line-faint pb-2">
                     03. Concierge Preferences
                   </h3>
 
@@ -484,7 +483,7 @@ function Contact() {
                     }}
                     children={(field) => (
                       <div className="space-y-2">
-                        <label className="text-xs uppercase tracking-widest text-neutral-500">
+                        <label className="text-xs uppercase tracking-widest text-ink-muted">
                           Communication Methods (Select all that apply) *
                         </label>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -500,7 +499,7 @@ function Contact() {
                               className={`flex items-center gap-3 p-3 border ${
                                 field.state.value.includes(option.value)
                                   ? 'border-gold bg-gold/5'
-                                  : 'border-white/10 bg-black/20'
+                                  : 'border-line bg-inset'
                               } cursor-pointer transition-all`}
                             >
                               <input
@@ -554,7 +553,7 @@ function Contact() {
                               <div className="space-y-2 animate-fade-in-up">
                                 <label
                                   htmlFor={field.name}
-                                  className="text-xs uppercase tracking-widest text-neutral-500"
+                                  className="text-xs uppercase tracking-widest text-ink-muted"
                                 >
                                   Mobile Number *
                                 </label>
@@ -589,37 +588,38 @@ function Contact() {
                               }}
                               children={(field) => (
                                 <div className="space-y-2">
-                                  <label className="text-xs uppercase tracking-widest text-neutral-500">
+                                  <label className="text-xs uppercase tracking-widest text-ink-muted">
                                     Preferred State *
                                   </label>
                                   <div className="grid grid-cols-2 gap-2">
-                                    {[
-                                      ...siteConfig.regions,
-                                      'Other',
-                                    ].map((option) => (
-                                      <label
-                                        key={option}
-                                        className={`flex items-center gap-2 p-3 border ${
-                                          field.state.value === option
-                                            ? 'border-gold bg-gold/5'
-                                            : 'border-white/10 bg-black/20'
-                                        } cursor-pointer transition-all`}
-                                      >
-                                        <input
-                                          type="radio"
-                                          name={field.name}
-                                          value={option}
-                                          checked={field.state.value === option}
-                                          onChange={() =>
-                                            field.handleChange(option)
-                                          }
-                                          className="accent-gold"
-                                        />
-                                        <span className="text-sm">
-                                          {option}
-                                        </span>
-                                      </label>
-                                    ))}
+                                    {[...siteConfig.regions, 'Other'].map(
+                                      (option) => (
+                                        <label
+                                          key={option}
+                                          className={`flex items-center gap-2 p-3 border ${
+                                            field.state.value === option
+                                              ? 'border-gold bg-gold/5'
+                                              : 'border-line bg-inset'
+                                          } cursor-pointer transition-all`}
+                                        >
+                                          <input
+                                            type="radio"
+                                            name={field.name}
+                                            value={option}
+                                            checked={
+                                              field.state.value === option
+                                            }
+                                            onChange={() =>
+                                              field.handleChange(option)
+                                            }
+                                            className="accent-gold"
+                                          />
+                                          <span className="text-sm">
+                                            {option}
+                                          </span>
+                                        </label>
+                                      ),
+                                    )}
                                   </div>
                                   {field.state.meta.errors.length ? (
                                     <em className="text-xs text-red-500">
@@ -642,7 +642,7 @@ function Contact() {
                                 <div className="space-y-2">
                                   <label
                                     htmlFor={field.name}
-                                    className="text-xs uppercase tracking-widest text-neutral-500"
+                                    className="text-xs uppercase tracking-widest text-ink-muted"
                                   >
                                     City & State *
                                   </label>

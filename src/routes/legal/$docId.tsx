@@ -40,17 +40,17 @@ function LegalDoc() {
   }[docId]
 
   if (!ContentComponent) {
-    return <div className="text-white">Document content not found</div>
+    return <div className="text-ink">Document content not found</div>
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] text-[#e5e5e5] font-sans selection:bg-[#E1BE4C] selection:text-black">
+    <div className="min-h-screen bg-page text-ink font-sans selection:bg-gold selection:text-black">
       {/* HEADER */}
       <section className="pt-48 pb-12 px-6 md:px-20 relative z-10">
         <div className="max-w-4xl mx-auto">
           <Link
             to="/legal"
-            className="text-xs uppercase tracking-widest text-neutral-500 hover:text-[#E1BE4C] transition-colors mb-8 block"
+            className="text-xs uppercase tracking-widest text-ink-muted hover:text-gold transition-colors mb-8 block"
           >
             &larr; Back to Legal
           </Link>
@@ -58,10 +58,10 @@ function LegalDoc() {
             {doc.title}
           </h1>
           <p
-            className="text-neutral-400 font-light text-sm animate-fade-in-up opacity-0 border-t border-white/10 pt-6 inline-block"
+            className="text-ink-sub font-light text-sm animate-fade-in-up opacity-0 border-t border-line pt-6 inline-block"
             style={{ animationDelay: '200ms' }}
           >
-            Last Updated: <span className="text-white">{doc.lastUpdated}</span>
+            Last Updated: <span className="text-ink-em">{doc.lastUpdated}</span>
           </p>
         </div>
       </section>

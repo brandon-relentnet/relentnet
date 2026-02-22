@@ -1,29 +1,29 @@
 import React from 'react'
 
 const H2 = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="text-[#E1BE4C] text-xs font-bold tracking-[0.3em] uppercase mt-16 mb-6">
+  <h2 className="text-gold text-xs font-bold tracking-[0.3em] uppercase mt-16 mb-6">
     {children}
   </h2>
 )
 
 const H3 = ({ children }: { children: React.ReactNode }) => (
-  <h3 className="font-serif text-xl text-white mt-8 mb-4">{children}</h3>
+  <h3 className="font-serif text-xl text-ink-em mt-8 mb-4">{children}</h3>
 )
 
 const P = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-neutral-400 font-light leading-relaxed mb-4 text-sm">
+  <p className="text-ink-sub font-light leading-relaxed mb-4 text-sm">
     {children}
   </p>
 )
 
 const List = ({ children }: { children: React.ReactNode }) => (
-  <ul className="list-disc list-inside text-neutral-400 font-light text-sm space-y-2 mb-4 pl-4">
+  <ul className="list-disc list-inside text-ink-sub font-light text-sm space-y-2 mb-4 pl-4">
     {children}
   </ul>
 )
 
 const Strong = ({ children }: { children: React.ReactNode }) => (
-  <strong className="text-white font-normal">{children}</strong>
+  <strong className="text-ink-em font-normal">{children}</strong>
 )
 
 const Section = ({ children }: { children: React.ReactNode }) => (
@@ -55,7 +55,7 @@ export const MSAContent = () => (
       <P>
         In the event of a conflict, the following order of precedence applies:
       </P>
-      <ol className="list-decimal list-inside text-neutral-400 font-light text-sm space-y-2 mb-4 pl-4">
+      <ol className="list-decimal list-inside text-ink-sub font-light text-sm space-y-2 mb-4 pl-4">
         <li>Master Services Agreement (MSA)</li>
         <li>Support & Hosting Agreement (if applicable)</li>
         <li>Statement(s) of Work (SOW)</li>
@@ -337,7 +337,7 @@ export const SHAContent = () => (
         This Agreement supplements the Master Services Agreement (MSA). In the
         event of conflict:
       </P>
-      <ol className="list-decimal list-inside text-neutral-400 font-light text-sm space-y-2 mb-4 pl-4">
+      <ol className="list-decimal list-inside text-ink-sub font-light text-sm space-y-2 mb-4 pl-4">
         <li>MSA</li>
         <li>This Agreement</li>
         <li>SOW</li>
@@ -371,18 +371,18 @@ export const SHAContent = () => (
     <Section>
       <H2>4. Support Requests & Response SLA</H2>
       <P>Support requests must be submitted via designated channels.</P>
-      <div className="overflow-x-auto border border-white/10 rounded-sm mb-6">
-        <table className="w-full text-left text-sm text-neutral-400">
-          <thead className="bg-white/5 uppercase text-xs tracking-widest text-[#E1BE4C]">
+      <div className="overflow-x-auto border border-line rounded-sm mb-6">
+        <table className="w-full text-left text-sm text-ink-sub">
+          <thead className="bg-line-faint uppercase text-xs tracking-widest text-gold">
             <tr>
-              <th className="p-4 border-b border-white/10">Priority</th>
-              <th className="p-4 border-b border-white/10">Description</th>
-              <th className="p-4 border-b border-white/10">
+              <th className="p-4 border-b border-line">Priority</th>
+              <th className="p-4 border-b border-line">Description</th>
+              <th className="p-4 border-b border-line">
                 Initial Response Time
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-line-faint">
             <tr>
               <td className="p-4">P1</td>
               <td className="p-4">Production down</td>
@@ -414,15 +414,15 @@ export const SHAContent = () => (
 
     <Section>
       <H2>5. Uptime SLA (Relentnet-Managed Only)</H2>
-      <div className="overflow-x-auto border border-white/10 rounded-sm mb-6">
-        <table className="w-full text-left text-sm text-neutral-400">
-          <thead className="bg-white/5 uppercase text-xs tracking-widest text-[#E1BE4C]">
+      <div className="overflow-x-auto border border-line rounded-sm mb-6">
+        <table className="w-full text-left text-sm text-ink-sub">
+          <thead className="bg-line-faint uppercase text-xs tracking-widest text-gold">
             <tr>
-              <th className="p-4 border-b border-white/10">Plan</th>
-              <th className="p-4 border-b border-white/10">Monthly Uptime</th>
+              <th className="p-4 border-b border-line">Plan</th>
+              <th className="p-4 border-b border-line">Monthly Uptime</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-line-faint">
             <tr>
               <td className="p-4">Standard</td>
               <td className="p-4">99.0%</td>
@@ -450,15 +450,15 @@ export const SHAContent = () => (
         If the SLA is not met, Client may request a{' '}
         <Strong>service credit applied to the next billing cycle</Strong>:
       </P>
-      <div className="overflow-x-auto border border-white/10 rounded-sm mb-6">
-        <table className="w-full text-left text-sm text-neutral-400">
-          <thead className="bg-white/5 uppercase text-xs tracking-widest text-[#E1BE4C]">
+      <div className="overflow-x-auto border border-line rounded-sm mb-6">
+        <table className="w-full text-left text-sm text-ink-sub">
+          <thead className="bg-line-faint uppercase text-xs tracking-widest text-gold">
             <tr>
-              <th className="p-4 border-b border-white/10">Monthly Uptime</th>
-              <th className="p-4 border-b border-white/10">Credit</th>
+              <th className="p-4 border-b border-line">Monthly Uptime</th>
+              <th className="p-4 border-b border-line">Credit</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-line-faint">
             <tr>
               <td className="p-4">98.0–98.99%</td>
               <td className="p-4">5%</td>
