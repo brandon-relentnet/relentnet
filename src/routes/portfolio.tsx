@@ -39,11 +39,11 @@ const projects: Array<Project> = [
       "A commanding digital presence for Nashville's premier commercial construction firm. Professional, streamlined, and built to convert.",
   },
   {
-    name: 'Star Kids',
-    url: 'https://starkids.relentnet.dev',
-    category: 'Nonprofit Organization',
+    name: 'CourtCommand',
+    url: 'https://courtcommand.app',
+    category: 'Sports Technology',
     description:
-      'A 501(c)(3) empowering children through education, healthcare, nutrition, and mentorship programs nationwide.',
+      'A zero-latency, multi-tenant referee engine and sports ticker designed for broadcast environments. Real-time score synchronization built for performance.',
   },
   {
     name: 'Houz2Home',
@@ -51,6 +51,20 @@ const projects: Array<Project> = [
     category: 'Home Renovations',
     description:
       'Where the difference is in the details. Showcasing craftsmanship and quality for a home renovations company that takes pride in every project.',
+  },
+  {
+    name: 'Star Kids',
+    url: 'https://starkids.relentnet.dev',
+    category: 'Nonprofit Organization',
+    description:
+      'A 501(c)(3) empowering children through education, healthcare, nutrition, and mentorship programs nationwide.',
+  },
+  {
+    name: 'VM Homes',
+    url: 'https://vm-homes.com',
+    category: 'Real Estate',
+    description:
+      'A premium digital storefront for a St. Pete Beach real estate team. MLS-integrated property search, neighborhood guides, and a client-first experience built to convert.',
   },
 ]
 
