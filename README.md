@@ -51,13 +51,13 @@ npm run check
 Build and run the marketing app with Docker Compose:
 
 ```sh
-docker compose up --build
+docker compose -f compose.yaml -f compose.local.yaml up --build
 ```
 
 The container serves the built SPA through Nginx on `http://localhost:3000` by default. Override the published port with `MARKETING_PORT`:
 
 ```sh
-MARKETING_PORT=3001 docker compose up --build
+MARKETING_PORT=3001 docker compose -f compose.yaml -f compose.local.yaml up --build
 ```
 
 ## Deployment
@@ -72,6 +72,8 @@ Service: marketing
 Exposed port: 80
 Domain: relentnet.com
 ```
+
+Use `compose.local.yaml` only for local development; `compose.yaml` intentionally does not bind host ports so Coolify can route traffic through its proxy.
 
 ## Marketing App
 

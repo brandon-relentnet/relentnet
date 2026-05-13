@@ -4,6 +4,6 @@ services:
       context: .
       dockerfile: apps/marketing/Dockerfile
     image: relentnet-marketing:latest
-    ports:
-      - '${MARKETING_PORT:-3000}:80'
+    expose:
+      - '80'
     restart: unless-stopped
