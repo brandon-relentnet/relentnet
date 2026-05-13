@@ -1,6 +1,18 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
-import { ArrowRight, Fingerprint, HeartHandshake, Shield } from 'lucide-react'
+import {
+  ArrowRight,
+  BarChart3,
+  ClipboardList,
+  FileText,
+  GitBranch,
+  LayoutDashboard,
+  MessagesSquare,
+  Search,
+  ShieldCheck,
+  Workflow,
+  Wrench,
+} from 'lucide-react'
 
 import type { LucideIcon } from 'lucide-react'
 
@@ -9,18 +21,114 @@ import { siteConfig } from '@/site.config'
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'RelentNet | Bespoke Digital Stewardship & Legacy' },
+      { title: 'RelentNet | Custom Software Stewardship' },
       {
         name: 'description',
         content:
-          'The sovereign antidote to the template factory. White-glove web architecture and digital legacy management for discerning founders. Secure your domain.',
+          'White-glove technology partnership for owner-led businesses. We diagnose operational friction, build custom software systems, and steward the technology long-term.',
       },
     ],
   }),
   component: HomeComponent,
 })
 
-/* ── Scroll-reveal hook ── */
+interface MethodStep {
+  title: string
+  description: string
+}
+
+interface ServiceLane {
+  title: string
+  description: string
+  icon: LucideIcon
+}
+
+export const homepageHero = {
+  headline: 'Your business has outgrown disconnected tools.',
+  body: 'RelentNet designs, builds, and stewards custom software systems for owners who need operations to move cleaner, faster, and with less friction.',
+  primaryCta: 'Map My Workflow',
+  secondaryCta: 'See Problems We Solve',
+} as const
+
+export const operationalPains = [
+  'Spreadsheet chaos',
+  'Missed follow-ups',
+  'Disconnected software',
+  'Slow admin work',
+  'Unclear reporting',
+  'Client communication gaps',
+] as const
+
+export const methodSteps: Array<MethodStep> = [
+  {
+    title: 'Discover',
+    description:
+      'We listen closely to how the business actually runs: intake, sales, fulfillment, communication, and reporting.',
+  },
+  {
+    title: 'Diagnose',
+    description:
+      'We identify the bottlenecks, duplicated effort, missed opportunities, and fragile handoffs that software can remove.',
+  },
+  {
+    title: 'Design',
+    description:
+      'We map the workflow, interface, data model, and implementation plan before a build ever begins.',
+  },
+  {
+    title: 'Build',
+    description:
+      'We create the system with clean engineering, sharp interfaces, and enough flexibility to grow with the business.',
+  },
+  {
+    title: 'Steward',
+    description:
+      'We stay close after launch: hosting, monitoring, improvements, support, and continued strategic iteration.',
+  },
+]
+
+export const problemsSolved = [
+  'Lead intake',
+  'Quoting workflows',
+  'Scheduling systems',
+  'Client portals',
+  'Reporting dashboards',
+  'Document operations',
+  'Automation layers',
+  'Internal tools',
+] as const
+
+const serviceLanes: Array<ServiceLane> = [
+  {
+    title: 'Workflow Discovery',
+    description:
+      'Paid operational audits that turn unclear business friction into a concrete software opportunity map.',
+    icon: Search,
+  },
+  {
+    title: 'Custom Software Systems',
+    description:
+      'Portals, dashboards, intake tools, reporting systems, and internal workflows built around how the company actually operates.',
+    icon: Workflow,
+  },
+  {
+    title: 'Technology Stewardship',
+    description:
+      'Long-term hosting, maintenance, security, support, monitoring, and iteration with direct access to the people who build.',
+    icon: ShieldCheck,
+  },
+]
+
+const problemIcons: Array<LucideIcon> = [
+  ClipboardList,
+  FileText,
+  GitBranch,
+  Wrench,
+  BarChart3,
+  MessagesSquare,
+  LayoutDashboard,
+  Workflow,
+]
 
 function useReveal(threshold = 0.15) {
   const ref = useRef<HTMLElement>(null)
@@ -45,305 +153,261 @@ function useReveal(threshold = 0.15) {
   return { ref, isRevealed }
 }
 
-/* ── Pillar data ── */
-
-interface Pillar {
-  title: string
-  quote: string
-  description: string
-  icon: LucideIcon
-}
-
-const pillars: Array<Pillar> = [
-  {
-    title: 'Bespoke Creation',
-    quote:
-      'Your business is not a template. Your website should not be either.',
-    description:
-      'Every project begins with a blank canvas. We architect solutions tailored to your business goals, your audience, and your growth trajectory — never recycling layouts or reusing another client\u2019s work.',
-    icon: Fingerprint,
-  },
-  {
-    title: 'White-Glove Stewardship',
-    quote: 'The launch is not the finish line. It\u2019s the starting line.',
-    description:
-      'Updates, security patches, content changes, performance monitoring — handled instantly, without you ever filing a ticket or waiting in a queue. You lead the business; we own the infrastructure.',
-    icon: Shield,
-  },
-  {
-    title: 'Personal Access',
-    quote: 'We do not hide behind ticket systems.',
-    description:
-      'Direct lines of communication with the people who actually build and maintain your site. A phone call, an email, a handshake in the Southeast — we adapt to your preferences.',
-    icon: HeartHandshake,
-  },
-]
-
-/* ── Page ── */
-
 function HomeComponent() {
-  const philosophyReveal = useReveal(0.15)
-  const pillarsReveal = useReveal(0.1)
-  const exploreReveal = useReveal(0.1)
+  const painReveal = useReveal(0.1)
+  const methodReveal = useReveal(0.1)
+  const problemsReveal = useReveal(0.1)
+  const workReveal = useReveal(0.1)
   const ctaReveal = useReveal(0.15)
-
-  /* Format region pairs for display */
-  const regionPairs: Array<Array<string>> = []
-  for (let i = 0; i < siteConfig.regions.length; i += 2) {
-    regionPairs.push(siteConfig.regions.slice(i, i + 2))
-  }
 
   return (
     <div className="min-h-screen overflow-hidden">
-      {/* ── HERO ── */}
-      <section className="min-h-screen flex flex-col justify-center items-center px-6 relative">
-        <h1 className="relative z-10 font-serif text-5xl md:text-7xl lg:text-9xl text-center leading-[1.1] animate-fade-in-up">
-          Empower Your <br />
-          <span className="italic text-gold/90">Digital Presence.</span>
-        </h1>
-
-        <div
-          className="relative z-10 mt-12 max-w-lg text-center space-y-8 opacity-0 animate-fade-in-up"
-          style={{ animationDelay: '200ms' }}
-        >
-          <p className="text-sm md:text-base text-ink-sub font-light leading-relaxed">
-            Relentless dedication to the white-glove website experience. We do
-            not just build; we steward your digital legacy.
-          </p>
-
-          <div className="flex justify-center gap-8 items-center pt-4">
-            {regionPairs.map((pair, i) => (
-              <span
-                key={pair.join('-')}
-                className="text-[10px] tracking-[0.3em] uppercase text-ink-muted"
+      <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 relative">
+        <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-8">
+            <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-bold mb-8 animate-fade-in-up">
+              White-glove technology partner
+            </p>
+            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.02] animate-fade-in-up">
+              Your business has outgrown{' '}
+              <span className="italic text-gold/90">disconnected tools.</span>
+            </h1>
+            <p
+              className="mt-8 max-w-2xl text-ink-sub text-base md:text-lg font-light leading-relaxed opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '150ms' }}
+            >
+              {homepageHero.body}
+            </p>
+            <div
+              className="mt-10 flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '300ms' }}
+            >
+              <Link
+                to="/inquire"
+                className="inline-flex items-center justify-center gap-3 border border-gold bg-gold px-7 py-4 text-sm uppercase tracking-widest text-black transition-all duration-300 hover:bg-transparent hover:text-gold"
               >
-                {i > 0 && (
-                  <span className="inline-block w-1 h-1 bg-gold rounded-full shadow-[0_0_10px_var(--color-gold)] align-middle -ml-4 mr-4" />
-                )}
-                {pair.join(' \u2022 ')}
-              </span>
-            ))}
+                {homepageHero.primaryCta}
+                <ArrowRight className="size-4" />
+              </Link>
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center justify-center gap-3 border border-line px-7 py-4 text-sm uppercase tracking-widest text-ink transition-all duration-300 hover:border-gold hover:text-gold"
+              >
+                {homepageHero.secondaryCta}
+              </Link>
+            </div>
           </div>
-        </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-pulse delay-1000 z-10">
-          <span className="text-[10px] uppercase tracking-widest text-gold">
-            Scroll
-          </span>
-          <div className="w-px h-12 bg-linear-to-b from-gold to-transparent" />
+          <aside
+            className="lg:col-span-4 border border-line bg-card/70 p-6 md:p-8 backdrop-blur-sm opacity-0 animate-fade-in-up"
+            style={{ animationDelay: '450ms' }}
+          >
+            <p className="text-[10px] uppercase tracking-[0.3em] text-ink-muted mb-6">
+              Built for owners in
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              {siteConfig.regions.map((region) => (
+                <span
+                  key={region}
+                  className="border border-line-faint bg-inset px-4 py-3 text-sm text-ink-sub"
+                >
+                  {region}
+                </span>
+              ))}
+            </div>
+            <p className="mt-8 text-sm leading-relaxed text-ink-muted">
+              Construction, home services, real estate-adjacent firms,
+              professional services, and regional companies with operational
+              complexity.
+            </p>
+          </aside>
         </div>
       </section>
 
-      {/* ── PHILOSOPHY ── */}
       <section
-        ref={philosophyReveal.ref}
+        ref={painReveal.ref}
         className="relative z-10 bg-surface backdrop-blur-xs border-y border-line"
       >
-        <div className="max-w-6xl mx-auto px-6 md:px-12 py-20 md:py-28">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-5">
               <h2
                 className={`text-xs font-bold tracking-[0.3em] text-gold uppercase mb-6 ${
-                  philosophyReveal.isRevealed
-                    ? 'animate-fade-in-up'
-                    : 'opacity-0'
+                  painReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
                 }`}
               >
-                The Philosophy
+                The Friction
               </h2>
               <h3
                 className={`font-serif text-3xl md:text-5xl leading-tight ${
-                  philosophyReveal.isRevealed
-                    ? 'animate-fade-in-up'
-                    : 'opacity-0'
+                  painReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
                 }`}
                 style={
-                  philosophyReveal.isRevealed
+                  painReveal.isRevealed
                     ? { animationDelay: '150ms' }
                     : undefined
                 }
               >
-                We sell one thing:
+                The business is moving.
                 <br />
                 <span className="text-black/15 dark:text-white/30">
-                  Peace of mind.
+                  The tools are not.
                 </span>
               </h3>
             </div>
-
-            <div
-              className={`space-y-6 text-ink-sub font-light text-lg leading-relaxed ${
-                philosophyReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
-              style={
-                philosophyReveal.isRevealed
-                  ? { animationDelay: '300ms' }
-                  : undefined
-              }
-            >
-              <p>
-                In a world of templates and automated responses, RelentNet
-                offers the antidote:
-                <strong className="text-gold font-normal">
-                  {' '}
-                  radical human attention.
-                </strong>
-              </p>
-              <p>
-                You provide the vision. We manage the execution, the
-                infrastructure, and the growth — whether you prefer a phone
-                call, an email, or a handshake in the Southeast.
-              </p>
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {operationalPains.map((pain, index) => (
+                <div
+                  key={pain}
+                  className={`border border-line-faint bg-card p-5 text-ink-sub ${
+                    painReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+                  }`}
+                  style={
+                    painReveal.isRevealed
+                      ? { animationDelay: `${200 + index * 80}ms` }
+                      : undefined
+                  }
+                >
+                  <span className="text-gold text-xs font-bold tracking-widest">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <p className="mt-3 text-lg font-serif">{pain}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── PILLARS ── */}
-      <section ref={pillarsReveal.ref} className="relative z-10">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 py-24 md:py-32">
+      <section ref={methodReveal.ref} className="relative z-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32">
           <h2
             className={`text-xs font-bold tracking-[0.3em] text-gold uppercase mb-16 text-center ${
-              pillarsReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+              methodReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
             }`}
           >
-            The Commitment
+            The Method
           </h2>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
+            {methodSteps.map((step, index) => (
+              <article
+                key={step.title}
+                className={`border-l border-line pl-6 ${
+                  methodReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+                }`}
+                style={
+                  methodReveal.isRevealed
+                    ? { animationDelay: `${index * 120}ms` }
+                    : undefined
+                }
+              >
+                <span className="text-[4rem] font-serif leading-none text-black/[0.06] dark:text-white/[0.04]">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className="font-serif text-2xl mt-2">{step.title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-ink-muted">
+                  {step.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10">
-            {pillars.map((pillar, i) => {
-              const Icon = pillar.icon
+      <section
+        ref={problemsReveal.ref}
+        className="relative z-10 bg-surface backdrop-blur-xs border-y border-line"
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
+            <div>
+              <h2
+                className={`text-xs font-bold tracking-[0.3em] text-gold uppercase mb-5 ${
+                  problemsReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+                }`}
+              >
+                Problems We Solve
+              </h2>
+              <p
+                className={`font-serif text-3xl md:text-5xl max-w-3xl leading-tight ${
+                  problemsReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+                }`}
+              >
+                Software for the places where work gets stuck.
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {problemsSolved.map((problem, index) => {
+              const Icon = problemIcons[index]
               return (
                 <div
-                  key={pillar.title}
-                  className={`group border-l border-line pl-8 hover:border-gold transition-colors duration-500 ${
-                    pillarsReveal.isRevealed
+                  key={problem}
+                  className={`group border border-line-faint bg-inset p-6 transition-colors duration-300 hover:border-gold/50 ${
+                    problemsReveal.isRevealed
                       ? 'animate-fade-in-up'
                       : 'opacity-0'
                   }`}
                   style={
-                    pillarsReveal.isRevealed
-                      ? { animationDelay: `${(i + 1) * 150}ms` }
+                    problemsReveal.isRevealed
+                      ? { animationDelay: `${index * 80}ms` }
                       : undefined
                   }
                 >
-                  <div className="w-12 h-12 rounded-lg border border-line flex items-center justify-center text-gold mb-6 group-hover:border-gold/50 transition-colors duration-500">
-                    <Icon className="size-5" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-serif mb-3">
-                    {pillar.title}
-                  </h3>
-                  <p className="font-serif italic text-sm text-ink-sub mb-4">
-                    &ldquo;{pillar.quote}&rdquo;
-                  </p>
-                  <p className="text-ink-muted text-sm leading-relaxed group-hover:text-ink-sub transition-colors duration-500">
-                    {pillar.description}
-                  </p>
+                  <Icon className="size-5 text-gold mb-8" strokeWidth={1.5} />
+                  <h3 className="font-serif text-xl">{problem}</h3>
                 </div>
               )
             })}
           </div>
-
-          {/* Conviction closing */}
-          <p
-            className={`mt-20 text-center font-serif italic text-lg md:text-xl text-ink-muted ${
-              pillarsReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-            }`}
-            style={
-              pillarsReveal.isRevealed ? { animationDelay: '650ms' } : undefined
-            }
-          >
-            No templates. No offshore. No ticket queues.
-            <br />
-            <span className="text-gold">Just relentless, human attention.</span>
-          </p>
         </div>
       </section>
 
-      {/* ── EXPLORE ── */}
-      <section
-        ref={exploreReveal.ref}
-        className="relative z-10 bg-surface backdrop-blur-xs border-y border-line"
-      >
-        <div className="max-w-6xl mx-auto px-6 md:px-12 py-24 md:py-32">
+      <section ref={workReveal.ref} className="relative z-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32">
           <h2
             className={`text-xs font-bold tracking-[0.3em] text-gold uppercase mb-16 text-center ${
-              exploreReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+              workReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
             }`}
           >
-            Go Deeper
+            How We Engage
           </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {/* Process card */}
-            <Link
-              to="/process"
-              className={`group relative border border-line rounded-lg p-8 md:p-10 hover:border-gold/50 transition-colors duration-500 ${
-                exploreReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
-              style={
-                exploreReveal.isRevealed
-                  ? { animationDelay: '150ms' }
-                  : undefined
-              }
-            >
-              <span className="text-[5rem] md:text-[6rem] font-serif text-black/[0.06] dark:text-white/[0.03] leading-none select-none absolute top-4 right-6">
-                I
-              </span>
-              <span className="text-gold text-[10px] font-bold tracking-[0.3em] uppercase block mb-3">
-                Explore
-              </span>
-              <h3 className="font-serif text-2xl md:text-3xl mb-4">
-                The Discipline.
-              </h3>
-              <p className="text-ink-muted text-sm leading-relaxed mb-6 max-w-sm">
-                Our rigorous four-phase methodology — from strategic discovery
-                through long-term stewardship. No shortcuts, no handoffs, no
-                surprises.
-              </p>
-              <span className="inline-flex items-center gap-2 text-sm text-gold group-hover:gap-3 transition-all duration-300">
-                View our process
-                <ArrowRight className="size-4" />
-              </span>
-            </Link>
-
-            {/* Portfolio card */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {serviceLanes.map((lane, index) => {
+              const Icon = lane.icon
+              return (
+                <article
+                  key={lane.title}
+                  className={`border border-line rounded-lg p-8 bg-card/60 ${
+                    workReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+                  }`}
+                  style={
+                    workReveal.isRevealed
+                      ? { animationDelay: `${index * 150}ms` }
+                      : undefined
+                  }
+                >
+                  <Icon className="size-7 text-gold mb-8" strokeWidth={1.5} />
+                  <h3 className="font-serif text-2xl mb-4">{lane.title}</h3>
+                  <p className="text-sm leading-relaxed text-ink-muted">
+                    {lane.description}
+                  </p>
+                </article>
+              )
+            })}
+          </div>
+          <div className="mt-12 text-center">
             <Link
               to="/portfolio"
-              className={`group relative border border-line rounded-lg p-8 md:p-10 hover:border-gold/50 transition-colors duration-500 ${
-                exploreReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
-              style={
-                exploreReveal.isRevealed
-                  ? { animationDelay: '300ms' }
-                  : undefined
-              }
+              className="inline-flex items-center gap-3 text-gold text-sm uppercase tracking-widest hover:gap-4 transition-all duration-300"
             >
-              <span className="text-[5rem] md:text-[6rem] font-serif text-black/[0.06] dark:text-white/[0.03] leading-none select-none absolute top-4 right-6">
-                II
-              </span>
-              <span className="text-gold text-[10px] font-bold tracking-[0.3em] uppercase block mb-3">
-                Explore
-              </span>
-              <h3 className="font-serif text-2xl md:text-3xl mb-4">
-                The Work.
-              </h3>
-              <p className="text-ink-muted text-sm leading-relaxed mb-6 max-w-sm">
-                Live examples of bespoke digital experiences — crafted with
-                intention, built without compromise. See what we build for
-                clients like you.
-              </p>
-              <span className="inline-flex items-center gap-2 text-sm text-gold group-hover:gap-3 transition-all duration-300">
-                View our portfolio
-                <ArrowRight className="size-4" />
-              </span>
+              See problems we have solved
+              <ArrowRight className="size-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
       <section ref={ctaReveal.ref} className="relative z-10">
         <div className="py-32 md:py-40 flex flex-col justify-center items-center text-center px-6">
           <p
@@ -351,29 +415,30 @@ function HomeComponent() {
               ctaReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
             }`}
           >
-            Are you ready?
+            Start with the workflow
           </p>
           <Link
             to="/inquire"
-            className={`group font-serif text-5xl md:text-8xl hover:text-gold transition-all duration-300 ${
+            className={`group font-serif text-4xl md:text-7xl hover:text-gold transition-all duration-300 ${
               ctaReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
             }`}
             style={
               ctaReveal.isRevealed ? { animationDelay: '150ms' } : undefined
             }
           >
-            Let&rsquo;s Talk.
+            Map My Workflow.
             <ArrowRight className="inline-block ml-4 size-8 md:size-12 text-gold opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
           </Link>
           <p
-            className={`mt-8 text-ink-muted text-sm ${
+            className={`mt-8 max-w-lg text-ink-muted text-sm leading-relaxed ${
               ctaReveal.isRevealed ? 'animate-fade-in-up' : 'opacity-0'
             }`}
             style={
               ctaReveal.isRevealed ? { animationDelay: '300ms' } : undefined
             }
           >
-            Accepting new clients for Q1 2026.
+            Bring the messy process, disconnected tools, and manual work. We
+            will help you find the leverage.
           </p>
         </div>
       </section>

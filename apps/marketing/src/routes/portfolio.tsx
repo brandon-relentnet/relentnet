@@ -1,141 +1,191 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
-import { useEffect, useRef, useState } from 'react'
-import { BrowserFrame } from '@/components/BrowserFrame'
+import { ArrowRight, ExternalLink } from 'lucide-react'
 
 export const Route = createFileRoute('/portfolio')({
   head: () => ({
     meta: [
-      { title: 'The Work | RelentNet Portfolio' },
+      { title: 'The Work | RelentNet Case Studies' },
       {
         name: 'description',
         content:
-          'A curated collection of bespoke digital experiences — crafted with intention, built without compromise.',
+          'Outcome-focused case studies showing how RelentNet identifies workflow friction and builds custom software systems for owner-led businesses.',
       },
     ],
   }),
   component: Portfolio,
 })
 
-interface Project {
+interface CaseStudy {
   name: string
   url: string
-  category: string
-  description: string
+  industry: string
+  systemType: string
+  image?: string
+  problem: string
+  diagnosis: string
+  build: string
+  outcome: string
 }
 
-const projects: Array<Project> = [
+export const caseStudies: Array<CaseStudy> = [
   {
     name: 'Scrollr',
     url: 'https://myscrollr.relentnet.dev',
-    category: 'SaaS Platform',
-    description:
-      'A customizable signal ticker built for traders and analysts. Real-time data feeds, personalized dashboards, and Chrome extension integration.',
+    industry: 'Trading & Analytics',
+    systemType: 'Workflow Platform',
+    image: '/scrollr_portfolio.png',
+    problem:
+      'Market signals, ticker behavior, and user preferences were scattered across disconnected surfaces instead of one operational product experience.',
+    diagnosis:
+      'The product needed a configurable signal workflow that could serve analysts and traders without forcing every user into the same dashboard.',
+    build:
+      'A SaaS-style signal ticker with personalized dashboards, real-time data presentation, and extension-ready product architecture.',
+    outcome:
+      'Scrollr became a sharper product system: easier to explain, easier to demo, and better aligned with how traders actually consume signals.',
   },
   {
     name: 'Cambridge Building Group',
     url: 'https://cambridgebg.com',
-    category: 'Commercial Construction',
-    description:
-      "A commanding digital presence for Nashville's premier commercial construction firm. Professional, streamlined, and built to convert.",
+    industry: 'Commercial Construction',
+    systemType: 'Sales Enablement System',
+    image: '/cbg_portfolio.png',
+    problem:
+      'A high-trust construction firm needed a digital presence that matched the quality of its work and helped serious prospects understand capability quickly.',
+    diagnosis:
+      'The site needed to reduce sales friction by making credibility, project quality, and company positioning immediately clear.',
+    build:
+      'A commanding marketing system with streamlined messaging, professional visual hierarchy, and conversion-focused inquiry paths.',
+    outcome:
+      'The company gained a more credible front door for high-value commercial opportunities and a cleaner way to support sales conversations.',
   },
   {
     name: 'CourtCommand',
     url: 'https://courtcommand.app',
-    category: 'Sports Technology',
-    description:
-      'A zero-latency, multi-tenant referee engine and sports ticker designed for broadcast environments. Real-time score synchronization built for performance.',
-  },
-  {
-    name: 'Houz2Home',
-    url: 'https://houz2home.com',
-    category: 'Home Renovations',
-    description:
-      'Where the difference is in the details. Showcasing craftsmanship and quality for a home renovations company that takes pride in every project.',
-  },
-  {
-    name: 'Star Kids',
-    url: 'https://starkids.relentnet.dev',
-    category: 'Nonprofit Organization',
-    description:
-      'A 501(c)(3) empowering children through education, healthcare, nutrition, and mentorship programs nationwide.',
+    industry: 'Sports Technology',
+    systemType: 'Real-Time Operations Engine',
+    problem:
+      'Broadcast-style sports environments cannot tolerate lag, unclear state, or fragile manual scorekeeping workflows.',
+    diagnosis:
+      'The system needed to behave like operational infrastructure: fast, multi-tenant, synchronized, and simple under pressure.',
+    build:
+      'A low-latency referee engine and sports ticker designed around real-time score synchronization and live event workflows.',
+    outcome:
+      'CourtCommand became a purpose-built operating layer for sports presentation instead of another generic scoreboard interface.',
   },
   {
     name: 'VM Homes',
     url: 'https://vm-homes.com',
-    category: 'Real Estate',
-    description:
-      'A premium digital storefront for a St. Pete Beach real estate team. MLS-integrated property search, neighborhood guides, and a client-first experience built to convert.',
+    industry: 'Real Estate',
+    systemType: 'Client Experience Platform',
+    image: '/vmh_portfolio.png',
+    problem:
+      'The team needed more than a polished website; they needed a premium buyer experience that could support property search and neighborhood trust.',
+    diagnosis:
+      'Real estate prospects need clarity, confidence, and fast access to relevant inventory before they are ready to start a conversation.',
+    build:
+      'A premium digital storefront with MLS-integrated property search, neighborhood guidance, and client-first conversion paths.',
+    outcome:
+      'The site now works as both a brand asset and a practical client acquisition tool for buyers evaluating the St. Pete Beach market.',
+  },
+  {
+    name: 'Star Kids',
+    url: 'https://starkids.relentnet.dev',
+    industry: 'Nonprofit',
+    systemType: 'Mission Communication System',
+    problem:
+      'A mission-driven organization needed to explain programs, trust, and impact without overwhelming donors or families.',
+    diagnosis:
+      'The experience needed to simplify complex service areas into a story people could understand and act on quickly.',
+    build:
+      'A focused nonprofit presence for education, healthcare, nutrition, and mentorship programs with clear paths to learn and support.',
+    outcome:
+      'The organization gained a clearer digital home for communicating purpose, programs, and credibility.',
   },
 ]
 
-function ProjectSection({
-  project,
+function CaseStudySection({
+  study,
   index,
 }: {
-  project: Project
+  study: CaseStudy
   index: number
 }) {
-  const sectionRef = useRef<HTMLElement>(null)
-  const [isRevealed, setIsRevealed] = useState(false)
-
-  useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsRevealed(true)
-          io.disconnect()
-        }
-      },
-      { threshold: 0.1 },
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
+  const isEven = index % 2 === 0
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-24 md:py-32 px-6 md:px-12 relative z-10"
-    >
-      <div className="max-w-6xl mx-auto">
-        {/* Number watermark */}
+    <section className="py-20 md:py-28 px-6 md:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto">
         <span
-          className={`block text-[7rem] md:text-[10rem] font-serif text-black/[0.06] dark:text-white/[0.03] leading-none select-none -mb-10 md:-mb-14 ${
-            isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+          className={`block text-[6rem] md:text-[9rem] font-serif text-black/[0.06] dark:text-white/[0.03] leading-none select-none -mb-8 md:-mb-12 ${
+            isEven ? '' : 'md:text-right'
           }`}
         >
           {String(index + 1).padStart(2, '0')}
         </span>
 
-        {/* Browser frame */}
-        <div
-          className={isRevealed ? 'animate-fade-in-up' : 'opacity-0'}
-          style={isRevealed ? { animationDelay: '150ms' } : undefined}
-        >
-          <BrowserFrame url={project.url} siteName={project.name} />
-        </div>
+        <article className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+          <div className={`lg:col-span-5 ${isEven ? '' : 'lg:order-last'}`}>
+            <div className="h-full border border-line bg-card p-7 md:p-9 flex flex-col justify-between">
+              <div>
+                <span className="text-gold text-[10px] tracking-[0.3em] uppercase font-bold">
+                  {study.industry}
+                </span>
+                <h2 className="font-serif text-3xl md:text-5xl mt-4">
+                  {study.name}
+                </h2>
+                <p className="mt-4 text-sm uppercase tracking-[0.2em] text-ink-muted">
+                  {study.systemType}
+                </p>
+              </div>
 
-        {/* Project info */}
-        <div
-          className={`mt-8 md:mt-10 flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-12 ${
-            isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-          }`}
-          style={isRevealed ? { animationDelay: '300ms' } : undefined}
-        >
-          <div>
-            <span className="text-gold text-[10px] tracking-[0.3em] uppercase font-bold">
-              {project.category}
-            </span>
-            <h3 className="text-2xl md:text-3xl font-serif mt-2">
-              {project.name}
-            </h3>
+              {study.image ? (
+                <div className="mt-10 overflow-hidden border border-line-faint bg-neutral-950 aspect-video">
+                  <img
+                    src={study.image}
+                    alt={`${study.name} interface preview`}
+                    className="h-full w-full object-cover opacity-90 grayscale-25 transition duration-500 hover:scale-[1.02] hover:grayscale-0"
+                    loading="lazy"
+                  />
+                </div>
+              ) : (
+                <div className="mt-10 border border-line-faint bg-inset aspect-video flex items-center justify-center px-8 text-center">
+                  <p className="font-serif text-2xl text-ink-muted">
+                    Real-time system preview
+                  </p>
+                </div>
+              )}
+
+              <a
+                href={study.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-2 text-sm text-gold uppercase tracking-widest hover:gap-3 transition-all duration-300"
+              >
+                View live site
+                <ExternalLink className="size-4" />
+              </a>
+            </div>
           </div>
-          <p className="text-ink-muted text-sm leading-relaxed max-w-md font-light">
-            {project.description}
-          </p>
-        </div>
+
+          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              ['The Problem', study.problem],
+              ['The Diagnosis', study.diagnosis],
+              ['The Build', study.build],
+              ['The Outcome', study.outcome],
+            ].map(([label, value]) => (
+              <div
+                key={label}
+                className="border border-line-faint bg-inset p-6"
+              >
+                <h3 className="text-[10px] font-bold tracking-[0.3em] uppercase text-gold mb-5">
+                  {label}
+                </h3>
+                <p className="text-sm leading-relaxed text-ink-sub">{value}</p>
+              </div>
+            ))}
+          </div>
+        </article>
       </div>
     </section>
   )
@@ -144,42 +194,42 @@ function ProjectSection({
 function Portfolio() {
   return (
     <div className="min-h-screen overflow-hidden">
-      {/* HERO */}
-      <section className="min-h-screen flex flex-col justify-center items-center px-6 relative">
-        <h1 className="font-serif text-5xl md:text-7xl lg:text-9xl text-center leading-[1.1] animate-fade-in-up">
+      <section className="min-h-screen flex flex-col justify-center items-center px-6 relative text-center">
+        <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-bold mb-8 animate-fade-in-up">
+          Workflow problems solved
+        </p>
+        <h1 className="font-serif text-5xl md:text-7xl lg:text-9xl leading-[1.05] animate-fade-in-up">
           The <span className="italic text-gold/90">Work.</span>
         </h1>
         <p
-          className="mt-8 text-ink-muted text-sm md:text-base font-light tracking-wide opacity-0 animate-fade-in-up"
+          className="mt-8 max-w-2xl text-ink-muted text-sm md:text-lg font-light leading-relaxed opacity-0 animate-fade-in-up"
           style={{ animationDelay: '200ms' }}
         >
-          Crafted with intention. Built without compromise.
+          Not iframe previews. Proof that we can study a business, find the
+          operational leverage, and build the system around it.
         </p>
-
-        {/* Scroll indicator */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-pulse delay-1000 z-10">
           <span className="text-[10px] uppercase tracking-widest text-gold">
             Scroll
           </span>
-          <div className="w-px h-12 bg-linear-to-b from-gold to-transparent"></div>
+          <div className="w-px h-12 bg-linear-to-b from-gold to-transparent" />
         </div>
       </section>
 
-      {/* PROJECTS */}
-      {projects.map((project, index) => (
-        <ProjectSection key={project.url} project={project} index={index} />
+      {caseStudies.map((study, index) => (
+        <CaseStudySection key={study.name} study={study} index={index} />
       ))}
 
-      {/* CTA */}
       <section className="py-32 flex flex-col justify-center items-center text-center px-6 relative z-10">
         <p className="text-xs font-bold tracking-[0.3em] text-ink-muted uppercase mb-8">
-          Your vision, next
+          Your bottleneck, next
         </p>
         <Link
           to="/inquire"
-          className="font-serif text-4xl md:text-7xl hover:italic hover:text-gold transition-all duration-300"
+          className="group font-serif text-4xl md:text-7xl hover:text-gold transition-all duration-300"
         >
-          Start Building.
+          Map My Workflow.
+          <ArrowRight className="inline-block ml-4 size-8 md:size-12 text-gold opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
         </Link>
       </section>
     </div>
