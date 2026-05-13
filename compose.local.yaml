@@ -1,0 +1,4 @@
+services:
+  marketing:
+    ports:
+      - '${MARKETING_PORT:-3000}:80'

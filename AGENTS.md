@@ -38,6 +38,14 @@ npm run check       # Auto-fix: prettier --write . && eslint --fix
 
 Root commands proxy to the `@relentnet/marketing` workspace. Use `npm run <script> -w @relentnet/marketing` when you need to run a workspace script directly.
 
+### Docker
+
+```sh
+docker compose -f compose.yaml -f compose.local.yaml up --build
+```
+
+`compose.yaml` is the Coolify entrypoint and intentionally does not publish host ports. `compose.local.yaml` adds local port mappings for development and verification.
+
 ### Running a single test
 
 ```sh
