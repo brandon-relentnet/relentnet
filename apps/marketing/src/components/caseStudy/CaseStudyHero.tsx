@@ -34,7 +34,7 @@ export function CaseStudyHero({ caseStudy }: CaseStudyHeroProps) {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-10 inline-flex items-center gap-2 border border-gold bg-gold px-7 py-4 text-sm uppercase tracking-widest text-black transition-all duration-300 hover:bg-transparent hover:text-gold animate-fade-in-up opacity-0"
+          className="mt-10 inline-flex items-center gap-2 border border-gold bg-gold px-7 py-4 text-sm uppercase tracking-widest text-black transition-all duration-300 hover:bg-transparent hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold animate-fade-in-up opacity-0"
           style={{ animationDelay: '320ms' }}
         >
           Visit live site
