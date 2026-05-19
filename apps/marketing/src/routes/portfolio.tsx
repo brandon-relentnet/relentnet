@@ -1,6 +1,9 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 
+import { caseStudies } from '@/data/caseStudies'
+import type { CaseStudy } from '@/data/caseStudies'
+
 export const Route = createFileRoute('/portfolio')({
   head: () => ({
     meta: [
@@ -14,18 +17,6 @@ export const Route = createFileRoute('/portfolio')({
   }),
   component: Portfolio,
 })
-
-interface CaseStudy {
-  name: string
-  url: string
-  industry: string
-  systemType: string
-  image?: string
-  problem: string
-  diagnosis: string
-  build: string
-  outcome: string
-}
 
 export const portfolioIntro = {
   headlinePrefix: 'Diagnosed friction.',
@@ -41,82 +32,6 @@ export const portfolioCta = {
   label: 'Start With a Diagnostic',
   to: '/diagnostic',
 } as const
-
-export const caseStudies: Array<CaseStudy> = [
-  {
-    name: 'Scrollr',
-    url: 'https://myscrollr.relentnet.dev',
-    industry: 'Trading & Analytics',
-    systemType: 'Workflow Platform',
-    image: '/scrollr_portfolio.png',
-    problem:
-      'Market signals, ticker behavior, and user preferences were scattered across disconnected surfaces instead of one operational product experience.',
-    diagnosis:
-      'The product needed a configurable signal workflow that could serve analysts and traders without forcing every user into the same dashboard.',
-    build:
-      'A SaaS-style signal ticker with personalized dashboards, real-time data presentation, and extension-ready product architecture.',
-    outcome:
-      'Scrollr became a sharper product system: easier to explain, easier to demo, and better aligned with how traders actually consume signals.',
-  },
-  {
-    name: 'Cambridge Building Group',
-    url: 'https://cambridgebg.com',
-    industry: 'Commercial Construction',
-    systemType: 'Sales Enablement System',
-    image: '/cbg_portfolio.png',
-    problem:
-      'A high-trust construction firm needed a digital presence that matched the quality of its work and helped serious prospects understand capability quickly.',
-    diagnosis:
-      'The site needed to reduce sales friction by making credibility, project quality, and company positioning immediately clear.',
-    build:
-      'A commanding marketing system with streamlined messaging, professional visual hierarchy, and conversion-focused inquiry paths.',
-    outcome:
-      'The company gained a more credible front door for high-value commercial opportunities and a cleaner way to support sales conversations.',
-  },
-  {
-    name: 'CourtCommand',
-    url: 'https://courtcommand.app',
-    industry: 'Sports Technology',
-    systemType: 'Real-Time Operations Engine',
-    problem:
-      'Broadcast-style sports environments cannot tolerate lag, unclear state, or fragile manual scorekeeping workflows.',
-    diagnosis:
-      'The system needed to behave like operational infrastructure: fast, multi-tenant, synchronized, and simple under pressure.',
-    build:
-      'A low-latency referee engine and sports ticker designed around real-time score synchronization and live event workflows.',
-    outcome:
-      'CourtCommand became a purpose-built operating layer for sports presentation instead of another generic scoreboard interface.',
-  },
-  {
-    name: 'VM Homes',
-    url: 'https://vm-homes.com',
-    industry: 'Real Estate',
-    systemType: 'Client Experience Platform',
-    image: '/vmh_portfolio.png',
-    problem:
-      'The team needed more than a polished website; they needed a premium buyer experience that could support property search and neighborhood trust.',
-    diagnosis:
-      'Real estate prospects need clarity, confidence, and fast access to relevant inventory before they are ready to start a conversation.',
-    build:
-      'A premium digital storefront with MLS-integrated property search, neighborhood guidance, and client-first conversion paths.',
-    outcome:
-      'The site now works as both a brand asset and a practical client acquisition tool for buyers evaluating the St. Pete Beach market.',
-  },
-  {
-    name: 'Star Kids',
-    url: 'https://starkids.relentnet.dev',
-    industry: 'Nonprofit',
-    systemType: 'Mission Communication System',
-    problem:
-      'A mission-driven organization needed to explain programs, trust, and impact without overwhelming donors or families.',
-    diagnosis:
-      'The experience needed to simplify complex service areas into a story people could understand and act on quickly.',
-    build:
-      'A focused nonprofit presence for education, healthcare, nutrition, and mentorship programs with clear paths to learn and support.',
-    outcome:
-      'The organization gained a clearer digital home for communicating purpose, programs, and credibility.',
-  },
-]
 
 function CaseStudySection({
   study,
@@ -153,11 +68,13 @@ function CaseStudySection({
                 </p>
               </div>
 
-              {study.image ? (
+              {study.hero.image ? (
                 <div className="mt-10 overflow-hidden border border-line-faint bg-neutral-950 aspect-video">
                   <img
-                    src={study.image}
-                    alt={`${study.name} interface preview`}
+                    src={study.hero.image.src}
+                    alt={study.hero.image.alt}
+                    width={study.hero.image.width}
+                    height={study.hero.image.height}
                     className="h-full w-full object-cover opacity-90 grayscale-25 transition duration-500 hover:scale-[1.02] hover:grayscale-0"
                     loading="lazy"
                   />
@@ -184,10 +101,10 @@ function CaseStudySection({
 
           <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
-              ['The Problem', study.problem],
-              ['The Diagnosis', study.diagnosis],
-              ['The Build', study.build],
-              ['The Outcome', study.outcome],
+              ['The Problem', study.summary.problem],
+              ['The Diagnosis', study.summary.diagnosis],
+              ['The Build', study.summary.build],
+              ['The Outcome', study.summary.outcome],
             ].map(([label, value]) => (
               <div
                 key={label}
