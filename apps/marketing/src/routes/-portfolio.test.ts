@@ -18,4 +18,10 @@ describe('portfolio case studies', () => {
     expect(portfolioCta.to).toBe('/diagnostic')
     expect(portfolioCta.label).toBe('Start With a Diagnostic')
   })
+
+  it('every case study exposes a deep link to its detail page', () => {
+    for (const study of caseStudies) {
+      expect(study.slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/)
+    }
+  })
 })

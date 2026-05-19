@@ -96,6 +96,14 @@ function CaseStudySection({
                 View live site
                 <ExternalLink className="size-4" />
               </a>
+              <Link
+                to="/portfolio/$slug"
+                params={{ slug: study.slug }}
+                className="mt-3 inline-flex items-center gap-2 text-sm text-ink uppercase tracking-widest hover:text-gold transition-colors"
+              >
+                Read the case study
+                <ArrowRight className="size-4" />
+              </Link>
             </div>
           </div>
 
