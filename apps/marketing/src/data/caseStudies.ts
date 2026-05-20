@@ -120,9 +120,31 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
         p(
           'Daniel, a RelentNet co-founder, first met the Scrollr team at an incubator pop-up where they were openly looking for a developer partner. Phil and three partners had raised funding around a clear vision — a fantasy sports ticker bar that sat at the edge of the screen while you watched a game in a browser — and had paid several developers across two earlier builds to get there.',
         ),
+        {
+          type: 'image',
+          image: {
+            src: '/case-studies/scrollr/legacy-homepage.webp',
+            alt: 'The pre-rebuild myscrollr.com marketing page, built on Wix, framed entirely around fantasy football',
+            caption:
+              'The pre-rebuild marketing site \u2014 a Wix page positioned entirely around fantasy football, matching the narrow scope of the product underneath.',
+            width: 1920,
+            height: 1080,
+          },
+        },
         p(
           'What they had to show for it was a Chrome-extension-only product, useful only inside the browser, useful only during sports seasons, and structurally fragile. Each round of paid work had left behind a different developer\u2019s code, none of it stitched together cleanly, none of it in source control or organized in a way the team could keep growing on.',
         ),
+        {
+          type: 'image',
+          image: {
+            src: '/case-studies/scrollr/legacy-ticker-bar.webp',
+            alt: 'Screenshot of the original Scrollr ticker bar from the Chrome-extension era, showing live sports scores in a long horizontal strip',
+            caption:
+              'The original Scrollr ticker, captured from the pre-rebuild site. The right shape \u2014 a thin live-data strip at the edge of the screen \u2014 trapped inside a brittle browser-only extension.',
+            width: 1920,
+            height: 112,
+          },
+        },
         p(
           'The team was not short on vision or commitment. They were short on a foundation that could carry it.',
         ),
@@ -131,6 +153,17 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
         p(
           'Daniel was the first one to look at the codebase and call the shot: this would have to be a full rebuild. Brandon, the other RelentNet co-founder, came in for a second look specifically to see what could be salvaged — and arrived at the same conclusion. The Firebase-bound architecture was too rigid and too tangled to extend; every additional fix would be paying interest on the wrong foundation.',
         ),
+        {
+          type: 'image',
+          image: {
+            src: '/case-studies/scrollr/ticker-all-detailed-dark.webp',
+            alt: 'Scrollr ticker strip showing sports, finance, news, and fantasy together in detailed density',
+            caption:
+              'The reframe: the same ticker shape, but serving sports, markets, news, and fantasy in one product instead of one season at a time.',
+            width: 1465,
+            height: 62,
+          },
+        },
         p(
           'The deeper diagnosis was about scope, not just code. A ticker that lived inside a browser and only ran during sports seasons was a much smaller product than what the team was actually capable of shipping. The real opportunity was to decouple the ticker from the browser, broaden it past sports, and design the system so new data sources could be added without rebuilding the product each time.',
         ),
@@ -139,37 +172,6 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
         p(
           'Over the months that followed, we sat down with the original idea and reshaped it. RSS feeds for live headlines, market data for finance, fantasy league integration, and a desktop-native shell that could run alongside any application — not just a browser tab. The product\u2019s identity moved from "Chrome extension for sports" to "always-visible desktop ticker for whatever data matters to you."',
         ),
-        {
-          type: 'image',
-          image: {
-            src: '/case-studies/scrollr/ticker-sports-detailed-dark.webp',
-            alt: 'Scrollr ticker strip showing live sports scores across multiple games in detailed density',
-            caption:
-              'Sports channel, detailed density — the same ticker shape now serves four different data domains.',
-            width: 1465,
-            height: 62,
-          },
-        },
-        {
-          type: 'image',
-          image: {
-            src: '/case-studies/scrollr/ticker-finance-compact-dark.webp',
-            alt: 'Scrollr ticker strip showing live stock and crypto prices in compact density',
-            caption: 'Finance channel, compact density.',
-            width: 1465,
-            height: 40,
-          },
-        },
-        {
-          type: 'image',
-          image: {
-            src: '/case-studies/scrollr/ticker-news-detailed-dark.webp',
-            alt: 'Scrollr ticker strip showing recent RSS headlines with source attribution in detailed density',
-            caption: 'News channel pulling curated RSS feeds.',
-            width: 1465,
-            height: 62,
-          },
-        },
         p(
           'The architecture we landed on is intentionally decoupled. A Go core API handles routing, authentication via self-hosted Logto, and real-time delivery over per-user Redis pub/sub channels streamed to clients via Server-Sent Events. Rust services ingest from each source on their own schedules — TwelveData WebSockets for market data, ESPN for sports, RSS feeds for news, Yahoo for fantasy — normalize the data, and write to PostgreSQL. Sequin watches the database for changes and fires CDC webhooks back into the core, which fans them out to the right users.',
         ),
@@ -187,6 +189,14 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
         p(
           'The client is a Tauri v2 native app wrapping a React 19 + Vite 7 + TanStack Router frontend, with a daisyUI-based theme system and Motion-driven animations. It installs on macOS, Windows, and Linux. The ticker can be docked to any edge of the screen, with adjustable density, scroll speed, row count, and nine theme palettes.',
         ),
+        p(
+          'The hardest decision was committing to a channel architecture where each data source — sports, finance, news, fantasy — is a fully self-contained unit with its own Go API, Rust service, dashboard tab, and feed component. No shared code between channels. That decision cost more upfront, but it is the reason new channels can ship today without touching the rest of the product, and the reason community contributors can add their own.',
+        ),
+      ],
+      outcome: [
+        p(
+          'Scrollr is in beta and preparing for launch. The original founders, Phil included, have stayed close throughout and have been openly happy with both the product and the partnership. The version of Scrollr that exists today is the version they were trying to fund into existence on the first two attempts — a real product, not a brittle extension.',
+        ),
         {
           type: 'image',
           image: {
@@ -199,15 +209,12 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
           },
         },
         p(
-          'The hardest decision was committing to a channel architecture where each data source — sports, finance, news, fantasy — is a fully self-contained unit with its own Go API, Rust service, dashboard tab, and feed component. No shared code between channels. That decision cost more upfront, but it is the reason new channels can ship today without touching the rest of the product, and the reason community contributors can add their own.',
+          'The product is open source on GitHub, runs natively on three platforms, ships with a free tier and a paid "Uplink" plan, and has a Discord community organized around it. The architecture earned its place: each new channel ships independently, and the team can talk about the product as a platform rather than as a single sports widget.',
         ),
       ],
-      outcome: [
+      stewardship: [
         p(
-          'Scrollr is in beta and preparing for launch. The original founders, Phil included, have stayed close throughout and have been openly happy with both the product and the partnership. The version of Scrollr that exists today is the version they were trying to fund into existence on the first two attempts — a real product, not a brittle extension.',
-        ),
-        p(
-          'The product is open source on GitHub, runs natively on three platforms, ships with a free tier and a paid "Uplink" plan, and has a Discord community organized around it. The architecture earned its place: each new channel ships independently, and the team can talk about the product as a platform rather than as a single sports widget.',
+          'Two years in, the engagement is ongoing. RelentNet continues to design and build new channels and features, hosts the production stack on self-hosted Coolify infrastructure, monitors and maintains the services, and stays close to the Scrollr team as the product moves from beta toward launch.',
         ),
         {
           type: 'image',
@@ -215,16 +222,11 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
             src: '/case-studies/scrollr/theme-tokyo-night-dark.webp',
             alt: 'Scrollr settings panel rendered in the Tokyo Night dark theme',
             caption:
-              'One of nine theme palettes that ship with light and dark variants across every channel.',
+              'The polish layer keeps growing too. Nine theme palettes ship with full light and dark variants across every channel, widget, and config panel.',
             width: 1600,
             height: 954,
           },
         },
-      ],
-      stewardship: [
-        p(
-          'Two years in, the engagement is ongoing. RelentNet continues to design and build new channels and features, hosts the production stack on self-hosted Coolify infrastructure, monitors and maintains the services, and stays close to the Scrollr team as the product moves from beta toward launch.',
-        ),
       ],
     },
     meta: {
