@@ -123,12 +123,12 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
         {
           type: 'image',
           image: {
-            src: '/case-studies/scrollr/legacy-homepage.webp',
+            src: '/case-studies/scrollr/legacy-homepage.png',
             alt: 'The pre-rebuild myscrollr.com marketing page, built on Wix, framed entirely around fantasy football',
             caption:
               'The pre-rebuild marketing site \u2014 a Wix page positioned entirely around fantasy football, matching the narrow scope of the product underneath.',
-            width: 1920,
-            height: 1080,
+            width: 1362,
+            height: 959,
           },
         },
         p(
