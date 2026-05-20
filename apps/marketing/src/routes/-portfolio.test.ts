@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { caseStudies } from '@/data/caseStudies'
 
-import { portfolioCta, portfolioIntro } from './portfolio'
+import { portfolioCta, portfolioIntro } from './portfolio/index'
 
 describe('portfolio case studies', () => {
   it('frames work as diagnosed friction becoming useful systems', () => {

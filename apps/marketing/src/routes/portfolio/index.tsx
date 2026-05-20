@@ -3,7 +3,7 @@ import { ArrowRight, ExternalLink } from 'lucide-react'
 
 import { caseStudies, type CaseStudy } from '@/data/caseStudies'
 
-export const Route = createFileRoute('/portfolio')({
+export const Route = createFileRoute('/portfolio/')({
   head: () => ({
     meta: [
       { title: 'The Work | RelentNet Case Studies' },

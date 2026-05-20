@@ -11,11 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SowRouteImport } from './routes/sow'
 import { Route as ProcessRouteImport } from './routes/process'
-import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as InquireRouteImport } from './routes/inquire'
 import { Route as DiagnosticRouteImport } from './routes/diagnostic'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PortfolioIndexRouteImport } from './routes/portfolio/index'
 import { Route as LegalIndexRouteImport } from './routes/legal/index'
 import { Route as PortfolioSlugRouteImport } from './routes/portfolio/$slug'
 import { Route as LegalDocIdRouteImport } from './routes/legal/$docId'
@@ -28,11 +28,6 @@ const SowRoute = SowRouteImport.update({
 const ProcessRoute = ProcessRouteImport.update({
   id: '/process',
   path: '/process',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortfolioRoute = PortfolioRouteImport.update({
-  id: '/portfolio',
-  path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortalRoute = PortalRouteImport.update({
@@ -55,15 +50,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
+  id: '/portfolio/',
+  path: '/portfolio/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LegalIndexRoute = LegalIndexRouteImport.update({
   id: '/legal/',
   path: '/legal/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortfolioSlugRoute = PortfolioSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => PortfolioRoute,
+  id: '/portfolio/$slug',
+  path: '/portfolio/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const LegalDocIdRoute = LegalDocIdRouteImport.update({
   id: '/legal/$docId',
@@ -76,24 +76,24 @@ export interface FileRoutesByFullPath {
   '/diagnostic': typeof DiagnosticRoute
   '/inquire': typeof InquireRoute
   '/portal': typeof PortalRoute
-  '/portfolio': typeof PortfolioRouteWithChildren
   '/process': typeof ProcessRoute
   '/sow': typeof SowRoute
   '/legal/$docId': typeof LegalDocIdRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/legal': typeof LegalIndexRoute
+  '/portfolio': typeof PortfolioIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/diagnostic': typeof DiagnosticRoute
   '/inquire': typeof InquireRoute
   '/portal': typeof PortalRoute
-  '/portfolio': typeof PortfolioRouteWithChildren
   '/process': typeof ProcessRoute
   '/sow': typeof SowRoute
   '/legal/$docId': typeof LegalDocIdRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/legal': typeof LegalIndexRoute
+  '/portfolio': typeof PortfolioIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -101,12 +101,12 @@ export interface FileRoutesById {
   '/diagnostic': typeof DiagnosticRoute
   '/inquire': typeof InquireRoute
   '/portal': typeof PortalRoute
-  '/portfolio': typeof PortfolioRouteWithChildren
   '/process': typeof ProcessRoute
   '/sow': typeof SowRoute
   '/legal/$docId': typeof LegalDocIdRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/legal/': typeof LegalIndexRoute
+  '/portfolio/': typeof PortfolioIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -115,36 +115,36 @@ export interface FileRouteTypes {
     | '/diagnostic'
     | '/inquire'
     | '/portal'
-    | '/portfolio'
     | '/process'
     | '/sow'
     | '/legal/$docId'
     | '/portfolio/$slug'
     | '/legal'
+    | '/portfolio'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/diagnostic'
     | '/inquire'
     | '/portal'
-    | '/portfolio'
     | '/process'
     | '/sow'
     | '/legal/$docId'
     | '/portfolio/$slug'
     | '/legal'
+    | '/portfolio'
   id:
     | '__root__'
     | '/'
     | '/diagnostic'
     | '/inquire'
     | '/portal'
-    | '/portfolio'
     | '/process'
     | '/sow'
     | '/legal/$docId'
     | '/portfolio/$slug'
     | '/legal/'
+    | '/portfolio/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -152,11 +152,12 @@ export interface RootRouteChildren {
   DiagnosticRoute: typeof DiagnosticRoute
   InquireRoute: typeof InquireRoute
   PortalRoute: typeof PortalRoute
-  PortfolioRoute: typeof PortfolioRouteWithChildren
   ProcessRoute: typeof ProcessRoute
   SowRoute: typeof SowRoute
   LegalDocIdRoute: typeof LegalDocIdRoute
+  PortfolioSlugRoute: typeof PortfolioSlugRoute
   LegalIndexRoute: typeof LegalIndexRoute
+  PortfolioIndexRoute: typeof PortfolioIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -173,13 +174,6 @@ declare module '@tanstack/react-router' {
       path: '/process'
       fullPath: '/process'
       preLoaderRoute: typeof ProcessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portfolio': {
-      id: '/portfolio'
-      path: '/portfolio'
-      fullPath: '/portfolio'
-      preLoaderRoute: typeof PortfolioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portal': {
@@ -210,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portfolio/': {
+      id: '/portfolio/'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/legal/': {
       id: '/legal/'
       path: '/legal'
@@ -219,10 +220,10 @@ declare module '@tanstack/react-router' {
     }
     '/portfolio/$slug': {
       id: '/portfolio/$slug'
-      path: '/$slug'
+      path: '/portfolio/$slug'
       fullPath: '/portfolio/$slug'
       preLoaderRoute: typeof PortfolioSlugRouteImport
-      parentRoute: typeof PortfolioRoute
+      parentRoute: typeof rootRouteImport
     }
     '/legal/$docId': {
       id: '/legal/$docId'
@@ -234,28 +235,17 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface PortfolioRouteChildren {
-  PortfolioSlugRoute: typeof PortfolioSlugRoute
-}
-
-const PortfolioRouteChildren: PortfolioRouteChildren = {
-  PortfolioSlugRoute: PortfolioSlugRoute,
-}
-
-const PortfolioRouteWithChildren = PortfolioRoute._addFileChildren(
-  PortfolioRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiagnosticRoute: DiagnosticRoute,
   InquireRoute: InquireRoute,
   PortalRoute: PortalRoute,
-  PortfolioRoute: PortfolioRouteWithChildren,
   ProcessRoute: ProcessRoute,
   SowRoute: SowRoute,
   LegalDocIdRoute: LegalDocIdRoute,
+  PortfolioSlugRoute: PortfolioSlugRoute,
   LegalIndexRoute: LegalIndexRoute,
+  PortfolioIndexRoute: PortfolioIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
