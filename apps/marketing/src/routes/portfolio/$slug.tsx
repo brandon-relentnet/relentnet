@@ -38,31 +38,36 @@ function CaseStudyDetailPage() {
         systemType={study.systemType}
       />
 
+      {/* Numbered watermarks intentionally suppressed on detail pages
+          via showNumber={false}. The numbers stay in the data so they
+          can be reintroduced by flipping a single prop. */}
       <CaseStudySection
         number="01"
         label="The Problem"
         title="What was getting in the way"
         blocks={study.story.problem}
+        showNumber={false}
       />
       <CaseStudySection
         number="02"
         label="The Diagnosis"
         title="What the friction actually was"
         blocks={study.story.diagnosis}
-        alignRight
+        showNumber={false}
       />
       <CaseStudySection
         number="03"
         label="The Build"
         title="What we designed and built"
         blocks={study.story.build}
+        showNumber={false}
       />
       <CaseStudySection
         number="04"
         label="The Outcome"
         title="What changed for the business"
         blocks={study.story.outcome}
-        alignRight
+        showNumber={false}
       />
       {study.story.stewardship ? (
         <CaseStudySection
@@ -70,6 +75,8 @@ function CaseStudyDetailPage() {
           label="Stewardship"
           title="How we continue to care for it"
           blocks={study.story.stewardship}
+          showNumber={false}
+          tone="subordinate"
         />
       ) : null}
 

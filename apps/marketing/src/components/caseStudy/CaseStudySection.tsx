@@ -9,7 +9,18 @@ interface CaseStudySectionProps {
   label: string
   title: string
   blocks: ReadonlyArray<StoryBlock>
+  /** Mirror the layout to the right side. Default false. */
   alignRight?: boolean
+  /** Show the large dropshadow phase number. Default true; pass false on
+   *  detail pages where the numbers feel imposed but we want to keep them
+   *  in the data so they can come back. */
+  showNumber?: boolean
+  /**
+   * 'standard' renders the full section treatment (large serif title).
+   * 'subordinate' demotes the section to an addendum: smaller eyebrow,
+   * no large title, tighter padding, thin top divider.
+   */
+  tone?: 'standard' | 'subordinate'
 }
 
 export function CaseStudySection({
@@ -18,11 +29,45 @@ export function CaseStudySection({
   title,
   blocks,
   alignRight = false,
+  showNumber = true,
+  tone = 'standard',
 }: CaseStudySectionProps) {
   const { ref, isRevealed } = useReveal(0.15)
 
   if (blocks.length === 0) {
     return null
+  }
+
+  if (tone === 'subordinate') {
+    return (
+      <section
+        ref={ref}
+        className="relative z-10 px-6 md:px-12 py-16 md:py-20 border-t border-line-faint"
+      >
+        <div className="max-w-6xl mx-auto">
+          <div
+            className={`flex items-baseline gap-4 mb-6 ${
+              isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+            }`}
+          >
+            <span className="text-gold text-[10px] font-bold tracking-[0.3em] uppercase">
+              {label}
+            </span>
+            <span className="text-ink-muted text-[10px] tracking-[0.3em] uppercase">
+              {title}
+            </span>
+          </div>
+          <div
+            className={`${
+              isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+            }`}
+            style={isRevealed ? { animationDelay: '120ms' } : undefined}
+          >
+            <StoryBlocks blocks={blocks} />
+          </div>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -31,13 +76,15 @@ export function CaseStudySection({
       className="relative z-10 px-6 md:px-12 py-24 md:py-32"
     >
       <div className="max-w-6xl mx-auto">
-        <span
-          className={`block text-[7rem] md:text-[10rem] font-serif text-black/[0.06] dark:text-white/[0.03] leading-none select-none -mb-10 md:-mb-14 ${
-            alignRight ? 'md:text-right' : ''
-          } ${isRevealed ? 'animate-fade-in-up' : 'opacity-0'}`}
-        >
-          {number}
-        </span>
+        {showNumber ? (
+          <span
+            className={`block text-[7rem] md:text-[10rem] font-serif text-black/[0.06] dark:text-white/[0.03] leading-none select-none -mb-10 md:-mb-14 ${
+              alignRight ? 'md:text-right' : ''
+            } ${isRevealed ? 'animate-fade-in-up' : 'opacity-0'}`}
+          >
+            {number}
+          </span>
+        ) : null}
 
         <div
           className={`grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 ${
