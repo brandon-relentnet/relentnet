@@ -92,10 +92,10 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
       tagline:
         'A quiet, always-visible desktop ticker for live scores, prices, headlines, and fantasy — rebuilt from a brittle Chrome extension into a cross-platform native product.',
       image: {
-        src: '/scrollr_portfolio.png',
-        alt: 'Scrollr desktop ticker preview',
-        width: 1440,
-        height: 810,
+        src: '/case-studies/scrollr/hero-sports-dark.webp',
+        alt: 'Scrollr desktop app showing live MLB scores with team logos, status pills, and tabs for Schedule and Standings',
+        width: 1600,
+        height: 954,
       },
     },
     atAGlance: {
@@ -139,12 +139,65 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
         p(
           'Over the months that followed, we sat down with the original idea and reshaped it. RSS feeds for live headlines, market data for finance, fantasy league integration, and a desktop-native shell that could run alongside any application — not just a browser tab. The product\u2019s identity moved from "Chrome extension for sports" to "always-visible desktop ticker for whatever data matters to you."',
         ),
+        {
+          type: 'image',
+          image: {
+            src: '/case-studies/scrollr/ticker-sports-detailed-dark.webp',
+            alt: 'Scrollr ticker strip showing live sports scores across multiple games in detailed density',
+            caption:
+              'Sports channel, detailed density — the same ticker shape now serves four different data domains.',
+            width: 1465,
+            height: 62,
+          },
+        },
+        {
+          type: 'image',
+          image: {
+            src: '/case-studies/scrollr/ticker-finance-compact-dark.webp',
+            alt: 'Scrollr ticker strip showing live stock and crypto prices in compact density',
+            caption: 'Finance channel, compact density.',
+            width: 1465,
+            height: 40,
+          },
+        },
+        {
+          type: 'image',
+          image: {
+            src: '/case-studies/scrollr/ticker-news-detailed-dark.webp',
+            alt: 'Scrollr ticker strip showing recent RSS headlines with source attribution in detailed density',
+            caption: 'News channel pulling curated RSS feeds.',
+            width: 1465,
+            height: 62,
+          },
+        },
         p(
           'The architecture we landed on is intentionally decoupled. A Go core API handles routing, authentication via self-hosted Logto, and real-time delivery over per-user Redis pub/sub channels streamed to clients via Server-Sent Events. Rust services ingest from each source on their own schedules — TwelveData WebSockets for market data, ESPN for sports, RSS feeds for news, Yahoo for fantasy — normalize the data, and write to PostgreSQL. Sequin watches the database for changes and fires CDC webhooks back into the core, which fans them out to the right users.',
         ),
+        {
+          type: 'image',
+          image: {
+            src: '/case-studies/scrollr/catalog-dark.webp',
+            alt: 'Scrollr source catalog showing Finance, Sports, Fantasy, News, Clock, and Weather as added channels alongside available widgets for System Monitor, Uptime, and GitHub',
+            caption:
+              'Each channel is a self-contained unit. Adding a new one — community-built or otherwise — does not touch the existing product.',
+            width: 1600,
+            height: 954,
+          },
+        },
         p(
           'The client is a Tauri v2 native app wrapping a React 19 + Vite 7 + TanStack Router frontend, with a daisyUI-based theme system and Motion-driven animations. It installs on macOS, Windows, and Linux. The ticker can be docked to any edge of the screen, with adjustable density, scroll speed, row count, and nine theme palettes.',
         ),
+        {
+          type: 'image',
+          image: {
+            src: '/case-studies/scrollr/settings-ticker-dark.webp',
+            alt: 'Scrollr ticker settings panel with controls for edge position, scroll speed, row count, and per-row channel assignment',
+            caption:
+              'Configuration is opinionated where it matters and quiet everywhere else — edge, speed, row count, per-row channel assignment.',
+            width: 1600,
+            height: 954,
+          },
+        },
         p(
           'The hardest decision was committing to a channel architecture where each data source — sports, finance, news, fantasy — is a fully self-contained unit with its own Go API, Rust service, dashboard tab, and feed component. No shared code between channels. That decision cost more upfront, but it is the reason new channels can ship today without touching the rest of the product, and the reason community contributors can add their own.',
         ),
@@ -156,6 +209,17 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
         p(
           'The product is open source on GitHub, runs natively on three platforms, ships with a free tier and a paid "Uplink" plan, and has a Discord community organized around it. The architecture earned its place: each new channel ships independently, and the team can talk about the product as a platform rather than as a single sports widget.',
         ),
+        {
+          type: 'image',
+          image: {
+            src: '/case-studies/scrollr/theme-tokyo-night-dark.webp',
+            alt: 'Scrollr settings panel rendered in the Tokyo Night dark theme',
+            caption:
+              'One of nine theme palettes that ship with light and dark variants across every channel.',
+            width: 1600,
+            height: 954,
+          },
+        },
       ],
       stewardship: [
         p(
