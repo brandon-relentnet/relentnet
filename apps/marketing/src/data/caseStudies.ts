@@ -39,11 +39,28 @@ export interface CaseStudyHero {
   tagline: string
 }
 
+export interface StackItem {
+  label: string
+  /** simple-icons slug — e.g. 'react', 'tauri'. Optional; falls back to lucide. */
+  iconSlug?: string
+}
+
+export interface StackCategory {
+  category: string
+  items: ReadonlyArray<StackItem>
+}
+
+export interface CaseStudyGlobal {
+  label: string
+  /** Absolute path from /public, e.g. '/logos/cloudflare.svg'. */
+  logoSrc: string
+}
+
 export interface CaseStudyAtAGlance {
   engagementYear?: string
   duration?: string
   role?: string
-  stack?: ReadonlyArray<string>
+  stack?: ReadonlyArray<StackCategory>
   metrics?: ReadonlyArray<CaseStudyMetric>
   /**
    * Compact inline quote rendered inside the At-a-glance strip. For a
@@ -51,6 +68,8 @@ export interface CaseStudyAtAGlance {
    * top-level `pullquote` field on CaseStudy instead.
    */
   quote?: CaseStudyQuote
+  /** Stripe-style "Global" row in the right-side Stack card. */
+  global?: CaseStudyGlobal
 }
 
 export interface CaseStudyStory {
@@ -156,17 +175,35 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
       engagementYear: '2024–present',
       role: 'Product strategy, design, full-stack engineering, devops, hosting, ongoing stewardship',
       stack: [
-        'Tauri v2',
-        'React 19',
-        'Vite 7',
-        'TanStack Router',
-        'Tailwind 4',
-        'Go (Fiber)',
-        'Rust (tokio)',
-        'PostgreSQL',
-        'Redis',
-        'Sequin CDC',
-        'Logto',
+        {
+          category: 'Client',
+          items: [
+            { label: 'Tauri v2', iconSlug: 'tauri' },
+            { label: 'React 19', iconSlug: 'react' },
+            { label: 'Vite 7', iconSlug: 'vite' },
+            { label: 'TanStack Router' },
+            { label: 'Tailwind 4', iconSlug: 'tailwindcss' },
+          ],
+        },
+        {
+          category: 'Server',
+          items: [
+            { label: 'Go (Fiber)', iconSlug: 'go' },
+            { label: 'Rust (tokio)', iconSlug: 'rust' },
+          ],
+        },
+        {
+          category: 'Data',
+          items: [
+            { label: 'PostgreSQL', iconSlug: 'postgresql' },
+            { label: 'Redis', iconSlug: 'redis' },
+            { label: 'Sequin CDC' },
+          ],
+        },
+        {
+          category: 'Auth & Ops',
+          items: [{ label: 'Logto' }],
+        },
       ],
     },
     story: {

@@ -80,6 +80,24 @@ describe('caseStudies data', () => {
     })
   })
 
+  it('uses categorized stack shape on every case study that ships a stack', () => {
+    for (const study of caseStudies) {
+      const stack = study.atAGlance.stack
+      if (!stack) continue
+      expect(Array.isArray(stack), `${study.slug}.atAGlance.stack must be an array`).toBe(true)
+      for (const category of stack) {
+        expect(typeof category.category).toBe('string')
+        expect(category.category.length).toBeGreaterThan(0)
+        expect(Array.isArray(category.items)).toBe(true)
+        expect(category.items.length).toBeGreaterThan(0)
+        for (const item of category.items) {
+          expect(typeof item.label).toBe('string')
+          expect(item.label.length).toBeGreaterThan(0)
+        }
+      }
+    }
+  })
+
   it('rejects metrics that are neither flat nor delta', () => {
     // A valid metric must be flat (value only) or delta (from + to only).
     // The data must never contain mixed-shape or empty-shape metrics.

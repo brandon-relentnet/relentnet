@@ -40,7 +40,9 @@ export function CaseStudyAtAGlance({
     facts.push({ label: 'Role', value: atAGlance.role })
   }
 
-  const stack = atAGlance.stack ?? []
+  const stackItems: Array<string> = (atAGlance.stack ?? []).flatMap(
+    (category) => category.items.map((item) => item.label),
+  )
 
   return (
     <section
@@ -77,7 +79,7 @@ export function CaseStudyAtAGlance({
           ))}
         </dl>
 
-        {stack.length > 0 ? (
+        {stackItems.length > 0 ? (
           <div
             className={`mt-10 ${
               isRevealed ? 'animate-fade-in-up' : 'opacity-0'
@@ -88,7 +90,7 @@ export function CaseStudyAtAGlance({
               Stack
             </p>
             <ul className="flex flex-wrap gap-2">
-              {stack.map((item) => (
+              {stackItems.map((item) => (
                 <li
                   key={item}
                   className="border border-line-faint bg-inset px-3 py-1.5 text-xs text-ink-sub"
