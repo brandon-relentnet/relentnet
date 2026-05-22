@@ -1,6 +1,11 @@
 export interface CaseStudyMetric {
   label: string
-  value: string
+  /** Flat metric — present when from/to are not set. */
+  value?: string
+  /** Delta metric — `from` value before the engagement. */
+  from?: string
+  /** Delta metric — `to` value after the engagement. */
+  to?: string
   context?: string
 }
 

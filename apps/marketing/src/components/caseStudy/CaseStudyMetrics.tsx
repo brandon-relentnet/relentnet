@@ -52,7 +52,9 @@ export function CaseStudyMetrics({ metrics }: CaseStudyMetricsProps) {
                 {metric.label}
               </dt>
               <dd className="mt-4 font-serif text-5xl md:text-7xl leading-none text-ink-em">
-                {metric.value}
+                {metric.from && metric.to
+                  ? `${metric.from} → ${metric.to}`
+                  : metric.value}
               </dd>
               {metric.context ? (
                 <p className="mt-4 text-sm text-ink-muted leading-relaxed max-w-xs">

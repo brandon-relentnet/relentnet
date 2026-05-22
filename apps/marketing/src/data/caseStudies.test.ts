@@ -79,4 +79,22 @@ describe('caseStudies data', () => {
       })
     })
   })
+
+  it('rejects metrics that are neither flat nor delta', () => {
+    // A valid metric must be flat (value only) or delta (from + to only).
+    // The data must never contain mixed-shape or empty-shape metrics.
+    for (const study of caseStudies) {
+      for (const metric of study.atAGlance.metrics ?? []) {
+        const hasValue = typeof metric.value === 'string' && metric.value.length > 0
+        const hasFrom = typeof metric.from === 'string' && metric.from.length > 0
+        const hasTo = typeof metric.to === 'string' && metric.to.length > 0
+        const isFlat = hasValue && !hasFrom && !hasTo
+        const isDelta = !hasValue && hasFrom && hasTo
+        expect(
+          isFlat || isDelta,
+          `${study.slug} metric "${metric.label}" must be flat or delta, not mixed`,
+        ).toBe(true)
+      }
+    }
+  })
 })
