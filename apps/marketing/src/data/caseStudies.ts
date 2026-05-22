@@ -34,9 +34,27 @@ export interface CaseStudySummary {
   outcome: string
 }
 
+export type CaseStudySectionRef =
+  | 'challenge'
+  | 'diagnosis'
+  | 'solution'
+  | 'results'
+
+export interface CaseStudyHeroBeat {
+  image: CaseStudyImage
+  sectionRef: CaseStudySectionRef
+  blurb: string
+}
+
 export interface CaseStudyHero {
-  image?: CaseStudyImage
   tagline: string
+  image?: CaseStudyImage
+  /**
+   * Story-beat cycler content. When 1+ entries are present, the hero
+   * renders the cycling showcase. Otherwise it falls back to the
+   * single-image render using `image`.
+   */
+  beats?: ReadonlyArray<CaseStudyHeroBeat>
 }
 
 export interface StackItem {
@@ -176,6 +194,52 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
         width: 1600,
         height: 954,
       },
+      beats: [
+        {
+          sectionRef: 'challenge',
+          blurb:
+            'A founder-funded fantasy ticker locked inside a fragile Chrome extension — multiple developers, no source control, no foundation to build on.',
+          image: {
+            src: '/case-studies/scrollr/legacy-ticker-bar.webp',
+            alt: 'Original Scrollr Chrome-extension ticker bar showing live sports scores in a long horizontal strip',
+            width: 1920,
+            height: 112,
+          },
+        },
+        {
+          sectionRef: 'diagnosis',
+          blurb:
+            'The codebase was unsalvageable, but the underlying idea was bigger than sports. Decouple the ticker from the browser, broaden past one season, and ship a real product.',
+          image: {
+            src: '/case-studies/scrollr/ticker-all-detailed-dark.webp',
+            alt: 'Scrollr ticker strip serving sports, finance, news, and fantasy together in detailed density',
+            width: 1465,
+            height: 62,
+          },
+        },
+        {
+          sectionRef: 'solution',
+          blurb:
+            'A cross-platform Tauri desktop app over a decoupled channel architecture: Go core, Rust ingestion services, PostgreSQL + Sequin CDC, SSE delivery.',
+          image: {
+            src: '/case-studies/scrollr/catalog-dark.webp',
+            alt: 'Scrollr source catalog showing Finance, Sports, Fantasy, News, Clock, and Weather as added channels',
+            width: 1600,
+            height: 954,
+          },
+        },
+        {
+          sectionRef: 'results',
+          blurb:
+            'Now in beta on macOS, Windows, and Linux. Open-source, multi-channel, configurable — the version of Scrollr the founders had been trying to ship all along.',
+          image: {
+            src: '/case-studies/scrollr/settings-ticker-dark.webp',
+            alt: 'Scrollr ticker settings panel with controls for edge position, scroll speed, row count, and per-row channel assignment',
+            width: 1600,
+            height: 954,
+          },
+        },
+      ],
     },
     elevatorPitch:
       'Scrollr arrived as a fragile, fantasy-football Chrome extension built by a rotating cast of contractors. Two years later it ships as an open-source, cross-platform desktop product with a multi-channel real-time pipeline — the version of the product the founders had been trying to build all along.',

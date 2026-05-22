@@ -134,4 +134,37 @@ describe('caseStudies data', () => {
       'exactly one case study may be featured',
     ).toHaveLength(1)
   })
+
+  it('only uses canonical sectionRef values in hero beats', () => {
+    // Keep the literal allow-list aligned with CaseStudySectionRef in
+    // caseStudies.ts. If the union there changes, update this set too.
+    const valid = new Set(['challenge', 'diagnosis', 'solution', 'results'])
+    for (const study of caseStudies) {
+      const beats = study.hero.beats ?? []
+      beats.forEach((beat, i) => {
+        expect(
+          valid.has(beat.sectionRef),
+          `${study.slug} beat[${i}] sectionRef "${beat.sectionRef}" is not canonical`,
+        ).toBe(true)
+        expect(
+          beat.blurb.length,
+          `${study.slug} beat[${i}] blurb must be non-empty`,
+        ).toBeGreaterThan(0)
+        expect(
+          beat.image.src.length,
+          `${study.slug} beat[${i}] image.src must be non-empty`,
+        ).toBeGreaterThan(0)
+      })
+    }
+  })
+
+  it('never repeats a sectionRef inside the same case study hero beats', () => {
+    for (const study of caseStudies) {
+      const refs = (study.hero.beats ?? []).map((b) => b.sectionRef)
+      expect(
+        new Set(refs).size,
+        `${study.slug} hero beats must not repeat a sectionRef (got [${refs.join(', ')}])`,
+      ).toBe(refs.length)
+    }
+  })
 })
