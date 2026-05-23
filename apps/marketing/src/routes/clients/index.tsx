@@ -7,6 +7,7 @@ import { ClientsHero, clientsIntro } from '@/components/clients/ClientsHero'
 import { ClientsLogoWall } from '@/components/clients/ClientsLogoWall'
 import { ClientsPortraitGrid } from '@/components/clients/ClientsPortraitGrid'
 import { ClientsResultsBand } from '@/components/clients/ClientsResultsBand'
+import { ClientsWhatWeBuild } from '@/components/clients/ClientsWhatWeBuild'
 
 export const Route = createFileRoute('/clients/')({
   head: () => ({
@@ -53,6 +54,8 @@ function ClientsIndex() {
       <ClientsFeaturedEngagement />
 
       <ClientsByIndustry />
+
+      <ClientsWhatWeBuild />
     </div>
   )
 }
