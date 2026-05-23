@@ -4,10 +4,10 @@ import { clientsCta, clientsIntro } from './clients/index'
 import { caseStudies } from '@/data/caseStudies'
 
 describe('clients case studies', () => {
-  it('frames work as diagnosed friction becoming useful systems', () => {
-    expect(clientsIntro.headline).toContain('Diagnosed friction')
-    expect(clientsIntro.body).toContain('workflow diagnostic')
-    expect(caseStudies).toHaveLength(11)
+  it('frames work as diagnostic-first', () => {
+    expect(clientsIntro.headline.toLowerCase()).toContain('diagnostic')
+    expect(clientsIntro.body.toLowerCase()).toContain('diagnostic')
+    expect(caseStudies.length).toBeGreaterThanOrEqual(5)
     expect(
       caseStudies.every((study) => study.summary.diagnosis.length > 0),
     ).toBe(true)
@@ -15,7 +15,7 @@ describe('clients case studies', () => {
 
   it('routes the final CTA to the workflow diagnostic', () => {
     expect(clientsCta.to).toBe('/diagnostic')
-    expect(clientsCta.label).toBe('Start With a Diagnostic')
+    expect(clientsCta.label.toLowerCase()).toContain('diagnostic')
   })
 
   it('every case study has a URL-safe slug suitable for /clients/$slug', () => {

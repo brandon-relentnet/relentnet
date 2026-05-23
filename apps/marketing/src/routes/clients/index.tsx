@@ -1,17 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { ClientsByEngagementType } from '@/components/clients/ClientsByEngagementType'
-import { ClientsByIndustry } from '@/components/clients/ClientsByIndustry'
-import {
-  ClientsClosingCta,
-  clientsCta,
-} from '@/components/clients/ClientsClosingCta'
-import { ClientsFeaturedEngagement } from '@/components/clients/ClientsFeaturedEngagement'
+import { ClientsBuildingTogether } from '@/components/clients/ClientsBuildingTogether'
+import { ClientsBySize } from '@/components/clients/ClientsBySize'
+import { ClientsFeaturedTiles } from '@/components/clients/ClientsFeaturedTiles'
 import { ClientsHero, clientsIntro } from '@/components/clients/ClientsHero'
-import { ClientsLogoWall } from '@/components/clients/ClientsLogoWall'
-import { ClientsPortraitGrid } from '@/components/clients/ClientsPortraitGrid'
-import { ClientsResultsBand } from '@/components/clients/ClientsResultsBand'
-import { ClientsWhatWeBuild } from '@/components/clients/ClientsWhatWeBuild'
+import { ClientsLogoStrip } from '@/components/clients/ClientsLogoStrip'
+import { ClientsMeasurableResults } from '@/components/clients/ClientsMeasurableResults'
+import { ClosingCtaPanels, clientsCta } from '@/components/clients/ClosingCtaPanels'
 
 export const Route = createFileRoute('/clients/')({
   head: () => ({
@@ -27,25 +22,21 @@ export const Route = createFileRoute('/clients/')({
   component: ClientsIndex,
 })
 
-const PORTRAIT_GRID_ID = 'client-stories'
-
 // Re-exported for the migrated test file.
 export { clientsIntro, clientsCta }
+
+const ALL_STORIES_ID = 'all-stories'
 
 function ClientsIndex() {
   return (
     <div className="min-h-screen overflow-hidden">
-      <ClientsHero scrollTargetId={PORTRAIT_GRID_ID} />
-      <div id={PORTRAIT_GRID_ID}>
-        <ClientsPortraitGrid />
-      </div>
-      <ClientsResultsBand />
-      <ClientsLogoWall />
-      <ClientsByEngagementType />
-      <ClientsFeaturedEngagement />
-      <ClientsByIndustry />
-      <ClientsWhatWeBuild />
-      <ClientsClosingCta scrollTargetId={PORTRAIT_GRID_ID} />
+      <ClientsHero scrollTargetId={ALL_STORIES_ID} />
+      <ClientsFeaturedTiles />
+      <ClientsMeasurableResults />
+      <ClientsLogoStrip />
+      <ClientsBySize />
+      <ClientsBuildingTogether />
+      <ClosingCtaPanels />
     </div>
   )
 }
