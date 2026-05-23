@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { ClientsByEngagementType } from '@/components/clients/ClientsByEngagementType'
+import { ClientsByIndustry } from '@/components/clients/ClientsByIndustry'
 import { ClientsFeaturedEngagement } from '@/components/clients/ClientsFeaturedEngagement'
 import { ClientsHero, clientsIntro } from '@/components/clients/ClientsHero'
 import { ClientsLogoWall } from '@/components/clients/ClientsLogoWall'
@@ -50,6 +51,8 @@ function ClientsIndex() {
       <ClientsByEngagementType />
 
       <ClientsFeaturedEngagement />
+
+      <ClientsByIndustry />
     </div>
   )
 }
