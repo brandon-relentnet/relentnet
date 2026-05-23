@@ -32,8 +32,7 @@ export const clientsCta = {
 
 /**
  * 2-tile bottom CTA pair, used on both /clients index and /clients/$slug.
- * Mirrors Stripe /customers's bottom 2-tile CTA pair. Replaces the older
- * 3-panel ClosingCtaPanels block.
+ * Mirrors Stripe /customers's bottom 2-tile CTA pair.
  */
 export function ClosingCtaPair() {
   return (

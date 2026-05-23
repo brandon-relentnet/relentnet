@@ -8,7 +8,8 @@ import { CaseStudyNarrative } from '@/components/caseStudy/CaseStudyNarrative'
 import { CaseStudyProductsRow } from '@/components/caseStudy/CaseStudyProductsRow'
 import { CaseStudyPullquote } from '@/components/caseStudy/CaseStudyPullquote'
 import { CaseStudyReadMore } from '@/components/caseStudy/CaseStudyReadMore'
-import { ClosingCtaPanels } from '@/components/clients/ClosingCtaPanels'
+import { CaseStudyRegionStrip } from '@/components/caseStudy/CaseStudyRegionStrip'
+import { ClosingCtaPair } from '@/components/clients/ClosingCtaPair'
 import { caseStudies } from '@/data/caseStudies'
 
 export const Route = createFileRoute('/clients/$slug')({
@@ -36,6 +37,10 @@ function ClientDetail() {
     <article className="min-h-screen overflow-hidden">
       <CaseStudyDetailHero study={study} />
       <CaseStudyProductsRow study={study} />
+      <CaseStudyRegionStrip
+        region={study.region}
+        companySize={study.companySize}
+      />
       <CaseStudyBigStats study={study} />
       <CaseStudyInlineCta />
       <CaseStudyHeroImage study={study} />
@@ -44,7 +49,7 @@ function ClientDetail() {
         <CaseStudyPullquote pullquote={study.pullquote} />
       ) : null}
       <CaseStudyReadMore currentSlug={study.slug} />
-      <ClosingCtaPanels />
+      <ClosingCtaPair />
     </article>
   )
 }
