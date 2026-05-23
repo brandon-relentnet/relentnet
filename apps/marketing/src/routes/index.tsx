@@ -190,7 +190,7 @@ function HomeComponent() {
                 <ArrowRight className="size-4" />
               </Link>
               <Link
-                to="/portfolio"
+                to="/clients"
                 className="inline-flex items-center justify-center gap-3 border border-line px-7 py-4 text-sm uppercase tracking-widest text-ink transition-all duration-300 hover:border-gold hover:text-gold"
               >
                 {homepageHero.secondaryCta}
@@ -398,7 +398,7 @@ function HomeComponent() {
           </div>
           <div className="mt-12 text-center">
             <Link
-              to="/portfolio"
+              to="/clients"
               className="inline-flex items-center gap-3 text-gold text-sm uppercase tracking-widest hover:gap-4 transition-all duration-300"
             >
               See problems we have solved
