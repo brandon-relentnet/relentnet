@@ -3,14 +3,14 @@ import { ArrowRight, ExternalLink } from 'lucide-react'
 
 import { caseStudies, type CaseStudy } from '@/data/caseStudies'
 
-export const Route = createFileRoute('/portfolio/')({
+export const Route = createFileRoute('/clients/')({
   head: () => ({
     meta: [
-      { title: 'The Work | RelentNet Case Studies' },
+      { title: 'Our Clients | RelentNet Case Studies' },
       {
         name: 'description',
         content:
-          'Diagnostic-first proof from RelentNet case studies, showing how diagnosed workflow friction becomes useful systems and clearer operations.',
+          'Diagnostic-first proof from RelentNet client engagements, showing how diagnosed workflow friction becomes useful systems and clearer operations.',
       },
     ],
   }),
@@ -87,7 +87,7 @@ function CaseStudySection({
               )}
 
               <Link
-                to="/portfolio/$slug"
+                to="/clients/$slug"
                 params={{ slug: study.slug }}
                 className="mt-8 inline-flex items-center gap-2 text-sm text-gold uppercase tracking-widest hover:gap-3 transition-all duration-300"
               >

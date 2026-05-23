@@ -12,7 +12,7 @@ import { CaseStudyStackCard } from '@/components/caseStudy/CaseStudyStackCard'
 import { CaseStudyStatsRail } from '@/components/caseStudy/CaseStudyStatsRail'
 import { getCaseStudyBySlug } from '@/data/caseStudies'
 
-export const Route = createFileRoute('/portfolio/$slug')({
+export const Route = createFileRoute('/clients/$slug')({
   loader: ({ params }) => {
     const study = getCaseStudyBySlug(params.slug)
     if (!study) {

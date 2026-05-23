@@ -32,7 +32,7 @@ export function CaseStudyNav({ slug }: CaseStudyNavProps) {
       <div className={`max-w-6xl mx-auto ${gridClass}`}>
         {prev ? (
           <Link
-            to="/portfolio/$slug"
+            to="/clients/$slug"
             params={{ slug: prev.slug }}
             className="group border border-line bg-card p-6 md:p-8 hover:border-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold transition-colors"
           >
@@ -48,7 +48,7 @@ export function CaseStudyNav({ slug }: CaseStudyNavProps) {
         ) : null}
         {next ? (
           <Link
-            to="/portfolio/$slug"
+            to="/clients/$slug"
             params={{ slug: next.slug }}
             className="group border border-line bg-card p-6 md:p-8 hover:border-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold transition-colors md:text-right"
           >

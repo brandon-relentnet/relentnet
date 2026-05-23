@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest'
 
 import { caseStudies } from '@/data/caseStudies'
 
-import { portfolioCta, portfolioIntro } from './portfolio/index'
+import { portfolioCta, portfolioIntro } from './clients/index'
 
-describe('portfolio case studies', () => {
+describe('clients case studies', () => {
   it('frames work as diagnosed friction becoming useful systems', () => {
     expect(portfolioIntro.headline).toContain('Diagnosed friction')
     expect(portfolioIntro.body).toContain('workflow diagnostic')
@@ -19,7 +19,7 @@ describe('portfolio case studies', () => {
     expect(portfolioCta.label).toBe('Start With a Diagnostic')
   })
 
-  it('every case study has a URL-safe slug suitable for /portfolio/$slug', () => {
+  it('every case study has a URL-safe slug suitable for /clients/$slug', () => {
     for (const study of caseStudies) {
       expect(study.slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/)
     }
