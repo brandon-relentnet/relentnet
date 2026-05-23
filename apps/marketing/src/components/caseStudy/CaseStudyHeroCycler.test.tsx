@@ -48,7 +48,9 @@ describe('CaseStudyHeroCycler', () => {
   it('switches active beat when a progress button is clicked', async () => {
     const user = userEvent.setup()
     render(<CaseStudyHeroCycler beats={beats} />)
-    await user.click(screen.getByRole('button', { name: /show diagnosis beat/i }))
+    await user.click(
+      screen.getByRole('button', { name: /show diagnosis beat/i }),
+    )
     expect(screen.getByText('Diagnosis blurb')).toBeInTheDocument()
   })
 

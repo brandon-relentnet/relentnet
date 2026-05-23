@@ -296,7 +296,8 @@ export const caseStudies: ReadonlyArray<CaseStudy> = [
           label: 'Source availability',
           from: 'Closed, contractor-owned',
           to: 'Open source · AGPL-3.0',
-          context: 'Full codebase public on GitHub for inspection and contribution.',
+          context:
+            'Full codebase public on GitHub for inspection and contribution.',
         },
       ],
       global: {

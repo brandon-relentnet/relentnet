@@ -15,6 +15,7 @@
 ## File map
 
 Files to create:
+
 - `apps/marketing/src/data/caseStudies.ts` — types, data, lookup helpers
 - `apps/marketing/src/data/-caseStudies.test.ts` — data sanity tests
 - `apps/marketing/src/components/caseStudy/CaseStudyImage.tsx`
@@ -27,13 +28,16 @@ Files to create:
 - `apps/marketing/src/routes/portfolio/-$slug.test.ts`
 
 Files to modify:
+
 - `apps/marketing/src/routes/portfolio.tsx` — import from `@/data/caseStudies`; update field reads (`study.problem` → `study.summary.problem`); add "Read the case study" link per card
 - `apps/marketing/src/routes/-portfolio.test.ts` — update import sources after data extraction; assert deep-link presence
 
 Auto-regenerated (do not hand-edit):
+
 - `apps/marketing/src/routeTree.gen.ts` — the router plugin will regenerate when the dev server runs or `npm run build` runs
 
 Out of scope (content debt tracked separately, not in this plan):
+
 - Capturing CourtCommand and Star Kids screenshots
 - Filling real metrics, quotes, gallery shots
 
@@ -52,6 +56,7 @@ Note: there is no global `beforeEach` cleanup configured. Each rendering test mu
 ## Task 1: Extract case study data with new schema
 
 **Files:**
+
 - Create: `apps/marketing/src/data/caseStudies.ts`
 - Modify: `apps/marketing/src/routes/portfolio.tsx` (replace inline `caseStudies` literal with import; update field reads)
 - Modify: `apps/marketing/src/routes/-portfolio.test.ts` (update import source)
@@ -148,7 +153,7 @@ describe('caseStudies data', () => {
 ### Step 1.2: Run the test to verify it fails
 
 - [ ] Run: `npx vitest run apps/marketing/src/data/-caseStudies.test.ts`
-  Expected: FAIL — cannot resolve module `./caseStudies`.
+      Expected: FAIL — cannot resolve module `./caseStudies`.
 
 ### Step 1.3: Create the data module
 
@@ -559,7 +564,7 @@ export function getAdjacentCaseStudies(slug: string): {
 ### Step 1.4: Run the data test to verify it passes
 
 - [ ] Run: `npx vitest run apps/marketing/src/data/-caseStudies.test.ts`
-  Expected: PASS — all assertions in the suite pass.
+      Expected: PASS — all assertions in the suite pass.
 
 ### Step 1.5: Update `routes/portfolio.tsx` to use the new data shape
 
@@ -573,11 +578,11 @@ import { caseStudies } from '@/data/caseStudies'
 import type { CaseStudy } from '@/data/caseStudies'
 ```
 
-  - Update the `CaseStudySection` component's prop type to use the imported `CaseStudy`.
-  - Inside the right-column 2-up grid, change the source array from:
+- Update the `CaseStudySection` component's prop type to use the imported `CaseStudy`.
+- Inside the right-column 2-up grid, change the source array from:
 
 ```ts
-[
+;[
   ['The Problem', study.problem],
   ['The Diagnosis', study.diagnosis],
   ['The Build', study.build],
@@ -585,10 +590,10 @@ import type { CaseStudy } from '@/data/caseStudies'
 ]
 ```
 
-  to:
+to:
 
 ```ts
-[
+;[
   ['The Problem', study.summary.problem],
   ['The Diagnosis', study.summary.diagnosis],
   ['The Build', study.summary.build],
@@ -596,30 +601,32 @@ import type { CaseStudy } from '@/data/caseStudies'
 ]
 ```
 
-  - Inside the left-column card, the `study.image` reference becomes `study.hero.image?.src` for the conditional, with `alt={study.hero.image?.alt ?? \`${study.name} interface preview\`}`. Concretely:
+- Inside the left-column card, the `study.image` reference becomes `study.hero.image?.src` for the conditional, with `alt={study.hero.image?.alt ?? \`${study.name} interface preview\`}`. Concretely:
 
 ```tsx
-{study.hero.image ? (
-  <div className="mt-10 overflow-hidden border border-line-faint bg-neutral-950 aspect-video">
-    <img
-      src={study.hero.image.src}
-      alt={study.hero.image.alt}
-      width={study.hero.image.width}
-      height={study.hero.image.height}
-      className="h-full w-full object-cover opacity-90 grayscale-25 transition duration-500 hover:scale-[1.02] hover:grayscale-0"
-      loading="lazy"
-    />
-  </div>
-) : (
-  <div className="mt-10 border border-line-faint bg-inset aspect-video flex items-center justify-center px-8 text-center">
-    <p className="font-serif text-2xl text-ink-muted">
-      Real-time system preview
-    </p>
-  </div>
-)}
+{
+  study.hero.image ? (
+    <div className="mt-10 overflow-hidden border border-line-faint bg-neutral-950 aspect-video">
+      <img
+        src={study.hero.image.src}
+        alt={study.hero.image.alt}
+        width={study.hero.image.width}
+        height={study.hero.image.height}
+        className="h-full w-full object-cover opacity-90 grayscale-25 transition duration-500 hover:scale-[1.02] hover:grayscale-0"
+        loading="lazy"
+      />
+    </div>
+  ) : (
+    <div className="mt-10 border border-line-faint bg-inset aspect-video flex items-center justify-center px-8 text-center">
+      <p className="font-serif text-2xl text-ink-muted">
+        Real-time system preview
+      </p>
+    </div>
+  )
+}
 ```
 
-  - Leave `portfolioIntro` and `portfolioCta` exports in place (they're consumed by the existing portfolio test).
+- Leave `portfolioIntro` and `portfolioCta` exports in place (they're consumed by the existing portfolio test).
 
 ### Step 1.6: Update the portfolio route test to import from the new source
 
@@ -629,28 +636,30 @@ import type { CaseStudy } from '@/data/caseStudies'
 import { caseStudies, portfolioCta, portfolioIntro } from './portfolio'
 ```
 
-  to:
+to:
 
 ```ts
 import { portfolioCta, portfolioIntro } from './portfolio'
 import { caseStudies } from '@/data/caseStudies'
 ```
 
-  Update the diagnosis assertion to use the new shape:
+Update the diagnosis assertion to use the new shape:
 
 ```ts
-expect(caseStudies.every((study) => study.summary.diagnosis.length > 0)).toBe(true)
+expect(caseStudies.every((study) => study.summary.diagnosis.length > 0)).toBe(
+  true,
+)
 ```
 
 ### Step 1.7: Run portfolio + data tests to verify both pass
 
 - [ ] Run: `npx vitest run apps/marketing/src/data/-caseStudies.test.ts apps/marketing/src/routes/-portfolio.test.ts`
-  Expected: PASS — both suites green.
+      Expected: PASS — both suites green.
 
 ### Step 1.8: Typecheck
 
 - [ ] Run: `npm run typecheck`
-  Expected: no TypeScript errors.
+      Expected: no TypeScript errors.
 
 ### Step 1.9: Commit
 
@@ -669,6 +678,7 @@ git commit -m "refactor: extract case study data with expanded schema"
 ## Task 2: Add "Read the case study" link to each index card
 
 **Files:**
+
 - Modify: `apps/marketing/src/routes/portfolio.tsx`
 - Modify: `apps/marketing/src/routes/-portfolio.test.ts`
 
@@ -684,12 +694,12 @@ it('every case study exposes a deep link to its detail page', () => {
 })
 ```
 
-  (We can't easily DOM-test the `<Link>` here without rendering the route — a deeper render test goes in Task 6. This test just protects the contract that every entry has a slug we can link to.)
+(We can't easily DOM-test the `<Link>` here without rendering the route — a deeper render test goes in Task 6. This test just protects the contract that every entry has a slug we can link to.)
 
 ### Step 2.2: Run the test to verify it passes (the slug regex is the new behavior)
 
 - [ ] Run: `npx vitest run apps/marketing/src/routes/-portfolio.test.ts`
-  Expected: PASS — every slug already matches the regex (set up in Task 1).
+      Expected: PASS — every slug already matches the regex (set up in Task 1).
 
 ### Step 2.3: Add the deep link to the index card
 
@@ -708,12 +718,12 @@ it('every case study exposes a deep link to its detail page', () => {
 </Link>
 ```
 
-  - Add `ArrowRight` to the lucide import line if it is not already present there (it is currently imported at the top of `portfolio.tsx` — confirm before editing).
+- Add `ArrowRight` to the lucide import line if it is not already present there (it is currently imported at the top of `portfolio.tsx` — confirm before editing).
 
 ### Step 2.4: Typecheck (the `to`/`params` will currently fail because the route does not exist yet)
 
 - [ ] Run: `npm run typecheck`
-  Expected: TypeScript error — `'/portfolio/$slug'` is not a known route. This is expected; Task 3 introduces the route and the router plugin will regenerate `routeTree.gen.ts`.
+      Expected: TypeScript error — `'/portfolio/$slug'` is not a known route. This is expected; Task 3 introduces the route and the router plugin will regenerate `routeTree.gen.ts`.
 
 > **Important:** Do not commit yet. Proceed to Task 3 — typecheck passes after Task 3 lands.
 
@@ -722,6 +732,7 @@ it('every case study exposes a deep link to its detail page', () => {
 ## Task 3: Add the `/portfolio/$slug` route shell
 
 **Files:**
+
 - Create: `apps/marketing/src/routes/portfolio/$slug.tsx`
 
 The router plugin regenerates `apps/marketing/src/routeTree.gen.ts` automatically on dev server start or `npm run build`. Do not hand-edit it.
@@ -773,12 +784,12 @@ function CaseStudyDetailPage() {
 npm run build
 ```
 
-  Expected: build succeeds. `apps/marketing/src/routeTree.gen.ts` is updated to include `/portfolio/$slug`.
+Expected: build succeeds. `apps/marketing/src/routeTree.gen.ts` is updated to include `/portfolio/$slug`.
 
 ### Step 3.3: Re-run typecheck (Task 2's pending error should clear)
 
 - [ ] Run: `npm run typecheck`
-  Expected: no TypeScript errors. The `to="/portfolio/$slug"` link from Task 2 now resolves.
+      Expected: no TypeScript errors. The `to="/portfolio/$slug"` link from Task 2 now resolves.
 
 ### Step 3.4: Commit Task 2 + Task 3 together
 
@@ -797,6 +808,7 @@ git commit -m "feat: add /portfolio/\$slug route and index deep-link"
 ## Task 4: Build the `CaseStudyImage` figure primitive
 
 **Files:**
+
 - Create: `apps/marketing/src/components/caseStudy/CaseStudyImage.tsx`
 
 This is the lowest-level component. Other components depend on it, so it goes first.
@@ -813,7 +825,10 @@ interface CaseStudyImageProps {
   priority?: boolean
 }
 
-export function CaseStudyImage({ image, priority = false }: CaseStudyImageProps) {
+export function CaseStudyImage({
+  image,
+  priority = false,
+}: CaseStudyImageProps) {
   return (
     <figure className="my-10 border border-line-faint bg-inset overflow-hidden">
       <img
@@ -837,13 +852,14 @@ export function CaseStudyImage({ image, priority = false }: CaseStudyImageProps)
 ### Step 4.2: Typecheck
 
 - [ ] Run: `npm run typecheck`
-  Expected: no errors.
+      Expected: no errors.
 
 ---
 
 ## Task 5: Build `CaseStudyHero`
 
 **Files:**
+
 - Create: `apps/marketing/src/components/caseStudy/CaseStudyHero.tsx`
 
 ### Step 5.1: Write the component
@@ -911,13 +927,14 @@ export function CaseStudyHero({ caseStudy }: CaseStudyHeroProps) {
 ### Step 5.2: Typecheck
 
 - [ ] Run: `npm run typecheck`
-  Expected: no errors.
+      Expected: no errors.
 
 ---
 
 ## Task 6: Build `CaseStudyAtAGlance`
 
 **Files:**
+
 - Create: `apps/marketing/src/components/caseStudy/CaseStudyAtAGlance.tsx`
 
 ### Step 6.1: Write the component
@@ -1050,13 +1067,14 @@ export function CaseStudyAtAGlance({
 ### Step 6.2: Typecheck
 
 - [ ] Run: `npm run typecheck`
-  Expected: no errors.
+      Expected: no errors.
 
 ---
 
 ## Task 7: Build `CaseStudySection` with `StoryBlocks`
 
 **Files:**
+
 - Create: `apps/marketing/src/components/caseStudy/CaseStudySection.tsx`
 
 ### Step 7.1: Write the component (including the internal `StoryBlocks` renderer)
@@ -1108,7 +1126,9 @@ export function CaseStudySection({
             <h2 className="font-serif text-2xl md:text-3xl mt-2">{title}</h2>
           </div>
 
-          <div className={`md:col-span-9 ${alignRight ? 'md:order-first' : ''}`}>
+          <div
+            className={`md:col-span-9 ${alignRight ? 'md:order-first' : ''}`}
+          >
             <StoryBlocks blocks={blocks} />
           </div>
         </div>
@@ -1160,13 +1180,14 @@ function StoryBlocks({ blocks }: StoryBlocksProps) {
 ### Step 7.2: Typecheck
 
 - [ ] Run: `npm run typecheck`
-  Expected: no errors.
+      Expected: no errors.
 
 ---
 
 ## Task 8: Build `CaseStudyNav` (prev/next)
 
 **Files:**
+
 - Create: `apps/marketing/src/components/caseStudy/CaseStudyNav.tsx`
 
 ### Step 8.1: Write the component
@@ -1240,13 +1261,14 @@ export function CaseStudyNav({ slug }: CaseStudyNavProps) {
 ### Step 8.2: Typecheck
 
 - [ ] Run: `npm run typecheck`
-  Expected: no errors.
+      Expected: no errors.
 
 ---
 
 ## Task 9: Build `CaseStudyCta` (closing CTA mirror)
 
 **Files:**
+
 - Create: `apps/marketing/src/components/caseStudy/CaseStudyCta.tsx`
 
 ### Step 9.1: Write the component
@@ -1286,13 +1308,14 @@ export function CaseStudyCta() {
 ### Step 9.2: Typecheck
 
 - [ ] Run: `npm run typecheck`
-  Expected: no errors.
+      Expected: no errors.
 
 ---
 
 ## Task 10: Wire all sections into `routes/portfolio/$slug.tsx`
 
 **Files:**
+
 - Modify: `apps/marketing/src/routes/portfolio/$slug.tsx`
 
 ### Step 10.1: Replace the placeholder component body
@@ -1385,12 +1408,12 @@ function CaseStudyDetailPage() {
 ### Step 10.2: Run typecheck
 
 - [ ] Run: `npm run typecheck`
-  Expected: no errors.
+      Expected: no errors.
 
 ### Step 10.3: Run the existing test suite
 
 - [ ] Run: `npm run test`
-  Expected: all tests pass.
+      Expected: all tests pass.
 
 ### Step 10.4: Commit the component layer
 
@@ -1407,6 +1430,7 @@ git commit -m "feat: build case study detail page components"
 ## Task 11: Detail-page render test
 
 **Files:**
+
 - Create: `apps/marketing/src/routes/portfolio/-$slug.test.ts`
 
 ### Step 11.1: Write the failing test
@@ -1485,7 +1509,7 @@ describe('case study detail page', () => {
 ### Step 11.2: Run the test to verify it passes
 
 - [ ] Run: `npx vitest run apps/marketing/src/routes/portfolio/-\$slug.test.ts`
-  Expected: PASS — all three assertions render and locate the expected text.
+      Expected: PASS — all three assertions render and locate the expected text.
 
   If TanStack Router complains about a missing default `defaultPendingComponent` or similar during the render in test mode, add minimal options to the `createRouter` call (`{ defaultPendingMs: 0 }`) and re-run. Do not bypass the test by changing assertions.
 
@@ -1505,22 +1529,22 @@ git commit -m "test: render the case study detail page for a known slug"
 ### Step 12.1: Run formatter + linter
 
 - [ ] Run: `npm run check`
-  Expected: prettier writes formatting changes (if any); ESLint reports no errors. If prettier wrote changes, inspect with `git diff` and stage with `git add -u`.
+      Expected: prettier writes formatting changes (if any); ESLint reports no errors. If prettier wrote changes, inspect with `git diff` and stage with `git add -u`.
 
 ### Step 12.2: Run typecheck
 
 - [ ] Run: `npm run typecheck`
-  Expected: no errors.
+      Expected: no errors.
 
 ### Step 12.3: Run tests
 
 - [ ] Run: `npm run test`
-  Expected: all suites pass.
+      Expected: all suites pass.
 
 ### Step 12.4: Production build
 
 - [ ] Run: `npm run build`
-  Expected: `vite build` succeeds, `tsc --noEmit` passes, no warnings about unused exports or broken types.
+      Expected: `vite build` succeeds, `tsc --noEmit` passes, no warnings about unused exports or broken types.
 
 ### Step 12.5: Visual QA
 
@@ -1546,7 +1570,7 @@ git diff --cached
 git commit -m "chore: prettier-format case study additions"
 ```
 
-  Otherwise skip.
+Otherwise skip.
 
 ---
 

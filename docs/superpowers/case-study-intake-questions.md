@@ -16,6 +16,7 @@ Standard chronological intake used for every RelentNet case study. Questions are
 
 **Q1 — Pre-contact state (multiple choice + short-answer fallback):**
 What state was the project in when you first encountered it?
+
 - Idea only — nothing built yet
 - Early prototype or proof of concept
 - Working product with rough edges
@@ -29,6 +30,7 @@ Who was behind it and what were they trying to accomplish? Include team size, ba
 
 **Q3 — How the engagement started (multiple choice + short-answer fallback):**
 How did the engagement start?
+
 - They approached us
 - Warm intro / referral
 - We approached them
@@ -55,6 +57,7 @@ What's the state of the project today, and what changed for the client after lau
 
 **Q8 — Current relationship (multiple choice + short-answer fallback):**
 Where does the engagement stand today?
+
 - Ongoing — active development partnership
 - Ongoing — hosting & maintenance only
 - Shipped and handed off
@@ -69,17 +72,17 @@ Years of engagement and roles RelentNet held on the project. Examples: "Spring 2
 
 ## Schema Mapping
 
-| Question | Populates |
-| --- | --- |
-| Q1 | `story.problem` (opening paragraphs about the pre-existing state) |
-| Q2 | `story.problem` (who the team was, what they were trying to do) |
-| Q3 | `story.problem` (how the engagement started — often opens the narrative) |
-| Q4 | `story.diagnosis` (the workflow-diagnostic insight) |
-| Q5 | `story.diagnosis` (what was reframed, what was talked out of) |
-| Q6 | `story.build` + `atAGlance.stack` |
-| Q7 | `story.outcome` |
-| Q8 | `story.stewardship` (included if ongoing) |
-| Q9 | `atAGlance.engagementYear` + `atAGlance.role` |
+| Question | Populates                                                                |
+| -------- | ------------------------------------------------------------------------ |
+| Q1       | `story.problem` (opening paragraphs about the pre-existing state)        |
+| Q2       | `story.problem` (who the team was, what they were trying to do)          |
+| Q3       | `story.problem` (how the engagement started — often opens the narrative) |
+| Q4       | `story.diagnosis` (the workflow-diagnostic insight)                      |
+| Q5       | `story.diagnosis` (what was reframed, what was talked out of)            |
+| Q6       | `story.build` + `atAGlance.stack`                                        |
+| Q7       | `story.outcome`                                                          |
+| Q8       | `story.stewardship` (included if ongoing)                                |
+| Q9       | `atAGlance.engagementYear` + `atAGlance.role`                            |
 
 ## Honesty Constraints
 

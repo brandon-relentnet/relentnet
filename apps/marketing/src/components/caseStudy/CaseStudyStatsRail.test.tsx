@@ -42,7 +42,12 @@ describe('CaseStudyStatsRail', () => {
   it('renders delta metrics as from→to', async () => {
     const atAGlance: CaseStudyAtAGlance = {
       metrics: [
-        { label: 'Lighthouse', from: '38', to: '96', context: 'Mobile, archived legacy.' },
+        {
+          label: 'Lighthouse',
+          from: '38',
+          to: '96',
+          context: 'Mobile, archived legacy.',
+        },
       ],
     }
     renderInRouter(<CaseStudyStatsRail atAGlance={atAGlance} />)

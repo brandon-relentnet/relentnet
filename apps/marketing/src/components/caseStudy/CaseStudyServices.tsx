@@ -36,9 +36,7 @@ export function CaseStudyServices({ services }: CaseStudyServicesProps) {
           {services.map((category, index) => (
             <div
               key={category.label}
-              className={`${
-                isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-              }`}
+              className={`${isRevealed ? 'animate-fade-in-up' : 'opacity-0'}`}
               style={
                 isRevealed
                   ? { animationDelay: `${100 + index * 120}ms` }

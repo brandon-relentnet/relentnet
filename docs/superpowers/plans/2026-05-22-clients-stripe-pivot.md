@@ -94,23 +94,24 @@ Tasks are sequenced so each one ends with a green test suite and a committable c
 Append to `apps/marketing/src/data/caseStudies.test.ts` (inside the top-level `describe('caseStudies data', …)` block, before its closing brace):
 
 ```ts
-  it('rejects metrics that are neither flat nor delta', () => {
-    // A valid metric must be flat (value only) or delta (from + to only).
-    // The data must never contain mixed-shape or empty-shape metrics.
-    for (const study of caseStudies) {
-      for (const metric of study.atAGlance.metrics ?? []) {
-        const hasValue = typeof metric.value === 'string' && metric.value.length > 0
-        const hasFrom = typeof metric.from === 'string' && metric.from.length > 0
-        const hasTo = typeof metric.to === 'string' && metric.to.length > 0
-        const isFlat = hasValue && !hasFrom && !hasTo
-        const isDelta = !hasValue && hasFrom && hasTo
-        expect(
-          isFlat || isDelta,
-          `${study.slug} metric "${metric.label}" must be flat or delta, not mixed`,
-        ).toBe(true)
-      }
+it('rejects metrics that are neither flat nor delta', () => {
+  // A valid metric must be flat (value only) or delta (from + to only).
+  // The data must never contain mixed-shape or empty-shape metrics.
+  for (const study of caseStudies) {
+    for (const metric of study.atAGlance.metrics ?? []) {
+      const hasValue =
+        typeof metric.value === 'string' && metric.value.length > 0
+      const hasFrom = typeof metric.from === 'string' && metric.from.length > 0
+      const hasTo = typeof metric.to === 'string' && metric.to.length > 0
+      const isFlat = hasValue && !hasFrom && !hasTo
+      const isDelta = !hasValue && hasFrom && hasTo
+      expect(
+        isFlat || isDelta,
+        `${study.slug} metric "${metric.label}" must be flat or delta, not mixed`,
+      ).toBe(true)
     }
-  })
+  }
+})
 ```
 
 - [ ] **Step 1.2: Run the test and watch it fail**
@@ -166,23 +167,26 @@ git commit -m "feat(clients): allow delta-shaped CaseStudyMetric (from/to)"
 Append to `apps/marketing/src/data/caseStudies.test.ts` inside the main describe block:
 
 ```ts
-  it('uses categorized stack shape on every case study that ships a stack', () => {
-    for (const study of caseStudies) {
-      const stack = study.atAGlance.stack
-      if (!stack) continue
-      expect(Array.isArray(stack), `${study.slug}.atAGlance.stack must be an array`).toBe(true)
-      for (const category of stack) {
-        expect(typeof category.category).toBe('string')
-        expect(category.category.length).toBeGreaterThan(0)
-        expect(Array.isArray(category.items)).toBe(true)
-        expect(category.items.length).toBeGreaterThan(0)
-        for (const item of category.items) {
-          expect(typeof item.label).toBe('string')
-          expect(item.label.length).toBeGreaterThan(0)
-        }
+it('uses categorized stack shape on every case study that ships a stack', () => {
+  for (const study of caseStudies) {
+    const stack = study.atAGlance.stack
+    if (!stack) continue
+    expect(
+      Array.isArray(stack),
+      `${study.slug}.atAGlance.stack must be an array`,
+    ).toBe(true)
+    for (const category of stack) {
+      expect(typeof category.category).toBe('string')
+      expect(category.category.length).toBeGreaterThan(0)
+      expect(Array.isArray(category.items)).toBe(true)
+      expect(category.items.length).toBeGreaterThan(0)
+      for (const item of category.items) {
+        expect(typeof item.label).toBe('string')
+        expect(item.label.length).toBeGreaterThan(0)
       }
     }
-  })
+  }
+})
 ```
 
 - [ ] **Step 2.2: Run the test and watch it fail**
@@ -293,16 +297,18 @@ git commit -m "feat(clients): categorize atAGlance.stack and add CaseStudyGlobal
 Append to `apps/marketing/src/data/caseStudies.test.ts`:
 
 ```ts
-  it('classifies every case study with an engagementType', () => {
-    for (const study of caseStudies) {
-      expect(['product', 'operations', 'platform']).toContain(study.engagementType)
-    }
-  })
+it('classifies every case study with an engagementType', () => {
+  for (const study of caseStudies) {
+    expect(['product', 'operations', 'platform']).toContain(
+      study.engagementType,
+    )
+  }
+})
 
-  it('promotes exactly one case study via featured: true', () => {
-    const featured = caseStudies.filter((s) => s.featured === true)
-    expect(featured).toHaveLength(1)
-  })
+it('promotes exactly one case study via featured: true', () => {
+  const featured = caseStudies.filter((s) => s.featured === true)
+  expect(featured).toHaveLength(1)
+})
 ```
 
 - [ ] **Step 3.2: Run tests and watch them fail**
@@ -383,23 +389,23 @@ git commit -m "feat(clients): add engagementType and featured flag to CaseStudy"
 Append to `apps/marketing/src/data/caseStudies.test.ts`:
 
 ```ts
-  it('only uses canonical sectionRef values in hero beats', () => {
-    const valid = new Set(['challenge', 'diagnosis', 'solution', 'results'])
-    for (const study of caseStudies) {
-      for (const beat of study.hero.beats ?? []) {
-        expect(valid.has(beat.sectionRef)).toBe(true)
-        expect(beat.blurb.length).toBeGreaterThan(0)
-        expect(beat.image.src.length).toBeGreaterThan(0)
-      }
+it('only uses canonical sectionRef values in hero beats', () => {
+  const valid = new Set(['challenge', 'diagnosis', 'solution', 'results'])
+  for (const study of caseStudies) {
+    for (const beat of study.hero.beats ?? []) {
+      expect(valid.has(beat.sectionRef)).toBe(true)
+      expect(beat.blurb.length).toBeGreaterThan(0)
+      expect(beat.image.src.length).toBeGreaterThan(0)
     }
-  })
+  }
+})
 
-  it('never repeats a sectionRef inside the same case study hero beats', () => {
-    for (const study of caseStudies) {
-      const refs = (study.hero.beats ?? []).map((b) => b.sectionRef)
-      expect(new Set(refs).size).toBe(refs.length)
-    }
-  })
+it('never repeats a sectionRef inside the same case study hero beats', () => {
+  for (const study of caseStudies) {
+    const refs = (study.hero.beats ?? []).map((b) => b.sectionRef)
+    expect(new Set(refs).size).toBe(refs.length)
+  }
+})
 ```
 
 - [ ] **Step 4.2: Run tests and watch them stay green**
@@ -853,7 +859,9 @@ describe('CaseStudyHeroCycler', () => {
   it('switches active beat when a progress button is clicked', async () => {
     const user = userEvent.setup()
     render(<CaseStudyHeroCycler beats={beats} />)
-    await user.click(screen.getByRole('button', { name: /show diagnosis beat/i }))
+    await user.click(
+      screen.getByRole('button', { name: /show diagnosis beat/i }),
+    )
     expect(screen.getByText('Diagnosis blurb')).toBeInTheDocument()
   })
 
@@ -1183,7 +1191,12 @@ describe('CaseStudyStatsRail', () => {
   it('renders delta metrics as from→to', () => {
     const atAGlance: CaseStudyAtAGlance = {
       metrics: [
-        { label: 'Lighthouse', from: '38', to: '96', context: 'Mobile, archived legacy.' },
+        {
+          label: 'Lighthouse',
+          from: '38',
+          to: '96',
+          context: 'Mobile, archived legacy.',
+        },
       ],
     }
     renderInRouter(<CaseStudyStatsRail atAGlance={atAGlance} />)
@@ -1212,10 +1225,9 @@ describe('CaseStudyStatsRail', () => {
 
   it('always renders the diagnostic CTA', () => {
     renderInRouter(<CaseStudyStatsRail atAGlance={{}} />)
-    expect(screen.getByRole('link', { name: /start a diagnostic/i })).toHaveAttribute(
-      'href',
-      '/diagnostic',
-    )
+    expect(
+      screen.getByRole('link', { name: /start a diagnostic/i }),
+    ).toHaveAttribute('href', '/diagnostic')
   })
 })
 ```
@@ -1419,14 +1431,22 @@ const atAGlance: CaseStudyAtAGlance = {
 describe('CaseStudyStackCard', () => {
   it('renders the company name at the top of the card', () => {
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={atAGlance} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={atAGlance}
+        industry="Consumer Software"
+      />,
     )
     expect(screen.getByRole('heading', { name: 'Scrollr' })).toBeInTheDocument()
   })
 
   it('shows 4 items by default and a "+ N more" disclosure', () => {
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={atAGlance} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={atAGlance}
+        industry="Consumer Software"
+      />,
     )
     // The combined stack has 6 items total; show 4, expose disclosure for the rest.
     expect(screen.getByText('Tauri v2')).toBeInTheDocument()
@@ -1434,13 +1454,19 @@ describe('CaseStudyStackCard', () => {
     expect(screen.getByText('Vite 7')).toBeInTheDocument()
     expect(screen.getByText('TanStack Router')).toBeInTheDocument()
     expect(screen.queryByText('Tailwind 4')).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /\+ 2 more/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /\+ 2 more/i }),
+    ).toBeInTheDocument()
   })
 
   it('expands to show all items when disclosure is clicked', async () => {
     const user = userEvent.setup()
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={atAGlance} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={atAGlance}
+        industry="Consumer Software"
+      />,
     )
     await user.click(screen.getByRole('button', { name: /\+ 2 more/i }))
     expect(screen.getByText('Tailwind 4')).toBeInTheDocument()
@@ -1449,7 +1475,11 @@ describe('CaseStudyStackCard', () => {
 
   it('renders the global row with logo and label when present', () => {
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={atAGlance} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={atAGlance}
+        industry="Consumer Software"
+      />,
     )
     expect(screen.getByAltText(/cloudflare/i)).toBeInTheDocument()
     expect(screen.getByText('Cloudflare Global CDN')).toBeInTheDocument()
@@ -1468,7 +1498,11 @@ describe('CaseStudyStackCard', () => {
 
   it('always renders the industry row', () => {
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={atAGlance} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={atAGlance}
+        industry="Consumer Software"
+      />,
     )
     expect(screen.getByText('Consumer Software')).toBeInTheDocument()
   })
@@ -1567,7 +1601,9 @@ export function CaseStudyStackCard({
               alt={atAGlance.global.label}
               className="size-5 flex-shrink-0"
             />
-            <span className="text-sm text-ink-sub">{atAGlance.global.label}</span>
+            <span className="text-sm text-ink-sub">
+              {atAGlance.global.label}
+            </span>
           </div>
         </section>
       ) : null}
@@ -1613,43 +1649,38 @@ git commit -m "feat(clients): add CaseStudyStackCard with disclosure and global 
 In `apps/marketing/src/components/caseStudy/CaseStudySection.tsx`, replace the `tone === 'standard'` return block (currently lines 73–110) with a quieter version that drops the giant dropshadow number and uses a smaller eyebrow:
 
 ```tsx
-  return (
-    <section
-      ref={ref}
-      className="relative z-10 px-2 md:px-0 py-12 md:py-16"
-    >
-      <div className="max-w-3xl">
-        <div
-          className={`flex items-baseline gap-4 mb-6 ${
-            isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-          }`}
-        >
-          <span className="font-serif text-gold text-sm leading-none">
-            {number}
-          </span>
-          <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-gold">
-            {label}
-          </span>
-        </div>
-        <h2
-          className={`font-serif text-3xl md:text-4xl leading-tight ${
-            isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-          }`}
-          style={isRevealed ? { animationDelay: '80ms' } : undefined}
-        >
-          {title}
-        </h2>
-        <div
-          className={`mt-8 ${
-            isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-          }`}
-          style={isRevealed ? { animationDelay: '150ms' } : undefined}
-        >
-          <StoryBlocks blocks={blocks} />
-        </div>
+return (
+  <section ref={ref} className="relative z-10 px-2 md:px-0 py-12 md:py-16">
+    <div className="max-w-3xl">
+      <div
+        className={`flex items-baseline gap-4 mb-6 ${
+          isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+        }`}
+      >
+        <span className="font-serif text-gold text-sm leading-none">
+          {number}
+        </span>
+        <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-gold">
+          {label}
+        </span>
       </div>
-    </section>
-  )
+      <h2
+        className={`font-serif text-3xl md:text-4xl leading-tight ${
+          isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+        }`}
+        style={isRevealed ? { animationDelay: '80ms' } : undefined}
+      >
+        {title}
+      </h2>
+      <div
+        className={`mt-8 ${isRevealed ? 'animate-fade-in-up' : 'opacity-0'}`}
+        style={isRevealed ? { animationDelay: '150ms' } : undefined}
+      >
+        <StoryBlocks blocks={blocks} />
+      </div>
+    </div>
+  </section>
+)
 ```
 
 Note: the `alignRight` prop and the `showNumber` prop become unused in the standard tone. Keep them on the interface for the subordinate render path (which still uses them in spirit), but mark the unused ones with a `void` reference or remove the params from the standard path. The subordinate tone block (lines 41–71) is unchanged.
@@ -1825,6 +1856,7 @@ Expected: clean. (If a stray import of `CaseStudyAtAGlance` or `CaseStudyMetrics
 Run: `npm run dev`
 Visit: `http://localhost:3000/portfolio/scrollr`
 Expected:
+
 - Hero shows cycling beats with progress bars under the blurb
 - Three-column body renders with sticky rail on the left, narrative center, stack card on the right
 - Stack card shows Tauri v2, React 19, Vite 7, TanStack Router visible by default; "+ 2 more" expands
@@ -1834,6 +1866,7 @@ Expected:
 
 Visit: `http://localhost:3000/portfolio/cambridge-building-group`
 Expected:
+
 - Hero shows a single static image (fallback path — no beats present)
 - Stack card has no Cloudflare row, no Stack list, but the company name and industry still render
 - Stats rail shows only the CTA (no proof metrics, no engagement facts beyond `role`)
@@ -2253,9 +2286,9 @@ In `apps/marketing/src/routes/clients/index.tsx`, replace the empty `<div id={PO
 import { ClientsPortraitGrid } from '@/components/clients/ClientsPortraitGrid'
 
 // …inside ClientsIndex():
-      <div id={PORTRAIT_GRID_ID}>
-        <ClientsPortraitGrid />
-      </div>
+;<div id={PORTRAIT_GRID_ID}>
+  <ClientsPortraitGrid />
+</div>
 ```
 
 - [ ] **Step 18.3: Run typecheck, tests, build**
@@ -2318,7 +2351,8 @@ function buildAggregateMetrics(): ReadonlyArray<AggregateMetric> {
     {
       label: 'Industries served',
       value: String(new Set(caseStudies.map((s) => s.industry)).size),
-      context: 'Construction, consumer software, sports tech, real estate, nonprofit.',
+      context:
+        'Construction, consumer software, sports tech, real estate, nonprofit.',
     },
     {
       label: 'Open-source releases',
@@ -2367,7 +2401,7 @@ In `apps/marketing/src/routes/clients/index.tsx`, add the band below the portrai
 import { ClientsResultsBand } from '@/components/clients/ClientsResultsBand'
 
 // …after the portrait grid:
-      <ClientsResultsBand />
+;<ClientsResultsBand />
 ```
 
 - [ ] **Step 19.3: Run typecheck, tests, build, smoke**
@@ -2409,14 +2443,46 @@ export interface ClientLogo {
 }
 
 export const clientLogos: ReadonlyArray<ClientLogo> = [
-  { name: 'Client One', logoSrc: '/logos/clients/sample-1.svg', isSample: true },
-  { name: 'Client Two', logoSrc: '/logos/clients/sample-2.svg', isSample: true },
-  { name: 'Client Three', logoSrc: '/logos/clients/sample-3.svg', isSample: true },
-  { name: 'Client Four', logoSrc: '/logos/clients/sample-4.svg', isSample: true },
-  { name: 'Client Five', logoSrc: '/logos/clients/sample-5.svg', isSample: true },
-  { name: 'Client Six', logoSrc: '/logos/clients/sample-6.svg', isSample: true },
-  { name: 'Client Seven', logoSrc: '/logos/clients/sample-7.svg', isSample: true },
-  { name: 'Client Eight', logoSrc: '/logos/clients/sample-8.svg', isSample: true },
+  {
+    name: 'Client One',
+    logoSrc: '/logos/clients/sample-1.svg',
+    isSample: true,
+  },
+  {
+    name: 'Client Two',
+    logoSrc: '/logos/clients/sample-2.svg',
+    isSample: true,
+  },
+  {
+    name: 'Client Three',
+    logoSrc: '/logos/clients/sample-3.svg',
+    isSample: true,
+  },
+  {
+    name: 'Client Four',
+    logoSrc: '/logos/clients/sample-4.svg',
+    isSample: true,
+  },
+  {
+    name: 'Client Five',
+    logoSrc: '/logos/clients/sample-5.svg',
+    isSample: true,
+  },
+  {
+    name: 'Client Six',
+    logoSrc: '/logos/clients/sample-6.svg',
+    isSample: true,
+  },
+  {
+    name: 'Client Seven',
+    logoSrc: '/logos/clients/sample-7.svg',
+    isSample: true,
+  },
+  {
+    name: 'Client Eight',
+    logoSrc: '/logos/clients/sample-8.svg',
+    isSample: true,
+  },
 ]
 ```
 
@@ -2491,7 +2557,10 @@ export function ClientsLogoWall() {
         </p>
         <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-ink-muted">
           {clientLogos.map((logo) => (
-            <li key={logo.name} className="opacity-70 hover:opacity-100 transition-opacity">
+            <li
+              key={logo.name}
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            >
               <img
                 src={logo.logoSrc}
                 alt={logo.name}
@@ -2513,7 +2582,7 @@ export function ClientsLogoWall() {
 import { ClientsLogoWall } from '@/components/clients/ClientsLogoWall'
 
 // …after the results band:
-      <ClientsLogoWall />
+;<ClientsLogoWall />
 ```
 
 - [ ] **Step 20.5: Run typecheck, tests, build, smoke**
@@ -2634,7 +2703,7 @@ export function ClientsByEngagementType() {
 import { ClientsByEngagementType } from '@/components/clients/ClientsByEngagementType'
 
 // …after the logo wall:
-      <ClientsByEngagementType />
+;<ClientsByEngagementType />
 ```
 
 - [ ] **Step 21.3: Run typecheck, tests, build, smoke**
@@ -2776,7 +2845,7 @@ export function ClientsFeaturedEngagement() {
 import { ClientsFeaturedEngagement } from '@/components/clients/ClientsFeaturedEngagement'
 
 // …after the by-engagement-type band:
-      <ClientsFeaturedEngagement />
+;<ClientsFeaturedEngagement />
 ```
 
 - [ ] **Step 22.3: Run typecheck, tests, build, smoke**
@@ -2899,7 +2968,7 @@ export function ClientsByIndustry() {
 import { ClientsByIndustry } from '@/components/clients/ClientsByIndustry'
 
 // …after the featured engagement band:
-      <ClientsByIndustry />
+;<ClientsByIndustry />
 ```
 
 - [ ] **Step 23.3: Run typecheck, tests, build, smoke**
@@ -3000,7 +3069,7 @@ export function ClientsWhatWeBuild() {
 import { ClientsWhatWeBuild } from '@/components/clients/ClientsWhatWeBuild'
 
 // …after the by-industry band:
-      <ClientsWhatWeBuild />
+;<ClientsWhatWeBuild />
 ```
 
 - [ ] **Step 24.3: Run typecheck, tests, build, smoke**
@@ -3283,22 +3352,22 @@ Run: `npm run dev`
 
 Visit each URL and verify the expected behavior:
 
-| URL                              | Expected |
-|----------------------------------|----------|
-| `/clients`                       | Nine bands render: hero, portrait grid, results, logo wall, engagement-type tabs, featured engagement (Scrollr), industry tabs, what-we-build, closing CTA |
-| `/clients/scrollr`               | Cycling hero with 4 beats; three-column body; stack card with disclosure; Cloudflare global row; Industry: Consumer Software; section headers 01 Challenge … 04 Results, 05 Stewardship |
-| `/clients/cambridge-building-group` | Static hero (no beats); three-column body; stack card with company name and Industry only; rail shows only CTA + role engagement fact |
-| `/clients/courtcommand`          | Static hero; no proof metrics; rail shows only role + CTA |
-| `/clients/vm-homes`              | Static hero; rail shows only role + CTA |
-| `/clients/star-kids`             | Static hero; rail shows only role + CTA |
-| `/clients/nonexistent-slug`      | 404 page (TanStack `notFound()`) |
+| URL                                 | Expected                                                                                                                                                                                |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/clients`                          | Nine bands render: hero, portrait grid, results, logo wall, engagement-type tabs, featured engagement (Scrollr), industry tabs, what-we-build, closing CTA                              |
+| `/clients/scrollr`                  | Cycling hero with 4 beats; three-column body; stack card with disclosure; Cloudflare global row; Industry: Consumer Software; section headers 01 Challenge … 04 Results, 05 Stewardship |
+| `/clients/cambridge-building-group` | Static hero (no beats); three-column body; stack card with company name and Industry only; rail shows only CTA + role engagement fact                                                   |
+| `/clients/courtcommand`             | Static hero; no proof metrics; rail shows only role + CTA                                                                                                                               |
+| `/clients/vm-homes`                 | Static hero; rail shows only role + CTA                                                                                                                                                 |
+| `/clients/star-kids`                | Static hero; rail shows only role + CTA                                                                                                                                                 |
+| `/clients/nonexistent-slug`         | 404 page (TanStack `notFound()`)                                                                                                                                                        |
 
 Production-only behavior (verify after deploy, not in dev):
 
-| URL                              | Expected |
-|----------------------------------|----------|
-| `/portfolio`                     | 301 → `/clients` |
-| `/portfolio/scrollr`             | 301 → `/clients/scrollr` |
+| URL                  | Expected                 |
+| -------------------- | ------------------------ |
+| `/portfolio`         | 301 → `/clients`         |
+| `/portfolio/scrollr` | 301 → `/clients/scrollr` |
 
 - [ ] **Step 27.4: Update the PR body**
 
@@ -3359,4 +3428,3 @@ Plan complete and saved to `docs/superpowers/plans/2026-05-22-clients-stripe-piv
 2. **Inline Execution** — Execute tasks in this session using executing-plans, batch execution with checkpoints.
 
 Which approach?
-

@@ -28,7 +28,8 @@ function buildAggregateMetrics(): ReadonlyArray<AggregateMetric> {
     {
       label: 'Industries served',
       value: String(new Set(caseStudies.map((s) => s.industry)).size),
-      context: 'Construction, consumer software, sports tech, real estate, nonprofit.',
+      context:
+        'Construction, consumer software, sports tech, real estate, nonprofit.',
     },
     {
       label: 'Open-source releases',

@@ -76,7 +76,9 @@ export function CaseStudyStackCard({
               alt={atAGlance.global.label}
               className="size-5 flex-shrink-0"
             />
-            <span className="text-sm text-ink-sub">{atAGlance.global.label}</span>
+            <span className="text-sm text-ink-sub">
+              {atAGlance.global.label}
+            </span>
           </div>
         </section>
       ) : null}

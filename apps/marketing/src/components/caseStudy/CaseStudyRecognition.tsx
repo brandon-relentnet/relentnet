@@ -50,9 +50,7 @@ export function CaseStudyRecognition({
             return (
               <li
                 key={`${item.label}-${index}`}
-                className={`${
-                  isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-                }`}
+                className={`${isRevealed ? 'animate-fade-in-up' : 'opacity-0'}`}
                 style={
                   isRevealed
                     ? { animationDelay: `${100 + index * 80}ms` }

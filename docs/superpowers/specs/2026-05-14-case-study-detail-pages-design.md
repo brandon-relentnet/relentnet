@@ -66,22 +66,22 @@ apps/marketing/src/
 
 ```ts
 export interface CaseStudyMetric {
-  label: string                 // e.g. 'Quote turnaround'
-  value: string                 // e.g. '4 days'
-  context?: string              // optional, e.g. 'down from 14 days'
+  label: string // e.g. 'Quote turnaround'
+  value: string // e.g. '4 days'
+  context?: string // optional, e.g. 'down from 14 days'
 }
 
 export interface CaseStudyImage {
-  src: string                   // /case-studies/scrollr-dashboard.png
-  alt: string                   // required
-  caption?: string              // shown on detail figure only
-  width: number                 // explicit, prevents CLS
+  src: string // /case-studies/scrollr-dashboard.png
+  alt: string // required
+  caption?: string // shown on detail figure only
+  width: number // explicit, prevents CLS
   height: number
 }
 
 export interface CaseStudyQuote {
   text: string
-  attribution: string           // 'Name, Role, Company' — only when real and approved
+  attribution: string // 'Name, Role, Company' — only when real and approved
 }
 
 export type StoryBlock =
@@ -91,9 +91,9 @@ export type StoryBlock =
 
 export interface CaseStudy {
   // identity
-  slug: string                  // 'scrollr', 'cambridge-building-group', ...
+  slug: string // 'scrollr', 'cambridge-building-group', ...
   name: string
-  url: string                   // live external URL
+  url: string // live external URL
   industry: string
   systemType: string
 
@@ -107,8 +107,8 @@ export interface CaseStudy {
 
   // detail page
   hero: {
-    image?: CaseStudyImage      // optional; falls back to text-only treatment
-    tagline: string             // one-sentence what-we-did
+    image?: CaseStudyImage // optional; falls back to text-only treatment
+    tagline: string // one-sentence what-we-did
   }
   atAGlance: {
     engagementYear?: string
@@ -133,7 +133,9 @@ export interface CaseStudy {
   }
 }
 
-export const caseStudies: ReadonlyArray<CaseStudy> = [/* 5 entries */]
+export const caseStudies: ReadonlyArray<CaseStudy> = [
+  /* 5 entries */
+]
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined
 export function getAdjacentCaseStudies(slug: string): {
@@ -184,15 +186,15 @@ Same loader-throws-`notFound` pattern as `routes/legal/$docId.tsx`. The auto-gen
 
 ## Components
 
-| Component | Responsibility | Key props |
-| --- | --- | --- |
-| `CaseStudyHero` | Industry eyebrow, h1 name, tagline, hero image (or text fallback), "Visit live site" external link | `caseStudy: CaseStudy` |
-| `CaseStudyAtAGlance` | Tag strip; conditionally renders metrics 3-up grid; conditionally renders pullquote | `atAGlance`, `industry`, `systemType` |
-| `CaseStudySection` | Phase shell: large numbered watermark, eyebrow + title, then a `<StoryBlocks>` body | `number`, `label`, `title`, `blocks: ReadonlyArray<StoryBlock>` |
-| `StoryBlocks` *(internal to `CaseStudySection`)* | Switch on block type → `<p>`, `<CaseStudyImage>`, or pullquote | `blocks` |
-| `CaseStudyImage` | `<figure>` with bordered frame matching `BrowserFrame` aesthetic, optional caption, explicit width/height | `image: CaseStudyImage` |
-| `CaseStudyNav` | Prev/next bordered tiles using `getAdjacentCaseStudies(slug)`. Hides when null. | `slug: string` |
-| `CaseStudyCta` | Closing CTA. Mirrors the existing `portfolioCta` strings. | none |
+| Component                                        | Responsibility                                                                                            | Key props                                                       |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `CaseStudyHero`                                  | Industry eyebrow, h1 name, tagline, hero image (or text fallback), "Visit live site" external link        | `caseStudy: CaseStudy`                                          |
+| `CaseStudyAtAGlance`                             | Tag strip; conditionally renders metrics 3-up grid; conditionally renders pullquote                       | `atAGlance`, `industry`, `systemType`                           |
+| `CaseStudySection`                               | Phase shell: large numbered watermark, eyebrow + title, then a `<StoryBlocks>` body                       | `number`, `label`, `title`, `blocks: ReadonlyArray<StoryBlock>` |
+| `StoryBlocks` _(internal to `CaseStudySection`)_ | Switch on block type → `<p>`, `<CaseStudyImage>`, or pullquote                                            | `blocks`                                                        |
+| `CaseStudyImage`                                 | `<figure>` with bordered frame matching `BrowserFrame` aesthetic, optional caption, explicit width/height | `image: CaseStudyImage`                                         |
+| `CaseStudyNav`                                   | Prev/next bordered tiles using `getAdjacentCaseStudies(slug)`. Hides when null.                           | `slug: string`                                                  |
+| `CaseStudyCta`                                   | Closing CTA. Mirrors the existing `portfolioCta` strings.                                                 | none                                                            |
 
 Components live in `apps/marketing/src/components/caseStudy/`. Named-function exports (per repo convention). Props use `interface`.
 
@@ -253,7 +255,7 @@ Vitest + Testing Library. Test files use the `-` prefix to opt out of routing (e
   - `getCaseStudyBySlug` returns expected; returns `undefined` for unknown.
   - `getAdjacentCaseStudies` correctly handles first/last/middle entries.
   - Every `story.{problem,diagnosis,build,outcome}` has ≥1 block.
-- `src/routes/-portfolio.test.ts` *(extend existing)* — assert "Read the case study" link is present per study and the link target matches each slug.
+- `src/routes/-portfolio.test.ts` _(extend existing)_ — assert "Read the case study" link is present per study and the link target matches each slug.
 - `src/routes/portfolio/-$slug.test.ts` — lightweight render test for a known slug; assert known section headings render.
 
 Component-level snapshot tests are not worth the maintenance cost for this surface — visual review in the dev server is faster and more useful.

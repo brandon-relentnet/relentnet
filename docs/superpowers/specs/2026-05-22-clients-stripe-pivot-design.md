@@ -49,11 +49,11 @@ The same shape serves RelentNet's case studies, with two adjustments:
 
 ## Surfaces affected
 
-| Surface           | New URL              | Replaces             |
-|-------------------|----------------------|----------------------|
-| Index             | `/clients`           | `/portfolio`         |
-| Detail            | `/clients/$slug`     | `/portfolio/$slug`   |
-| Redirects (nginx) | 301 from old paths   | New                  |
+| Surface           | New URL            | Replaces           |
+| ----------------- | ------------------ | ------------------ |
+| Index             | `/clients`         | `/portfolio`       |
+| Detail            | `/clients/$slug`   | `/portfolio/$slug` |
+| Redirects (nginx) | 301 from old paths | New                |
 
 The rename to `/clients` is deliberate. RelentNet sells diagnostic-led
 engagements, not a product; the people on these pages are clients of an
@@ -63,13 +63,13 @@ rename below (Outcome → Results).
 
 ## Section rename map (detail page narrative)
 
-| Existing label    | New label           |
-|-------------------|---------------------|
-| 01 The Problem    | **01 The Challenge** |
-| 02 The Diagnosis  | 02 The Diagnosis    |
-| 03 The Build      | **03 The Solution** |
-| 04 The Outcome    | **04 The Results**  |
-| 05 Stewardship    | 05 Stewardship      |
+| Existing label   | New label            |
+| ---------------- | -------------------- |
+| 01 The Problem   | **01 The Challenge** |
+| 02 The Diagnosis | 02 The Diagnosis     |
+| 03 The Build     | **03 The Solution**  |
+| 04 The Outcome   | **04 The Results**   |
+| 05 Stewardship   | 05 Stewardship       |
 
 Stewardship remains optional and demoted in tone. The visual treatment of
 all five sections becomes quieter: small numbered eyebrow, simple
@@ -194,20 +194,20 @@ scaled down to N=5 case studies today. The full structure is built now
 because the case study pipeline is expected to grow quickly; the bands
 that look sparse at N=5 are expected to fill in as case studies are added.
 
-| #  | Band                  | Behavior at N=5                                                                                                   |
-|----|-----------------------|--------------------------------------------------------------------------------------------------------------------|
-| 1  | Hero                  | Reuse existing `portfolioIntro` copy. Primary CTA → `/diagnostic` ("Start a Diagnostic"). Secondary CTA → in-page anchor to band 2 ("Read client stories"). |
-| 2  | Portrait grid         | 4-column on `lg:`, first tile (Scrollr) spans 2 columns. 2-column on `md:` (no spanning, tiles flow in order). 1-column on `sm:` and below. Photographic treatment (existing hero images). Gold industry pill, name, tagline, hover lift. Each tile links to `/clients/$slug`. |
-| 3  | Measurable results    | 4 aggregate metrics derived from `caseStudies`. Each entry annotated with the case study it came from. Supports the same delta shape as the rail. |
-| 4  | Logo wall             | "Trusted by" strip. Populated from `clientLogos.ts`. Today: 8 sample entries flagged `isSample: true`. To be replaced post-merge with real logos. |
-| 5  | By engagement type    | Tabs: Product / Operations / Platform. Stripe-style tiles per case study within each tab. Tab membership derived from a new `engagementType` field. |
-| 6  | Featured engagement   | Full-width panel running Challenge / Solution / Stack inline + a "Read full case study →" link. Driven by `featured: true` on the case study data. Scrollr today. |
-| 7  | By industry vertical  | Tabs auto-derived from distinct `study.industry` values. Horizontal-scrolling tile row per tab. |
-| 8  | What we build         | Three link cards, one per service area: "Diagnose", "Design & Build", "Steward". Each links to the corresponding section of `/process` (or to `/diagnostic` for the first). No filter behavior, no derived data — content cards. |
-| 9  | Closing CTA           | Reuse existing `portfolioCta` exactly. Secondary anchor: "Read all stories" → band 2.                              |
+| #   | Band                 | Behavior at N=5                                                                                                                                                                                                                                                                |
+| --- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | Hero                 | Reuse existing `portfolioIntro` copy. Primary CTA → `/diagnostic` ("Start a Diagnostic"). Secondary CTA → in-page anchor to band 2 ("Read client stories").                                                                                                                    |
+| 2   | Portrait grid        | 4-column on `lg:`, first tile (Scrollr) spans 2 columns. 2-column on `md:` (no spanning, tiles flow in order). 1-column on `sm:` and below. Photographic treatment (existing hero images). Gold industry pill, name, tagline, hover lift. Each tile links to `/clients/$slug`. |
+| 3   | Measurable results   | 4 aggregate metrics derived from `caseStudies`. Each entry annotated with the case study it came from. Supports the same delta shape as the rail.                                                                                                                              |
+| 4   | Logo wall            | "Trusted by" strip. Populated from `clientLogos.ts`. Today: 8 sample entries flagged `isSample: true`. To be replaced post-merge with real logos.                                                                                                                              |
+| 5   | By engagement type   | Tabs: Product / Operations / Platform. Stripe-style tiles per case study within each tab. Tab membership derived from a new `engagementType` field.                                                                                                                            |
+| 6   | Featured engagement  | Full-width panel running Challenge / Solution / Stack inline + a "Read full case study →" link. Driven by `featured: true` on the case study data. Scrollr today.                                                                                                              |
+| 7   | By industry vertical | Tabs auto-derived from distinct `study.industry` values. Horizontal-scrolling tile row per tab.                                                                                                                                                                                |
+| 8   | What we build        | Three link cards, one per service area: "Diagnose", "Design & Build", "Steward". Each links to the corresponding section of `/process` (or to `/diagnostic` for the first). No filter behavior, no derived data — content cards.                                               |
+| 9   | Closing CTA          | Reuse existing `portfolioCta` exactly. Secondary anchor: "Read all stories" → band 2.                                                                                                                                                                                          |
 
-Bands 5 and 7 use distinct tab axes: Band 5 by *what kind of work*, Band 7
-by *what kind of business*. This is deliberate — they describe different
+Bands 5 and 7 use distinct tab axes: Band 5 by _what kind of work_, Band 7
+by _what kind of business_. This is deliberate — they describe different
 slices of the same portfolio.
 
 ## Data model changes
@@ -220,9 +220,9 @@ fields are additive and optional except where noted.
 ```ts
 export interface CaseStudyMetric {
   label: string
-  value?: string          // present for flat metrics
-  from?: string           // present when delta shape
-  to?: string             // present when delta shape
+  value?: string // present for flat metrics
+  from?: string // present when delta shape
+  to?: string // present when delta shape
   context?: string
 }
 ```
@@ -247,16 +247,16 @@ accepts the flat shape.
 
 ```ts
 export interface StackCategory {
-  category: string                       // "Client", "Server", "Data", …
+  category: string // "Client", "Server", "Data", …
   items: ReadonlyArray<{
-    label: string                        // "Tauri v2"
-    iconSlug?: string                    // "tauri" — simple-icons slug
+    label: string // "Tauri v2"
+    iconSlug?: string // "tauri" — simple-icons slug
   }>
 }
 
 export interface CaseStudyAtAGlance {
   // … existing fields unchanged
-  stack?: ReadonlyArray<StackCategory>   // shape change from string[]
+  stack?: ReadonlyArray<StackCategory> // shape change from string[]
   // …
 }
 ```
@@ -273,8 +273,8 @@ neutral lucide icon. When present, it resolves to the matching
 
 ```ts
 export interface CaseStudyGlobal {
-  label: string                          // "Cloudflare Global CDN"
-  logoSrc: string                        // "/logos/cloudflare.svg"
+  label: string // "Cloudflare Global CDN"
+  logoSrc: string // "/logos/cloudflare.svg"
 }
 
 export interface CaseStudyAtAGlance {
@@ -299,12 +299,12 @@ export type CaseStudySectionRef =
 export interface CaseStudyHeroBeat {
   image: CaseStudyImage
   sectionRef: CaseStudySectionRef
-  blurb: string                          // 1–2 sentence beat copy
+  blurb: string // 1–2 sentence beat copy
 }
 
 export interface CaseStudyHero {
   tagline: string
-  image?: CaseStudyImage                 // single-image fallback (kept)
+  image?: CaseStudyImage // single-image fallback (kept)
   beats?: ReadonlyArray<CaseStudyHeroBeat>
 }
 ```
@@ -335,7 +335,7 @@ export type EngagementType = 'product' | 'operations' | 'platform'
 
 export interface CaseStudy {
   // …
-  engagementType: EngagementType         // required
+  engagementType: EngagementType // required
 }
 ```
 
@@ -343,7 +343,7 @@ This field is required — Band 5 can't render correctly with unclassified
 case studies. Default classifications during migration:
 
 | Case study               | engagementType |
-|--------------------------|----------------|
+| ------------------------ | -------------- |
 | Scrollr                  | product        |
 | Cambridge Building Group | operations     |
 | CourtCommand             | platform       |
@@ -362,9 +362,9 @@ Drives Band 7 tabs directly. No change.
 ```ts
 export interface ClientLogo {
   name: string
-  logoSrc: string                        // path under public/logos/clients/
-  isSample: boolean                      // true today, false when real
-  url?: string                           // optional outbound link
+  logoSrc: string // path under public/logos/clients/
+  isSample: boolean // true today, false when real
+  url?: string // optional outbound link
 }
 
 export const clientLogos: ReadonlyArray<ClientLogo> = [

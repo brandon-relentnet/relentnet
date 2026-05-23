@@ -84,7 +84,10 @@ describe('caseStudies data', () => {
     for (const study of caseStudies) {
       const stack = study.atAGlance.stack
       if (!stack) continue
-      expect(Array.isArray(stack), `${study.slug}.atAGlance.stack must be an array`).toBe(true)
+      expect(
+        Array.isArray(stack),
+        `${study.slug}.atAGlance.stack must be an array`,
+      ).toBe(true)
       for (const category of stack) {
         expect(typeof category.category).toBe('string')
         expect(category.category.length).toBeGreaterThan(0)
@@ -103,8 +106,10 @@ describe('caseStudies data', () => {
     // The data must never contain mixed-shape or empty-shape metrics.
     for (const study of caseStudies) {
       for (const metric of study.atAGlance.metrics ?? []) {
-        const hasValue = typeof metric.value === 'string' && metric.value.length > 0
-        const hasFrom = typeof metric.from === 'string' && metric.from.length > 0
+        const hasValue =
+          typeof metric.value === 'string' && metric.value.length > 0
+        const hasFrom =
+          typeof metric.from === 'string' && metric.from.length > 0
         const hasTo = typeof metric.to === 'string' && metric.to.length > 0
         const isFlat = hasValue && !hasFrom && !hasTo
         const isDelta = !hasValue && hasFrom && hasTo

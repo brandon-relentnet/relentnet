@@ -9,7 +9,10 @@ export function ClientsLogoWall() {
         </p>
         <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-ink-muted">
           {clientLogos.map((logo) => (
-            <li key={logo.name} className="opacity-70 hover:opacity-100 transition-opacity">
+            <li
+              key={logo.name}
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            >
               <img
                 src={logo.logoSrc}
                 alt={logo.name}

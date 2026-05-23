@@ -17,10 +17,7 @@ export function CaseStudyPullquote({ pullquote }: CaseStudyPullquoteProps) {
   const { text, attribution } = pullquote
 
   return (
-    <section
-      ref={ref}
-      className="relative z-10 px-6 md:px-12 py-24 md:py-32"
-    >
+    <section ref={ref} className="relative z-10 px-6 md:px-12 py-24 md:py-32">
       <figure className="max-w-4xl mx-auto text-center">
         <span
           className={`block font-serif text-gold text-6xl md:text-8xl leading-none mb-6 ${

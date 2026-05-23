@@ -28,14 +28,22 @@ const atAGlance: CaseStudyAtAGlance = {
 describe('CaseStudyStackCard', () => {
   it('renders the company name at the top of the card', () => {
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={atAGlance} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={atAGlance}
+        industry="Consumer Software"
+      />,
     )
     expect(screen.getByRole('heading', { name: 'Scrollr' })).toBeInTheDocument()
   })
 
   it('shows 4 items by default and a "+ N more" disclosure', () => {
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={atAGlance} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={atAGlance}
+        industry="Consumer Software"
+      />,
     )
     // The combined stack has 6 items total; show 4, expose disclosure for the rest.
     expect(screen.getByText('Tauri v2')).toBeInTheDocument()
@@ -43,13 +51,19 @@ describe('CaseStudyStackCard', () => {
     expect(screen.getByText('Vite 7')).toBeInTheDocument()
     expect(screen.getByText('TanStack Router')).toBeInTheDocument()
     expect(screen.queryByText('Tailwind 4')).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /\+ 2 more/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /\+ 2 more/i }),
+    ).toBeInTheDocument()
   })
 
   it('expands to show all items when disclosure is clicked', async () => {
     const user = userEvent.setup()
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={atAGlance} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={atAGlance}
+        industry="Consumer Software"
+      />,
     )
     await user.click(screen.getByRole('button', { name: /\+ 2 more/i }))
     expect(screen.getByText('Tailwind 4')).toBeInTheDocument()
@@ -71,14 +85,24 @@ describe('CaseStudyStackCard', () => {
       ],
     }
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={fourItems} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={fourItems}
+        industry="Consumer Software"
+      />,
     )
-    expect(screen.queryByRole('button', { name: /more/i })).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('button', { name: /more/i }),
+    ).not.toBeInTheDocument()
   })
 
   it('renders the global row with logo and label when present', () => {
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={atAGlance} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={atAGlance}
+        industry="Consumer Software"
+      />,
     )
     expect(screen.getByAltText(/cloudflare/i)).toBeInTheDocument()
     expect(screen.getByText('Cloudflare Global CDN')).toBeInTheDocument()
@@ -97,7 +121,11 @@ describe('CaseStudyStackCard', () => {
 
   it('always renders the industry row', () => {
     render(
-      <CaseStudyStackCard name="Scrollr" atAGlance={atAGlance} industry="Consumer Software" />,
+      <CaseStudyStackCard
+        name="Scrollr"
+        atAGlance={atAGlance}
+        industry="Consumer Software"
+      />,
     )
     expect(screen.getByText('Consumer Software')).toBeInTheDocument()
   })

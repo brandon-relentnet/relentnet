@@ -1,8 +1,8 @@
+import { CaseStudyImage } from './CaseStudyImage'
 import type { StoryBlock } from '@/data/caseStudies'
 
 import { useReveal } from '@/hooks/useReveal'
 
-import { CaseStudyImage } from './CaseStudyImage'
 
 interface CaseStudySectionProps {
   number: string
@@ -56,9 +56,7 @@ export function CaseStudySection({
             </span>
           </div>
           <div
-            className={`${
-              isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-            }`}
+            className={`${isRevealed ? 'animate-fade-in-up' : 'opacity-0'}`}
             style={isRevealed ? { animationDelay: '120ms' } : undefined}
           >
             <StoryBlocks blocks={blocks} />
@@ -69,10 +67,7 @@ export function CaseStudySection({
   }
 
   return (
-    <section
-      ref={ref}
-      className="relative z-10 px-2 md:px-0 py-12 md:py-16"
-    >
+    <section ref={ref} className="relative z-10 px-2 md:px-0 py-12 md:py-16">
       <div className="max-w-3xl">
         <div
           className={`flex items-baseline gap-4 mb-6 ${
@@ -95,9 +90,7 @@ export function CaseStudySection({
           {title}
         </h2>
         <div
-          className={`mt-8 ${
-            isRevealed ? 'animate-fade-in-up' : 'opacity-0'
-          }`}
+          className={`mt-8 ${isRevealed ? 'animate-fade-in-up' : 'opacity-0'}`}
           style={isRevealed ? { animationDelay: '150ms' } : undefined}
         >
           <StoryBlocks blocks={blocks} />
