@@ -2,6 +2,10 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { ClientsByEngagementType } from '@/components/clients/ClientsByEngagementType'
 import { ClientsByIndustry } from '@/components/clients/ClientsByIndustry'
+import {
+  ClientsClosingCta,
+  clientsCta,
+} from '@/components/clients/ClientsClosingCta'
 import { ClientsFeaturedEngagement } from '@/components/clients/ClientsFeaturedEngagement'
 import { ClientsHero, clientsIntro } from '@/components/clients/ClientsHero'
 import { ClientsLogoWall } from '@/components/clients/ClientsLogoWall'
@@ -23,39 +27,25 @@ export const Route = createFileRoute('/clients/')({
   component: ClientsIndex,
 })
 
-// Re-exported for legacy test compatibility — Task 25 removes these in
-// favor of clientsIntro / clientsCta and updates -clients.test.ts.
-export const portfolioIntro = clientsIntro
-export const portfolioCta = {
-  headline: 'See the friction in your own operation?',
-  body: 'Start with a workflow diagnostic before deciding what should be built.',
-  label: 'Start With a Diagnostic',
-  to: '/diagnostic',
-} as const
-
 const PORTRAIT_GRID_ID = 'client-stories'
+
+// Re-exported for the migrated test file.
+export { clientsIntro, clientsCta }
 
 function ClientsIndex() {
   return (
     <div className="min-h-screen overflow-hidden">
       <ClientsHero scrollTargetId={PORTRAIT_GRID_ID} />
-
-      {/* Bands 3–9 land here in subsequent tasks. */}
       <div id={PORTRAIT_GRID_ID}>
         <ClientsPortraitGrid />
       </div>
-
       <ClientsResultsBand />
-
       <ClientsLogoWall />
-
       <ClientsByEngagementType />
-
       <ClientsFeaturedEngagement />
-
       <ClientsByIndustry />
-
       <ClientsWhatWeBuild />
+      <ClientsClosingCta scrollTargetId={PORTRAIT_GRID_ID} />
     </div>
   )
 }

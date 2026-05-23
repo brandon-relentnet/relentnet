@@ -1,13 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
+import { clientsCta, clientsIntro } from './clients/index'
 import { caseStudies } from '@/data/caseStudies'
-
-import { portfolioCta, portfolioIntro } from './clients/index'
 
 describe('clients case studies', () => {
   it('frames work as diagnosed friction becoming useful systems', () => {
-    expect(portfolioIntro.headline).toContain('Diagnosed friction')
-    expect(portfolioIntro.body).toContain('workflow diagnostic')
+    expect(clientsIntro.headline).toContain('Diagnosed friction')
+    expect(clientsIntro.body).toContain('workflow diagnostic')
     expect(caseStudies).toHaveLength(5)
     expect(
       caseStudies.every((study) => study.summary.diagnosis.length > 0),
@@ -15,8 +14,8 @@ describe('clients case studies', () => {
   })
 
   it('routes the final CTA to the workflow diagnostic', () => {
-    expect(portfolioCta.to).toBe('/diagnostic')
-    expect(portfolioCta.label).toBe('Start With a Diagnostic')
+    expect(clientsCta.to).toBe('/diagnostic')
+    expect(clientsCta.label).toBe('Start With a Diagnostic')
   })
 
   it('every case study has a URL-safe slug suitable for /clients/$slug', () => {
