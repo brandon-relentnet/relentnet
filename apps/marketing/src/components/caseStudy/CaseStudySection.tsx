@@ -28,8 +28,6 @@ export function CaseStudySection({
   label,
   title,
   blocks,
-  alignRight = false,
-  showNumber = true,
   tone = 'standard',
 }: CaseStudySectionProps) {
   const { ref, isRevealed } = useReveal(0.15)
@@ -73,37 +71,36 @@ export function CaseStudySection({
   return (
     <section
       ref={ref}
-      className="relative z-10 px-6 md:px-12 py-24 md:py-32"
+      className="relative z-10 px-2 md:px-0 py-12 md:py-16"
     >
-      <div className="max-w-6xl mx-auto">
-        {showNumber ? (
-          <span
-            className={`block text-[7rem] md:text-[10rem] font-serif text-black/[0.06] dark:text-white/[0.03] leading-none select-none -mb-10 md:-mb-14 ${
-              alignRight ? 'md:text-right' : ''
-            } ${isRevealed ? 'animate-fade-in-up' : 'opacity-0'}`}
-          >
+      <div className="max-w-3xl">
+        <div
+          className={`flex items-baseline gap-4 mb-6 ${
+            isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+          }`}
+        >
+          <span className="font-serif text-gold text-sm leading-none">
             {number}
           </span>
-        ) : null}
-
+          <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-gold">
+            {label}
+          </span>
+        </div>
+        <h2
+          className={`font-serif text-3xl md:text-4xl leading-tight ${
+            isRevealed ? 'animate-fade-in-up' : 'opacity-0'
+          }`}
+          style={isRevealed ? { animationDelay: '80ms' } : undefined}
+        >
+          {title}
+        </h2>
         <div
-          className={`grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 ${
+          className={`mt-8 ${
             isRevealed ? 'animate-fade-in-up' : 'opacity-0'
           }`}
           style={isRevealed ? { animationDelay: '150ms' } : undefined}
         >
-          <div
-            className={`md:col-span-3 ${alignRight ? 'md:order-last md:text-right' : ''}`}
-          >
-            <span className="text-gold text-[10px] font-bold tracking-[0.3em] uppercase block">
-              {label}
-            </span>
-            <h2 className="font-serif text-2xl md:text-3xl mt-2">{title}</h2>
-          </div>
-
-          <div className={`md:col-span-9 ${alignRight ? 'md:order-first' : ''}`}>
-            <StoryBlocks blocks={blocks} />
-          </div>
+          <StoryBlocks blocks={blocks} />
         </div>
       </div>
     </section>
