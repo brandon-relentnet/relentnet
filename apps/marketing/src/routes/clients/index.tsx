@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { ClientsHero, clientsIntro } from '@/components/clients/ClientsHero'
+import { ClientsPortraitGrid } from '@/components/clients/ClientsPortraitGrid'
 
 export const Route = createFileRoute('/clients/')({
   head: () => ({
@@ -33,8 +34,10 @@ function ClientsIndex() {
     <div className="min-h-screen overflow-hidden">
       <ClientsHero scrollTargetId={PORTRAIT_GRID_ID} />
 
-      {/* Bands 2–9 land here in subsequent tasks. */}
-      <div id={PORTRAIT_GRID_ID} />
+      {/* Bands 3–9 land here in subsequent tasks. */}
+      <div id={PORTRAIT_GRID_ID}>
+        <ClientsPortraitGrid />
+      </div>
     </div>
   )
 }
