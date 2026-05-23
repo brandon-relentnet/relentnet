@@ -1,8 +1,9 @@
 import { ExternalLink } from 'lucide-react'
 
-import type { CaseStudy } from '@/data/caseStudies'
-
+import { CaseStudyHeroCycler } from './CaseStudyHeroCycler'
 import { CaseStudyImage } from './CaseStudyImage'
+
+import type { CaseStudy } from '@/data/caseStudies'
 
 interface CaseStudyHeroProps {
   caseStudy: CaseStudy
@@ -10,6 +11,7 @@ interface CaseStudyHeroProps {
 
 export function CaseStudyHero({ caseStudy }: CaseStudyHeroProps) {
   const { name, industry, systemType, url, hero } = caseStudy
+  const hasBeats = (hero.beats?.length ?? 0) > 0
 
   return (
     <section className="relative z-10 px-6 md:px-12 pt-40 md:pt-48 pb-16 md:pb-24">
@@ -41,7 +43,14 @@ export function CaseStudyHero({ caseStudy }: CaseStudyHeroProps) {
           <ExternalLink className="size-4" />
         </a>
 
-        {hero.image ? (
+        {hasBeats ? (
+          <div
+            className="mt-16 animate-fade-in-up opacity-0"
+            style={{ animationDelay: '420ms' }}
+          >
+            <CaseStudyHeroCycler beats={hero.beats!} />
+          </div>
+        ) : hero.image ? (
           <div
             className="mt-16 animate-fade-in-up opacity-0"
             style={{ animationDelay: '420ms' }}
